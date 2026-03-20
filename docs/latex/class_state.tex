@@ -1,0 +1,394 @@
+\doxysection{Dokumentacja klasy State}
+\hypertarget{class_state}{}\label{class_state}\index{State@{State}}
+
+
+Klasa warstwy usług.  
+
+
+
+
+{\ttfamily \#include $<$State.\+h$>$}
+
+
+
+Diagram współpracy dla State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_state__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Typy publiczne}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{Typ\+Generatora}} \{ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86ca6376a6572edb8bb9bfb839975889f873}{Sinusoidalny}}
+, \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86ca371082d49f2fa541f722c0e927a68872}{Prostokatny}}
+, \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86ca4ab3b7b3d89734ff028ef86dfd9f5848}{Skok\+Jednostkowy}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_state_ae5ffd45c0a3375b1d5ba30f7ebe9aa43}{set\+Simmulation\+Running}} (bool simmulation\+\_\+running)
+\item 
+bool \mbox{\hyperlink{class_state_ada966480fd99438beb2d1b9b6c94b928}{get\+Simmulation\+Running}} ()
+\item 
+void \mbox{\hyperlink{class_state_a3cd04aadf916149ef079006b59a2e441}{set\+Simmulation\+Interval\+MS}} (uint32\+\_\+t interval)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_state_ae1ba3bce43d4ba132f0a05ea87b6a72b}{get\+Simmulation\+Interval\+MS}} ()
+\item 
+void \mbox{\hyperlink{class_state_a5246ca69518068b359617d738f180700}{set\+Output\+Callback}} (const std\+::function$<$ void(\mbox{\hyperlink{struct_tick_data}{Tick\+Data}})$>$ callback)
+\item 
+void \mbox{\hyperlink{class_state_aefe26920d68714b87650f5cb9831d2cb}{reset\+Simmulation}} ()
+\item 
+void \mbox{\hyperlink{class_state_acf186c66733e8c97a0ec9d2a9a537f86}{set\+Generator}} (\mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{Typ\+Generatora}} type)
+\item 
+\mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{Typ\+Generatora}} \mbox{\hyperlink{class_state_a2dfb3b672eae2d6bc649b1d95d8b44b9}{get\+Generator}} ()
+\item 
+void \mbox{\hyperlink{class_state_ad58fccfeb748a84eacb8c3e28294cbd7}{set\+Genenerator\+Amplitude}} (const double \&amplitude)
+\item 
+void \mbox{\hyperlink{class_state_a8126cb151b5b942e226c089e7cbe6f43}{set\+Genenerator\+Duty\+Cycle}} (const double \&duty\+\_\+cycle)
+\item 
+void \mbox{\hyperlink{class_state_a077fd5ca4c731ebc7a13939c21028e6f}{set\+Genenerator\+Period\+MS}} (uint32\+\_\+t period)
+\item 
+void \mbox{\hyperlink{class_state_ac8b75daadce0cdd535174a264ddcdee7}{set\+Generator\+Skladowa\+Stala}} (double skladowa\+\_\+stala)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_state_a9cc67a9ee078d240b2f998120ef39f54}{get\+Genenerator\+Period\+Jump\+MS}} ()
+\item 
+void \mbox{\hyperlink{class_state_ad2fb22b73ba7aec391fd1d8f32fd94b5}{set\+Generator\+Unit\+Jump\+Time\+MS}} (uint32\+\_\+t time)
+\item 
+void \mbox{\hyperlink{class_state_ad1fae3b24c3a78978d4587a9ac6e2a47}{reset\+Generator}} ()
+\item 
+void \mbox{\hyperlink{class_state_a571911a9003385f606db2e961a9e0b2c}{set\+PIDProportional}} (double k)
+\item 
+void \mbox{\hyperlink{class_state_a744abce496dd9fbc69c175b1b1cd9808}{set\+PIDIntegration}} (double T\+\_\+i)
+\item 
+void \mbox{\hyperlink{class_state_a5bd74dcf7ab687a62b58aebb188f03e5}{set\+PIDDerrivative}} (double T\+\_\+d)
+\item 
+void \mbox{\hyperlink{class_state_a7745042c1be54bb436e02a59cbb54b80}{set\+PIDIntegration\+Type}} (\mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{Integ\+Type}} integration\+\_\+type)
+\item 
+void \mbox{\hyperlink{class_state_aabf6a980426d3f3ca8815e700cc70f72}{reset\+PIDIntegration}} ()
+\item 
+void \mbox{\hyperlink{class_state_a36257ec6dff2757d3d1d70808a23dd79}{reset\+PIDDerrivative}} ()
+\item 
+void \mbox{\hyperlink{class_state_a6e219e6dbaab2021d86f7ec44049ff46}{set\+ARXCoefficients}} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\item 
+const std\+::vector$<$ double $>$ \mbox{\hyperlink{class_state_aaf262a5c6d9a5bcc67646942da59cd7a}{get\+ARXCoefficientsA}} ()
+\item 
+const std\+::vector$<$ double $>$ \mbox{\hyperlink{class_state_a244178910f1cd858a8e5d3a138a34776}{get\+ARXCoefficientsB}} ()
+\item 
+void \mbox{\hyperlink{class_state_ad84089bba785b6fa8cbd33ec5745ff72}{set\+ARXTransport\+Delay}} (uint16\+\_\+t k)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_state_a9aac0a0555a705ee3b22da4a9ddfde64}{get\+ARXTransport\+Delay}} ()
+\item 
+void \mbox{\hyperlink{class_state_a62388d3b79be6ae4b29021ae15b577b7}{set\+ARXInput\+Limits}} (double low, double high)
+\item 
+const std\+::pair$<$ double, double $>$ \& \mbox{\hyperlink{class_state_a2fd7e8b411acca20d8c6e67024c477e9}{get\+ARXInput\+Limits}} ()
+\item 
+void \mbox{\hyperlink{class_state_ab4b3ab76b3f4fbc504d6ad070e8eaa94}{set\+ARXOutput\+Limits}} (double low, double high)
+\item 
+const std\+::pair$<$ double, double $>$ \& \mbox{\hyperlink{class_state_a4d02853812c2666630b50e0dc3359ec4}{get\+ARXOutput\+Limits}} ()
+\item 
+void \mbox{\hyperlink{class_state_ad1d71d0fc3eb5dbd95d27194c03141d8}{set\+ARXNoise\+Standard\+Deviation}} (double standard\+\_\+deviation)
+\item 
+double \mbox{\hyperlink{class_state_ac9f426d323c4cfdc0cebc0bae3076dad}{get\+ARXNoise\+Standard\+Deviation}} ()
+\item 
+void \mbox{\hyperlink{class_state_a8b9ba7544bbbe85bcdfd6293be21cc86}{set\+ARXLimits\+Enabled}} (bool enabled)
+\item 
+void \mbox{\hyperlink{class_state_af07b6abc4b8bf6a57f9cf6af677c8586}{reset\+ARX}} ()
+\item 
+void \mbox{\hyperlink{class_state_ae8423af0e5b03cb4ef2d3c02fc11f0b4}{set\+Save\+State\+Object}} (\mbox{\hyperlink{class_save_state_interface}{Save\+State\+Interface}} \texorpdfstring{$\ast$}{*}object)
+\item 
+void \mbox{\hyperlink{class_state_a6ef44c3a2e38f42557155fd14fb908c4}{save\+To\+File}} (std\+::string path)
+\item 
+void \mbox{\hyperlink{class_state_acc81c4cc4b52d64063a33a402e563d2b}{read\+From\+File}} (std\+::string path)
+\item 
+const std\+::tuple$<$ const \mbox{\hyperlink{class_a_r_x}{ARX}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{class_regulator_p_i_d}{Regulator\+PID}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{Typ\+Generatora}}, const \mbox{\hyperlink{class_generator_sinusoida}{Generator\+Sinusoida}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{class_generator_prostokatny}{Generator\+Prostokatny}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_state_acfa01808f22630fc5dfbf2e75a0bd755}{get\+App\+State}} ()
+\item 
+void \mbox{\hyperlink{class_state_a8ddce70c7307fe0e3425e14ee584c87c}{tick}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Statyczne metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_state}{State}} \& \mbox{\hyperlink{class_state_a61fc39a383c1fc6b4465289e60e48637}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa warstwy usług. 
+
+\label{doc-enum-members}
+\Hypertarget{class_state_doc-enum-members}
+\doxysubsection{Dokumentacja składowych wyliczanych}
+\Hypertarget{class_state_a839e188a6b92a8e2d69b73c02f29a86c}\index{State@{State}!TypGeneratora@{TypGeneratora}}
+\index{TypGeneratora@{TypGeneratora}!State@{State}}
+\doxysubsubsection{\texorpdfstring{TypGeneratora}{TypGeneratora}}
+{\footnotesize\ttfamily \label{class_state_a839e188a6b92a8e2d69b73c02f29a86c} 
+enum class \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State\+::\+Typ\+Generatora}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Wartości wyliczeń}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Sinusoidalny@{Sinusoidalny}!State@{State}}\index{State@{State}!Sinusoidalny@{Sinusoidalny}}}\Hypertarget{class_state_a839e188a6b92a8e2d69b73c02f29a86ca6376a6572edb8bb9bfb839975889f873}\label{class_state_a839e188a6b92a8e2d69b73c02f29a86ca6376a6572edb8bb9bfb839975889f873} 
+Sinusoidalny&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Prostokatny@{Prostokatny}!State@{State}}\index{State@{State}!Prostokatny@{Prostokatny}}}\Hypertarget{class_state_a839e188a6b92a8e2d69b73c02f29a86ca371082d49f2fa541f722c0e927a68872}\label{class_state_a839e188a6b92a8e2d69b73c02f29a86ca371082d49f2fa541f722c0e927a68872} 
+Prostokatny&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SkokJednostkowy@{SkokJednostkowy}!State@{State}}\index{State@{State}!SkokJednostkowy@{SkokJednostkowy}}}\Hypertarget{class_state_a839e188a6b92a8e2d69b73c02f29a86ca4ab3b7b3d89734ff028ef86dfd9f5848}\label{class_state_a839e188a6b92a8e2d69b73c02f29a86ca4ab3b7b3d89734ff028ef86dfd9f5848} 
+Skok\+Jednostkowy&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{class_state_doc-func-members}
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_state_acfa01808f22630fc5dfbf2e75a0bd755}\index{State@{State}!getAppState@{getAppState}}
+\index{getAppState@{getAppState}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getAppState()}{getAppState()}}
+{\footnotesize\ttfamily \label{class_state_acfa01808f22630fc5dfbf2e75a0bd755} 
+const std\+::tuple$<$ const \mbox{\hyperlink{class_a_r_x}{ARX}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{class_regulator_p_i_d}{Regulator\+PID}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State\+::\+Typ\+Generatora}}, const \mbox{\hyperlink{class_generator_sinusoida}{Generator\+Sinusoida}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{class_generator_prostokatny}{Generator\+Prostokatny}} \texorpdfstring{$\ast$}{*} $>$ State\+::get\+App\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_aaf262a5c6d9a5bcc67646942da59cd7a}\index{State@{State}!getARXCoefficientsA@{getARXCoefficientsA}}
+\index{getARXCoefficientsA@{getARXCoefficientsA}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getARXCoefficientsA()}{getARXCoefficientsA()}}
+{\footnotesize\ttfamily \label{class_state_aaf262a5c6d9a5bcc67646942da59cd7a} 
+const std\+::vector$<$ double $>$ State\+::get\+ARXCoefficientsA (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a244178910f1cd858a8e5d3a138a34776}\index{State@{State}!getARXCoefficientsB@{getARXCoefficientsB}}
+\index{getARXCoefficientsB@{getARXCoefficientsB}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getARXCoefficientsB()}{getARXCoefficientsB()}}
+{\footnotesize\ttfamily \label{class_state_a244178910f1cd858a8e5d3a138a34776} 
+const std\+::vector$<$ double $>$ State\+::get\+ARXCoefficientsB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a2fd7e8b411acca20d8c6e67024c477e9}\index{State@{State}!getARXInputLimits@{getARXInputLimits}}
+\index{getARXInputLimits@{getARXInputLimits}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getARXInputLimits()}{getARXInputLimits()}}
+{\footnotesize\ttfamily \label{class_state_a2fd7e8b411acca20d8c6e67024c477e9} 
+const std\+::pair$<$ double, double $>$ \& State\+::get\+ARXInput\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ac9f426d323c4cfdc0cebc0bae3076dad}\index{State@{State}!getARXNoiseStandardDeviation@{getARXNoiseStandardDeviation}}
+\index{getARXNoiseStandardDeviation@{getARXNoiseStandardDeviation}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getARXNoiseStandardDeviation()}{getARXNoiseStandardDeviation()}}
+{\footnotesize\ttfamily \label{class_state_ac9f426d323c4cfdc0cebc0bae3076dad} 
+double State\+::get\+ARXNoise\+Standard\+Deviation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a4d02853812c2666630b50e0dc3359ec4}\index{State@{State}!getARXOutputLimits@{getARXOutputLimits}}
+\index{getARXOutputLimits@{getARXOutputLimits}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getARXOutputLimits()}{getARXOutputLimits()}}
+{\footnotesize\ttfamily \label{class_state_a4d02853812c2666630b50e0dc3359ec4} 
+const std\+::pair$<$ double, double $>$ \& State\+::get\+ARXOutput\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a9aac0a0555a705ee3b22da4a9ddfde64}\index{State@{State}!getARXTransportDelay@{getARXTransportDelay}}
+\index{getARXTransportDelay@{getARXTransportDelay}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getARXTransportDelay()}{getARXTransportDelay()}}
+{\footnotesize\ttfamily \label{class_state_a9aac0a0555a705ee3b22da4a9ddfde64} 
+uint16\+\_\+t State\+::get\+ARXTransport\+Delay (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a9cc67a9ee078d240b2f998120ef39f54}\index{State@{State}!getGeneneratorPeriodJumpMS@{getGeneneratorPeriodJumpMS}}
+\index{getGeneneratorPeriodJumpMS@{getGeneneratorPeriodJumpMS}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getGeneneratorPeriodJumpMS()}{getGeneneratorPeriodJumpMS()}}
+{\footnotesize\ttfamily \label{class_state_a9cc67a9ee078d240b2f998120ef39f54} 
+uint8\+\_\+t State\+::get\+Genenerator\+Period\+Jump\+MS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a2dfb3b672eae2d6bc649b1d95d8b44b9}\index{State@{State}!getGenerator@{getGenerator}}
+\index{getGenerator@{getGenerator}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getGenerator()}{getGenerator()}}
+{\footnotesize\ttfamily \label{class_state_a2dfb3b672eae2d6bc649b1d95d8b44b9} 
+\mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State\+::\+Typ\+Generatora}} State\+::get\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a61fc39a383c1fc6b4465289e60e48637}\index{State@{State}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{class_state_a61fc39a383c1fc6b4465289e60e48637} 
+class \mbox{\hyperlink{class_state}{State}} \& State\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_state_ae1ba3bce43d4ba132f0a05ea87b6a72b}\index{State@{State}!getSimmulationIntervalMS@{getSimmulationIntervalMS}}
+\index{getSimmulationIntervalMS@{getSimmulationIntervalMS}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getSimmulationIntervalMS()}{getSimmulationIntervalMS()}}
+{\footnotesize\ttfamily \label{class_state_ae1ba3bce43d4ba132f0a05ea87b6a72b} 
+uint32\+\_\+t State\+::get\+Simmulation\+Interval\+MS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ada966480fd99438beb2d1b9b6c94b928}\index{State@{State}!getSimmulationRunning@{getSimmulationRunning}}
+\index{getSimmulationRunning@{getSimmulationRunning}!State@{State}}
+\doxysubsubsection{\texorpdfstring{getSimmulationRunning()}{getSimmulationRunning()}}
+{\footnotesize\ttfamily \label{class_state_ada966480fd99438beb2d1b9b6c94b928} 
+bool State\+::get\+Simmulation\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_acc81c4cc4b52d64063a33a402e563d2b}\index{State@{State}!readFromFile@{readFromFile}}
+\index{readFromFile@{readFromFile}!State@{State}}
+\doxysubsubsection{\texorpdfstring{readFromFile()}{readFromFile()}}
+{\footnotesize\ttfamily \label{class_state_acc81c4cc4b52d64063a33a402e563d2b} 
+void State\+::read\+From\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_af07b6abc4b8bf6a57f9cf6af677c8586}\index{State@{State}!resetARX@{resetARX}}
+\index{resetARX@{resetARX}!State@{State}}
+\doxysubsubsection{\texorpdfstring{resetARX()}{resetARX()}}
+{\footnotesize\ttfamily \label{class_state_af07b6abc4b8bf6a57f9cf6af677c8586} 
+void State\+::reset\+ARX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ad1fae3b24c3a78978d4587a9ac6e2a47}\index{State@{State}!resetGenerator@{resetGenerator}}
+\index{resetGenerator@{resetGenerator}!State@{State}}
+\doxysubsubsection{\texorpdfstring{resetGenerator()}{resetGenerator()}}
+{\footnotesize\ttfamily \label{class_state_ad1fae3b24c3a78978d4587a9ac6e2a47} 
+void State\+::reset\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a36257ec6dff2757d3d1d70808a23dd79}\index{State@{State}!resetPIDDerrivative@{resetPIDDerrivative}}
+\index{resetPIDDerrivative@{resetPIDDerrivative}!State@{State}}
+\doxysubsubsection{\texorpdfstring{resetPIDDerrivative()}{resetPIDDerrivative()}}
+{\footnotesize\ttfamily \label{class_state_a36257ec6dff2757d3d1d70808a23dd79} 
+void State\+::reset\+PIDDerrivative (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_aabf6a980426d3f3ca8815e700cc70f72}\index{State@{State}!resetPIDIntegration@{resetPIDIntegration}}
+\index{resetPIDIntegration@{resetPIDIntegration}!State@{State}}
+\doxysubsubsection{\texorpdfstring{resetPIDIntegration()}{resetPIDIntegration()}}
+{\footnotesize\ttfamily \label{class_state_aabf6a980426d3f3ca8815e700cc70f72} 
+void State\+::reset\+PIDIntegration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_aefe26920d68714b87650f5cb9831d2cb}\index{State@{State}!resetSimmulation@{resetSimmulation}}
+\index{resetSimmulation@{resetSimmulation}!State@{State}}
+\doxysubsubsection{\texorpdfstring{resetSimmulation()}{resetSimmulation()}}
+{\footnotesize\ttfamily \label{class_state_aefe26920d68714b87650f5cb9831d2cb} 
+void State\+::reset\+Simmulation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a6ef44c3a2e38f42557155fd14fb908c4}\index{State@{State}!saveToFile@{saveToFile}}
+\index{saveToFile@{saveToFile}!State@{State}}
+\doxysubsubsection{\texorpdfstring{saveToFile()}{saveToFile()}}
+{\footnotesize\ttfamily \label{class_state_a6ef44c3a2e38f42557155fd14fb908c4} 
+void State\+::save\+To\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a6e219e6dbaab2021d86f7ec44049ff46}\index{State@{State}!setARXCoefficients@{setARXCoefficients}}
+\index{setARXCoefficients@{setARXCoefficients}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setARXCoefficients()}{setARXCoefficients()}}
+{\footnotesize\ttfamily \label{class_state_a6e219e6dbaab2021d86f7ec44049ff46} 
+void State\+::set\+ARXCoefficients (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{a}{, }\item[{std\+::vector$<$ double $>$}]{b}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a62388d3b79be6ae4b29021ae15b577b7}\index{State@{State}!setARXInputLimits@{setARXInputLimits}}
+\index{setARXInputLimits@{setARXInputLimits}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setARXInputLimits()}{setARXInputLimits()}}
+{\footnotesize\ttfamily \label{class_state_a62388d3b79be6ae4b29021ae15b577b7} 
+void State\+::set\+ARXInput\+Limits (\begin{DoxyParamCaption}\item[{double}]{low}{, }\item[{double}]{high}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a8b9ba7544bbbe85bcdfd6293be21cc86}\index{State@{State}!setARXLimitsEnabled@{setARXLimitsEnabled}}
+\index{setARXLimitsEnabled@{setARXLimitsEnabled}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setARXLimitsEnabled()}{setARXLimitsEnabled()}}
+{\footnotesize\ttfamily \label{class_state_a8b9ba7544bbbe85bcdfd6293be21cc86} 
+void State\+::set\+ARXLimits\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{enabled}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ad1d71d0fc3eb5dbd95d27194c03141d8}\index{State@{State}!setARXNoiseStandardDeviation@{setARXNoiseStandardDeviation}}
+\index{setARXNoiseStandardDeviation@{setARXNoiseStandardDeviation}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setARXNoiseStandardDeviation()}{setARXNoiseStandardDeviation()}}
+{\footnotesize\ttfamily \label{class_state_ad1d71d0fc3eb5dbd95d27194c03141d8} 
+void State\+::set\+ARXNoise\+Standard\+Deviation (\begin{DoxyParamCaption}\item[{double}]{standard\+\_\+deviation}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ab4b3ab76b3f4fbc504d6ad070e8eaa94}\index{State@{State}!setARXOutputLimits@{setARXOutputLimits}}
+\index{setARXOutputLimits@{setARXOutputLimits}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setARXOutputLimits()}{setARXOutputLimits()}}
+{\footnotesize\ttfamily \label{class_state_ab4b3ab76b3f4fbc504d6ad070e8eaa94} 
+void State\+::set\+ARXOutput\+Limits (\begin{DoxyParamCaption}\item[{double}]{low}{, }\item[{double}]{high}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ad84089bba785b6fa8cbd33ec5745ff72}\index{State@{State}!setARXTransportDelay@{setARXTransportDelay}}
+\index{setARXTransportDelay@{setARXTransportDelay}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setARXTransportDelay()}{setARXTransportDelay()}}
+{\footnotesize\ttfamily \label{class_state_ad84089bba785b6fa8cbd33ec5745ff72} 
+void State\+::set\+ARXTransport\+Delay (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{k}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ad58fccfeb748a84eacb8c3e28294cbd7}\index{State@{State}!setGeneneratorAmplitude@{setGeneneratorAmplitude}}
+\index{setGeneneratorAmplitude@{setGeneneratorAmplitude}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setGeneneratorAmplitude()}{setGeneneratorAmplitude()}}
+{\footnotesize\ttfamily \label{class_state_ad58fccfeb748a84eacb8c3e28294cbd7} 
+void State\+::set\+Genenerator\+Amplitude (\begin{DoxyParamCaption}\item[{const double \&}]{amplitude}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a8126cb151b5b942e226c089e7cbe6f43}\index{State@{State}!setGeneneratorDutyCycle@{setGeneneratorDutyCycle}}
+\index{setGeneneratorDutyCycle@{setGeneneratorDutyCycle}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setGeneneratorDutyCycle()}{setGeneneratorDutyCycle()}}
+{\footnotesize\ttfamily \label{class_state_a8126cb151b5b942e226c089e7cbe6f43} 
+void State\+::set\+Genenerator\+Duty\+Cycle (\begin{DoxyParamCaption}\item[{const double \&}]{duty\+\_\+cycle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a077fd5ca4c731ebc7a13939c21028e6f}\index{State@{State}!setGeneneratorPeriodMS@{setGeneneratorPeriodMS}}
+\index{setGeneneratorPeriodMS@{setGeneneratorPeriodMS}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setGeneneratorPeriodMS()}{setGeneneratorPeriodMS()}}
+{\footnotesize\ttfamily \label{class_state_a077fd5ca4c731ebc7a13939c21028e6f} 
+void State\+::set\+Genenerator\+Period\+MS (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{period}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_acf186c66733e8c97a0ec9d2a9a537f86}\index{State@{State}!setGenerator@{setGenerator}}
+\index{setGenerator@{setGenerator}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setGenerator()}{setGenerator()}}
+{\footnotesize\ttfamily \label{class_state_acf186c66733e8c97a0ec9d2a9a537f86} 
+void State\+::set\+Generator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{Typ\+Generatora}}}]{type}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ac8b75daadce0cdd535174a264ddcdee7}\index{State@{State}!setGeneratorSkladowaStala@{setGeneratorSkladowaStala}}
+\index{setGeneratorSkladowaStala@{setGeneratorSkladowaStala}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setGeneratorSkladowaStala()}{setGeneratorSkladowaStala()}}
+{\footnotesize\ttfamily \label{class_state_ac8b75daadce0cdd535174a264ddcdee7} 
+void State\+::set\+Generator\+Skladowa\+Stala (\begin{DoxyParamCaption}\item[{double}]{skladowa\+\_\+stala}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ad2fb22b73ba7aec391fd1d8f32fd94b5}\index{State@{State}!setGeneratorUnitJumpTimeMS@{setGeneratorUnitJumpTimeMS}}
+\index{setGeneratorUnitJumpTimeMS@{setGeneratorUnitJumpTimeMS}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setGeneratorUnitJumpTimeMS()}{setGeneratorUnitJumpTimeMS()}}
+{\footnotesize\ttfamily \label{class_state_ad2fb22b73ba7aec391fd1d8f32fd94b5} 
+void State\+::set\+Generator\+Unit\+Jump\+Time\+MS (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{time}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a5246ca69518068b359617d738f180700}\index{State@{State}!setOutputCallback@{setOutputCallback}}
+\index{setOutputCallback@{setOutputCallback}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setOutputCallback()}{setOutputCallback()}}
+{\footnotesize\ttfamily \label{class_state_a5246ca69518068b359617d738f180700} 
+void State\+::set\+Output\+Callback (\begin{DoxyParamCaption}\item[{const std\+::function$<$ void(\mbox{\hyperlink{struct_tick_data}{Tick\+Data}})$>$}]{callback}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a5bd74dcf7ab687a62b58aebb188f03e5}\index{State@{State}!setPIDDerrivative@{setPIDDerrivative}}
+\index{setPIDDerrivative@{setPIDDerrivative}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setPIDDerrivative()}{setPIDDerrivative()}}
+{\footnotesize\ttfamily \label{class_state_a5bd74dcf7ab687a62b58aebb188f03e5} 
+void State\+::set\+PIDDerrivative (\begin{DoxyParamCaption}\item[{double}]{T\+\_\+d}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a744abce496dd9fbc69c175b1b1cd9808}\index{State@{State}!setPIDIntegration@{setPIDIntegration}}
+\index{setPIDIntegration@{setPIDIntegration}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setPIDIntegration()}{setPIDIntegration()}}
+{\footnotesize\ttfamily \label{class_state_a744abce496dd9fbc69c175b1b1cd9808} 
+void State\+::set\+PIDIntegration (\begin{DoxyParamCaption}\item[{double}]{T\+\_\+i}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a7745042c1be54bb436e02a59cbb54b80}\index{State@{State}!setPIDIntegrationType@{setPIDIntegrationType}}
+\index{setPIDIntegrationType@{setPIDIntegrationType}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setPIDIntegrationType()}{setPIDIntegrationType()}}
+{\footnotesize\ttfamily \label{class_state_a7745042c1be54bb436e02a59cbb54b80} 
+void State\+::set\+PIDIntegration\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{Integ\+Type}}}]{integration\+\_\+type}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a571911a9003385f606db2e961a9e0b2c}\index{State@{State}!setPIDProportional@{setPIDProportional}}
+\index{setPIDProportional@{setPIDProportional}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setPIDProportional()}{setPIDProportional()}}
+{\footnotesize\ttfamily \label{class_state_a571911a9003385f606db2e961a9e0b2c} 
+void State\+::set\+PIDProportional (\begin{DoxyParamCaption}\item[{double}]{k}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ae8423af0e5b03cb4ef2d3c02fc11f0b4}\index{State@{State}!setSaveStateObject@{setSaveStateObject}}
+\index{setSaveStateObject@{setSaveStateObject}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setSaveStateObject()}{setSaveStateObject()}}
+{\footnotesize\ttfamily \label{class_state_ae8423af0e5b03cb4ef2d3c02fc11f0b4} 
+void State\+::set\+Save\+State\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_save_state_interface}{Save\+State\+Interface}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a3cd04aadf916149ef079006b59a2e441}\index{State@{State}!setSimmulationIntervalMS@{setSimmulationIntervalMS}}
+\index{setSimmulationIntervalMS@{setSimmulationIntervalMS}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setSimmulationIntervalMS()}{setSimmulationIntervalMS()}}
+{\footnotesize\ttfamily \label{class_state_a3cd04aadf916149ef079006b59a2e441} 
+void State\+::set\+Simmulation\+Interval\+MS (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{interval}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_ae5ffd45c0a3375b1d5ba30f7ebe9aa43}\index{State@{State}!setSimmulationRunning@{setSimmulationRunning}}
+\index{setSimmulationRunning@{setSimmulationRunning}!State@{State}}
+\doxysubsubsection{\texorpdfstring{setSimmulationRunning()}{setSimmulationRunning()}}
+{\footnotesize\ttfamily \label{class_state_ae5ffd45c0a3375b1d5ba30f7ebe9aa43} 
+void State\+::set\+Simmulation\+Running (\begin{DoxyParamCaption}\item[{bool}]{simmulation\+\_\+running}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_state_a8ddce70c7307fe0e3425e14ee584c87c}\index{State@{State}!tick@{tick}}
+\index{tick@{tick}!State@{State}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily \label{class_state_a8ddce70c7307fe0e3425e14ee584c87c} 
+void State\+::tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_state_8h}{State.\+h}}\item 
+\mbox{\hyperlink{_state_8cpp}{State.\+cpp}}\end{DoxyCompactItemize}

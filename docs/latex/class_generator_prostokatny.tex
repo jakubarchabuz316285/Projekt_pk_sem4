@@ -1,0 +1,120 @@
+\doxysection{Dokumentacja klasy Generator\+Prostokatny}
+\hypertarget{class_generator_prostokatny}{}\label{class_generator_prostokatny}\index{GeneratorProstokatny@{GeneratorProstokatny}}
+
+
+{\ttfamily \#include $<$Generator\+Prostokatny.\+h$>$}
+
+
+
+Diagram dziedziczenia dla Generator\+Prostokatny
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_generator_prostokatny__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Diagram współpracy dla Generator\+Prostokatny\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_generator_prostokatny__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_generator_prostokatny_aaef6393b00a1d2c9e482adbb762bcefc}{Generator\+Prostokatny}} ()
+\item 
+double \mbox{\hyperlink{class_generator_prostokatny_a5e0954dca878701e53ad77f0c8e8454a}{tick}} () override
+\item 
+void \mbox{\hyperlink{class_generator_prostokatny_ab8c5fd09a1f78c8f5929d2fd9f78829a}{set\+Duty\+Cycle}} (double duty\+\_\+cycle)
+\item 
+double \mbox{\hyperlink{class_generator_prostokatny_a93f5cc51409ce77e46d6a147d83363ed}{get\+Duty\+Cycle}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_generator}{Generator}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_generator_aaaf1e5f3a47ede3ef8a96a301ee04a10}{Generator}} ()
+\item 
+void \mbox{\hyperlink{class_generator_aa5e6f29f5965aa90853f9ce8db03d61d}{set\+Amplitude}} (double \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}})
+\item 
+void \mbox{\hyperlink{class_generator_a957b177f9aa1182a20d78c851bd0de08}{set\+Samples\+Per\+Cycle}} (uint16\+\_\+t \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\+\_\+per\+\_\+cycle}})
+\item 
+void \mbox{\hyperlink{class_generator_adfe47046f181b0709b70d0d0f02b6aa2}{set\+Bias}} (double \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}})
+\item 
+double \mbox{\hyperlink{class_generator_ada6e8934c7d0c6098b91beab54e7b618}{get\+Amplitude}} () const
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a8085a2bfe88269c34624d567edf6d840}{get\+Samples\+Per\+Cycle}} () const
+\item 
+double \mbox{\hyperlink{class_generator_a7462fb16fb6f5ad77af9a7980b36a91c}{get\+Bias}} () const
+\item 
+void \mbox{\hyperlink{class_generator_ae2d975627a34d706cd86f5238e7b87d8}{reset\+Clock}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Dodatkowe dziedziczone składowe}
+\doxysubsection*{Metody chronione dziedziczone z \mbox{\hyperlink{class_generator}{Generator}}}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_generator_aaea4dd2d574cf658962076427a1e95c6}{advance\+Clock\+And\+Return}} (double)
+\begin{DoxyCompactList}\small\item\em funckja zwiększa zegar wewnętrzny i zwraca wartość podaną jako arguemnt + bias \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty chronione dziedziczone z \mbox{\hyperlink{class_generator}{Generator}}}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\+\_\+per\+\_\+cycle}}
+\item 
+double \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a0a9529ddc1a3ea6c6b659e4e22c772b2}{internal\+\_\+clock}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_generator_prostokatny_doc-constructors}
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_generator_prostokatny_aaef6393b00a1d2c9e482adbb762bcefc}\index{GeneratorProstokatny@{GeneratorProstokatny}!GeneratorProstokatny@{GeneratorProstokatny}}
+\index{GeneratorProstokatny@{GeneratorProstokatny}!GeneratorProstokatny@{GeneratorProstokatny}}
+\doxysubsubsection{\texorpdfstring{GeneratorProstokatny()}{GeneratorProstokatny()}}
+{\footnotesize\ttfamily \label{class_generator_prostokatny_aaef6393b00a1d2c9e482adbb762bcefc} 
+Generator\+Prostokatny\+::\+Generator\+Prostokatny (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_generator_prostokatny_doc-func-members}
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_generator_prostokatny_a93f5cc51409ce77e46d6a147d83363ed}\index{GeneratorProstokatny@{GeneratorProstokatny}!getDutyCycle@{getDutyCycle}}
+\index{getDutyCycle@{getDutyCycle}!GeneratorProstokatny@{GeneratorProstokatny}}
+\doxysubsubsection{\texorpdfstring{getDutyCycle()}{getDutyCycle()}}
+{\footnotesize\ttfamily \label{class_generator_prostokatny_a93f5cc51409ce77e46d6a147d83363ed} 
+double Generator\+Prostokatny\+::get\+Duty\+Cycle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_generator_prostokatny_ab8c5fd09a1f78c8f5929d2fd9f78829a}\index{GeneratorProstokatny@{GeneratorProstokatny}!setDutyCycle@{setDutyCycle}}
+\index{setDutyCycle@{setDutyCycle}!GeneratorProstokatny@{GeneratorProstokatny}}
+\doxysubsubsection{\texorpdfstring{setDutyCycle()}{setDutyCycle()}}
+{\footnotesize\ttfamily \label{class_generator_prostokatny_ab8c5fd09a1f78c8f5929d2fd9f78829a} 
+void Generator\+Prostokatny\+::set\+Duty\+Cycle (\begin{DoxyParamCaption}\item[{double}]{duty\+\_\+cycle}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_generator_prostokatny_a5e0954dca878701e53ad77f0c8e8454a}\index{GeneratorProstokatny@{GeneratorProstokatny}!tick@{tick}}
+\index{tick@{tick}!GeneratorProstokatny@{GeneratorProstokatny}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily \label{class_generator_prostokatny_a5e0954dca878701e53ad77f0c8e8454a} 
+double Generator\+Prostokatny\+::tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+
+
+Implementuje \mbox{\hyperlink{class_generator_ab6634f2223b14b6406a79bfdb73f886c}{Generator}}.
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_generator_prostokatny_8h}{Generator\+Prostokatny.\+h}}\item 
+\mbox{\hyperlink{_generator_prostokatny_8cpp}{Generator\+Prostokatny.\+cpp}}\end{DoxyCompactItemize}

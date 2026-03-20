@@ -1,0 +1,20 @@
+\doxysection{QSave\+State.\+hpp}
+\hypertarget{_q_save_state_8hpp_source}{}\label{_q_save_state_8hpp_source}\mbox{\hyperlink{_q_save_state_8hpp}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ QSAVESTATE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ QSAVESTATE\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_state_8h}{State.h}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_q_save_state_a02fa3b5bf0962e796e56ac82dc24b1e5}{QSaveState}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_save_state_interface}{SaveStateInterface}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ QJsonArray\ vectorToJsonArray(\textcolor{keyword}{const}\ std::vector<double>\&\ vec);}
+\DoxyCodeLine{00008\ \ \ \ \ std::vector<double>\ qJsonArrayToVector(\textcolor{keyword}{const}\ QJsonArray\&\ jsonArray);}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_q_save_state_a02fa3b5bf0962e796e56ac82dc24b1e5}{QSaveState}}();}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_q_save_state_ae76d780863342616016d5aa869ad0b3d}{saveToFile}}(std::string\&\ path,\ \mbox{\hyperlink{class_u_a_r}{UAR}}*\ uar,\ \textcolor{keywordtype}{bool}\ simmulation\_running,\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State::TypGeneratora}}\ typ,\ \mbox{\hyperlink{class_generator_prostokatny}{GeneratorProstokatny}}*\ gen\_pros,\ \mbox{\hyperlink{class_generator_sinusoida}{GeneratorSinusoida}}*\ gen\_sin)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_q_save_state_ab5a6930c28da5e049a056affcc976308}{readFromFile}}(std::string\&\ path,\ \mbox{\hyperlink{class_u_a_r}{UAR}}*\ uar,\ \textcolor{keywordtype}{bool}*\ simmulation\_running,\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State::TypGeneratora}}*\ typ,\ \mbox{\hyperlink{class_generator_prostokatny}{GeneratorProstokatny}}*\ gen\_pros,\ \mbox{\hyperlink{class_generator_sinusoida}{GeneratorSinusoida}}*\ gen\_sin)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ QSAVESTATE\_HPP}}
+
+\end{DoxyCode}

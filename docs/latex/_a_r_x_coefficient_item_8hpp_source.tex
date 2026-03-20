@@ -1,0 +1,38 @@
+\doxysection{ARXCoefficient\+Item.\+hpp}
+\hypertarget{_a_r_x_coefficient_item_8hpp_source}{}\label{_a_r_x_coefficient_item_8hpp_source}\mbox{\hyperlink{_a_r_x_coefficient_item_8hpp}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ARXCOEFFICIENTITEM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ARXCOEFFICIENTITEM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_ui}{Ui}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classarx_coefficient_item}{arxCoefficientItem}};}
+\DoxyCodeLine{00008\ \}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classarx_coefficient_item_ab69560b7cbd76606751dc82616b0349d}{arxCoefficientItem}}\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classarx_coefficient_item_ab69560b7cbd76606751dc82616b0349d}{arxCoefficientItem}}(qint32\ index,\ \textcolor{keywordtype}{double}\ A,\ \textcolor{keywordtype}{double}\ B,\ QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{classarx_coefficient_item_abdd94a321d15b1d82c1954739a864dc0}{\string~arxCoefficientItem}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classarx_coefficient_item_a92794b1df94b8ac3a80c0d19c731116a}{getA}}();}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classarx_coefficient_item_a058fe5a5846506a98a014984b16dfab2}{getB}}();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_a\_valueChanged(\textcolor{keywordtype}{double}\ arg1);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_b\_valueChanged(\textcolor{keywordtype}{double}\ arg1);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_b\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_a\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ Ui::arxCoefficientItem\ *ui;}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ARXCOEFFICIENTITEM\_H}}
+
+\end{DoxyCode}

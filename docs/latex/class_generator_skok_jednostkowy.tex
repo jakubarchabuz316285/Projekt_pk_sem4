@@ -1,0 +1,128 @@
+\doxysection{Dokumentacja klasy Generator\+Skok\+Jednostkowy}
+\hypertarget{class_generator_skok_jednostkowy}{}\label{class_generator_skok_jednostkowy}\index{GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}}
+
+
+{\ttfamily \#include $<$Generator\+Skok\+Jednostkowy.\+hpp$>$}
+
+
+
+Diagram dziedziczenia dla Generator\+Skok\+Jednostkowy
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_generator_skok_jednostkowy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Diagram współpracy dla Generator\+Skok\+Jednostkowy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_generator_skok_jednostkowy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_generator_skok_jednostkowy_a4784db19541cf9b03d0767a2d3b4dd9c}{Generator\+Skok\+Jednostkowy}} ()
+\item 
+void \mbox{\hyperlink{class_generator_skok_jednostkowy_acc4e2c1599a89a8a4dce5ed159c6110c}{set\+Activation\+Time}} (uint32\+\_\+t activation\+\_\+time\+\_\+ticks)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_generator_skok_jednostkowy_ab198c639a6d7346722d54b2ee0f948fa}{get\+Activation\+Time}} () const
+\item 
+double \mbox{\hyperlink{class_generator_skok_jednostkowy_afb2de594f588a70a2ce8939f217b97cb}{tick}} () override
+\item 
+void \mbox{\hyperlink{class_generator_skok_jednostkowy_a605b9dec3ef2986f0f62834ec068a0ab}{reset\+Clock}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Metody publiczne dziedziczone z \mbox{\hyperlink{class_generator}{Generator}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_generator_aaaf1e5f3a47ede3ef8a96a301ee04a10}{Generator}} ()
+\item 
+void \mbox{\hyperlink{class_generator_aa5e6f29f5965aa90853f9ce8db03d61d}{set\+Amplitude}} (double \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}})
+\item 
+void \mbox{\hyperlink{class_generator_a957b177f9aa1182a20d78c851bd0de08}{set\+Samples\+Per\+Cycle}} (uint16\+\_\+t \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\+\_\+per\+\_\+cycle}})
+\item 
+void \mbox{\hyperlink{class_generator_adfe47046f181b0709b70d0d0f02b6aa2}{set\+Bias}} (double \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}})
+\item 
+double \mbox{\hyperlink{class_generator_ada6e8934c7d0c6098b91beab54e7b618}{get\+Amplitude}} () const
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a8085a2bfe88269c34624d567edf6d840}{get\+Samples\+Per\+Cycle}} () const
+\item 
+double \mbox{\hyperlink{class_generator_a7462fb16fb6f5ad77af9a7980b36a91c}{get\+Bias}} () const
+\item 
+void \mbox{\hyperlink{class_generator_ae2d975627a34d706cd86f5238e7b87d8}{reset\+Clock}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Dodatkowe dziedziczone składowe}
+\doxysubsection*{Metody chronione dziedziczone z \mbox{\hyperlink{class_generator}{Generator}}}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_generator_aaea4dd2d574cf658962076427a1e95c6}{advance\+Clock\+And\+Return}} (double)
+\begin{DoxyCompactList}\small\item\em funckja zwiększa zegar wewnętrzny i zwraca wartość podaną jako arguemnt + bias \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty chronione dziedziczone z \mbox{\hyperlink{class_generator}{Generator}}}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\+\_\+per\+\_\+cycle}}
+\item 
+double \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a0a9529ddc1a3ea6c6b659e4e22c772b2}{internal\+\_\+clock}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_generator_skok_jednostkowy_doc-constructors}
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_generator_skok_jednostkowy_a4784db19541cf9b03d0767a2d3b4dd9c}\index{GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}!GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}}
+\index{GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}!GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}}
+\doxysubsubsection{\texorpdfstring{GeneratorSkokJednostkowy()}{GeneratorSkokJednostkowy()}}
+{\footnotesize\ttfamily \label{class_generator_skok_jednostkowy_a4784db19541cf9b03d0767a2d3b4dd9c} 
+Generator\+Skok\+Jednostkowy\+::\+Generator\+Skok\+Jednostkowy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_generator_skok_jednostkowy_doc-func-members}
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_generator_skok_jednostkowy_ab198c639a6d7346722d54b2ee0f948fa}\index{GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}!getActivationTime@{getActivationTime}}
+\index{getActivationTime@{getActivationTime}!GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}}
+\doxysubsubsection{\texorpdfstring{getActivationTime()}{getActivationTime()}}
+{\footnotesize\ttfamily \label{class_generator_skok_jednostkowy_ab198c639a6d7346722d54b2ee0f948fa} 
+uint32\+\_\+t Generator\+Skok\+Jednostkowy\+::get\+Activation\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_generator_skok_jednostkowy_a605b9dec3ef2986f0f62834ec068a0ab}\index{GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}!resetClock@{resetClock}}
+\index{resetClock@{resetClock}!GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}}
+\doxysubsubsection{\texorpdfstring{resetClock()}{resetClock()}}
+{\footnotesize\ttfamily \label{class_generator_skok_jednostkowy_a605b9dec3ef2986f0f62834ec068a0ab} 
+void Generator\+Skok\+Jednostkowy\+::reset\+Clock (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_generator_skok_jednostkowy_acc4e2c1599a89a8a4dce5ed159c6110c}\index{GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}!setActivationTime@{setActivationTime}}
+\index{setActivationTime@{setActivationTime}!GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}}
+\doxysubsubsection{\texorpdfstring{setActivationTime()}{setActivationTime()}}
+{\footnotesize\ttfamily \label{class_generator_skok_jednostkowy_acc4e2c1599a89a8a4dce5ed159c6110c} 
+void Generator\+Skok\+Jednostkowy\+::set\+Activation\+Time (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{activation\+\_\+time\+\_\+ticks}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_generator_skok_jednostkowy_afb2de594f588a70a2ce8939f217b97cb}\index{GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}!tick@{tick}}
+\index{tick@{tick}!GeneratorSkokJednostkowy@{GeneratorSkokJednostkowy}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily \label{class_generator_skok_jednostkowy_afb2de594f588a70a2ce8939f217b97cb} 
+double Generator\+Skok\+Jednostkowy\+::tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+
+
+Implementuje \mbox{\hyperlink{class_generator_ab6634f2223b14b6406a79bfdb73f886c}{Generator}}.
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_generator_skok_jednostkowy_8hpp}{Generator\+Skok\+Jednostkowy.\+hpp}}\item 
+\mbox{\hyperlink{_generator_skok_jednostkowy_8cpp}{Generator\+Skok\+Jednostkowy.\+cpp}}\end{DoxyCompactItemize}

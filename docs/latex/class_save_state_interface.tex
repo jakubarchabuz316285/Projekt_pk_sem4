@@ -1,0 +1,63 @@
+\doxysection{Dokumentacja klasy Save\+State\+Interface}
+\hypertarget{class_save_state_interface}{}\label{class_save_state_interface}\index{SaveStateInterface@{SaveStateInterface}}
+
+
+{\ttfamily \#include $<$State.\+h$>$}
+
+
+
+Diagram dziedziczenia dla Save\+State\+Interface
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{class_save_state_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Diagram współpracy dla Save\+State\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{class_save_state_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_save_state_interface_a31b93056070d3a7f5e2f2a0be256af3b}{save\+To\+File}} (std\+::string \&path, \mbox{\hyperlink{class_u_a_r}{UAR}} \texorpdfstring{$\ast$}{*}uar, bool simmulation, \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State\+::\+Typ\+Generatora}} typ, \mbox{\hyperlink{class_generator_prostokatny}{Generator\+Prostokatny}} \texorpdfstring{$\ast$}{*}gen\+\_\+pros, \mbox{\hyperlink{class_generator_sinusoida}{Generator\+Sinusoida}} \texorpdfstring{$\ast$}{*}gen\+\_\+sin)=0
+\item 
+virtual void \mbox{\hyperlink{class_save_state_interface_a0e4181caf35dd54f21a62a1ddd82fb8e}{read\+From\+File}} (std\+::string \&path, \mbox{\hyperlink{class_u_a_r}{UAR}} \texorpdfstring{$\ast$}{*}uar, bool \texorpdfstring{$\ast$}{*}simmulation, \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State\+::\+Typ\+Generatora}} \texorpdfstring{$\ast$}{*}typ, \mbox{\hyperlink{class_generator_prostokatny}{Generator\+Prostokatny}} \texorpdfstring{$\ast$}{*}gen\+\_\+pros, \mbox{\hyperlink{class_generator_sinusoida}{Generator\+Sinusoida}} \texorpdfstring{$\ast$}{*}gen\+\_\+sin)=0
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_save_state_interface_doc-func-members}
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_save_state_interface_a0e4181caf35dd54f21a62a1ddd82fb8e}\index{SaveStateInterface@{SaveStateInterface}!readFromFile@{readFromFile}}
+\index{readFromFile@{readFromFile}!SaveStateInterface@{SaveStateInterface}}
+\doxysubsubsection{\texorpdfstring{readFromFile()}{readFromFile()}}
+{\footnotesize\ttfamily \label{class_save_state_interface_a0e4181caf35dd54f21a62a1ddd82fb8e} 
+virtual void Save\+State\+Interface\+::read\+From\+File (\begin{DoxyParamCaption}\item[{std\+::string \&}]{path}{, }\item[{\mbox{\hyperlink{class_u_a_r}{UAR}} \texorpdfstring{$\ast$}{*}}]{uar}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{simmulation}{, }\item[{\mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State\+::\+Typ\+Generatora}} \texorpdfstring{$\ast$}{*}}]{typ}{, }\item[{\mbox{\hyperlink{class_generator_prostokatny}{Generator\+Prostokatny}} \texorpdfstring{$\ast$}{*}}]{gen\+\_\+pros}{, }\item[{\mbox{\hyperlink{class_generator_sinusoida}{Generator\+Sinusoida}} \texorpdfstring{$\ast$}{*}}]{gen\+\_\+sin}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implementowany w \mbox{\hyperlink{class_q_save_state_ab5a6930c28da5e049a056affcc976308}{QSave\+State}}.
+
+\Hypertarget{class_save_state_interface_a31b93056070d3a7f5e2f2a0be256af3b}\index{SaveStateInterface@{SaveStateInterface}!saveToFile@{saveToFile}}
+\index{saveToFile@{saveToFile}!SaveStateInterface@{SaveStateInterface}}
+\doxysubsubsection{\texorpdfstring{saveToFile()}{saveToFile()}}
+{\footnotesize\ttfamily \label{class_save_state_interface_a31b93056070d3a7f5e2f2a0be256af3b} 
+virtual void Save\+State\+Interface\+::save\+To\+File (\begin{DoxyParamCaption}\item[{std\+::string \&}]{path}{, }\item[{\mbox{\hyperlink{class_u_a_r}{UAR}} \texorpdfstring{$\ast$}{*}}]{uar}{, }\item[{bool}]{simmulation}{, }\item[{\mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State\+::\+Typ\+Generatora}}}]{typ}{, }\item[{\mbox{\hyperlink{class_generator_prostokatny}{Generator\+Prostokatny}} \texorpdfstring{$\ast$}{*}}]{gen\+\_\+pros}{, }\item[{\mbox{\hyperlink{class_generator_sinusoida}{Generator\+Sinusoida}} \texorpdfstring{$\ast$}{*}}]{gen\+\_\+sin}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implementowany w \mbox{\hyperlink{class_q_save_state_ae76d780863342616016d5aa869ad0b3d}{QSave\+State}}.
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_state_8h}{State.\+h}}\end{DoxyCompactItemize}

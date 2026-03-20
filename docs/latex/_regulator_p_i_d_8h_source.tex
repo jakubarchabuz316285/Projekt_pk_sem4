@@ -1,0 +1,55 @@
+\doxysection{Regulator\+PID.\+h}
+\hypertarget{_regulator_p_i_d_8h_source}{}\label{_regulator_p_i_d_8h_source}\mbox{\hyperlink{_regulator_p_i_d_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REGULATOR\_PID\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REGULATOR\_PID\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{IntegType}}\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537ac30163615770c8b2b8873288e828de41}{outside}},}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537a5bd4531b3402d8bd9cbd05bbe129a733}{insde}},}
+\DoxyCodeLine{00011\ \};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_p_i_d_tick_data}{PIDTickData}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_p_i_d_tick_data_a0c64a0ee401db41825b4550f705c9762}{Proportional}};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_p_i_d_tick_data_a9b2889dfc1faae5bdbb3f2e6d437328e}{Integral}};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_p_i_d_tick_data_a9d72961198794dae3866bbc4c361b93c}{Derrivative}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ double()}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_p_i_d_tick_data_a0c64a0ee401db41825b4550f705c9762}{Proportional}}\ +\ \mbox{\hyperlink{struct_p_i_d_tick_data_a9b2889dfc1faae5bdbb3f2e6d437328e}{Integral}}\ +\ \mbox{\hyperlink{struct_p_i_d_tick_data_a9d72961198794dae3866bbc4c361b93c}{Derrivative}};}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_regulator_p_i_d_a5e95a7bffe8ace5719e720f4913884a1}{RegulatorPID}}}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{double}\ k;\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{double}\ T\_i;\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{double}\ T\_d;\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{double}\ sum\_of\_e\_inside\_integ;\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{double}\ sum\_of\_e\_outside\_integ;\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{double}\ previous\_e;\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{IntegType}}\ integration\_type;\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_regulator_p_i_d_a9edafc5ac8d3fac2eb2732f567eeb9ce}{tick}}(\textcolor{keywordtype}{double}\ e\_i);}
+\DoxyCodeLine{00052\ \mbox{\hyperlink{struct_p_i_d_tick_data}{PIDTickData}}\ \mbox{\hyperlink{class_regulator_p_i_d_a113e22ae44907eb92214c03dc1065d87}{tickMoreData}}(\textcolor{keywordtype}{double}\ e\_i);}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{class_regulator_p_i_d_a5e95a7bffe8ace5719e720f4913884a1}{RegulatorPID}}(\textcolor{keywordtype}{double}\ k,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_i\ =\ 0.0,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\_d\ =\ 0.0,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{IntegType}}\ integration\_type\ =\ \mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537ac30163615770c8b2b8873288e828de41}{IntegType::outside}});}
+\DoxyCodeLine{00070\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_regulator_p_i_d_a97c267f8993ae8253e8030751cae7d22}{setK}}(\textcolor{keywordtype}{double}\ k);}
+\DoxyCodeLine{00076\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_regulator_p_i_d_a1fd9ef980a24f6b438049d65189e2482}{setT\_i}}(\textcolor{keywordtype}{double}\ T\_i);}
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_regulator_p_i_d_a3c4a46bf9c755309718ff93ff458cec9}{setT\_d}}(\textcolor{keywordtype}{double}\ T\_d);}
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_regulator_p_i_d_aefc49ed86cab3f07f2cb9be1363c1471}{setIntegrationType}}(\mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{IntegType}}\ integ\_type);}
+\DoxyCodeLine{00094\ \mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{IntegType}}\ \mbox{\hyperlink{class_regulator_p_i_d_aee529b70378a01a729814bccc27267e3}{getIntegrationType}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_regulator_p_i_d_aa2180f299a452dd72e8f9edd757cb268}{getK}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_regulator_p_i_d_a5e9d8354b24b19dc00a6182ea1a55422}{getT\_i}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00112\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_regulator_p_i_d_a34a7fd3ec316d578e391c24b37267c39}{getT\_d}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00117\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_regulator_p_i_d_a21274dd08872c175499cd04d0681a5f6}{resetIntegrationPart}}();}
+\DoxyCodeLine{00122\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_regulator_p_i_d_a64dc02d3b15bf7074e1ba0272a92820f}{resetDerrivativePart}}();}
+\DoxyCodeLine{00127\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_regulator_p_i_d_a4a8e547b18693e8d94b7dd5ff27df7da}{reset}}();}
+\DoxyCodeLine{00128\ \};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ REGULATOR\_PID\_H}}
+
+\end{DoxyCode}

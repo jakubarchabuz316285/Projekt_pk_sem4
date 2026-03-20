@@ -1,0 +1,11 @@
+<map id="Graficzna hierarchia klas" name="Graficzna hierarchia klas">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,81,74,108"/>
+<area shape="rect" id="Node000001" href="$class_dialog_a_r_x_cooeficients.html" title=" " alt="" coords="122,5,281,32"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="71,70,121,42,152,31,148,34,123,46,74,74"/>
+<area shape="rect" id="Node000002" href="$class_dialog_a_r_xnoise.html" title=" " alt="" coords="143,56,260,83"/>
+<area shape="poly" id="edge5_Node000000_Node000002" title=" " alt="" coords="88,85,144,77,140,80,90,90"/>
+<area shape="rect" id="Node000003" href="$class_dialog_arx.html" title=" " alt="" coords="162,107,240,133"/>
+<area shape="poly" id="edge6_Node000000_Node000003" title=" " alt="" coords="89,100,164,112,160,116,89,105"/>
+<area shape="rect" id="Node000004" href="$class_dialog_debug.html" title=" " alt="" coords="153,157,250,184"/>
+<area shape="poly" id="edge7_Node000000_Node000004" title=" " alt="" coords="73,114,123,143,156,157,150,158,121,148,72,120"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="Graficzna hierarchia klas" name="Graficzna hierarchia klas">
+<area shape="rect" id="Node000000" href="$class_generator.html" title=" " alt="" coords="5,56,84,83"/>
+<area shape="rect" id="Node000001" href="$class_generator_prostokatny.html" title=" " alt="" coords="150,5,298,32"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="98,51,131,41,175,31,170,34,132,47,100,56"/>
+<area shape="rect" id="Node000002" href="$class_generator_sinusoida.html" title=" " alt="" coords="157,56,292,83"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="99,67,158,68,154,71,100,72"/>
+<area shape="rect" id="Node000003" href="$class_generator_skok_jednostkowy.html" title=" " alt="" coords="132,107,317,133"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="99,82,132,92,175,106,170,106,131,97,99,88"/>
+</map>

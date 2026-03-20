@@ -1,0 +1,7 @@
+<map id="dialogarx.h" name="dialogarx.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="45,5,130,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,74,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,31,58,69,54,65,77,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="98,80,173,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="97,30,122,67,116,67,95,35"/>
+</map>

@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Symulator UAR: Dokumentacja klasy RegulatorPID</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Symulator UAR
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('class_regulator_p_i_d.html','','class_regulator_p_i_d-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja klasy RegulatorPID</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_regulator_p_i_d_8h_source.html">RegulatorPID.h</a>&gt;</code></p>
+<div class="dynheader">
+Diagram współpracy dla RegulatorPID:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_regulator_p_i_d__coll__graph.png" border="0" usemap="#a_regulator_p_i_d_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_regulator_p_i_d_coll__map" id="a_regulator_p_i_d_coll__map">
+<area shape="rect" title=" " alt="" coords="5,5,209,448"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Metody publiczne</h2></td></tr>
+<tr class="memitem:a9edafc5ac8d3fac2eb2732f567eeb9ce" id="r_a9edafc5ac8d3fac2eb2732f567eeb9ce"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9edafc5ac8d3fac2eb2732f567eeb9ce">tick</a> (double e_i)</td></tr>
+<tr class="memitem:a113e22ae44907eb92214c03dc1065d87" id="r_a113e22ae44907eb92214c03dc1065d87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_p_i_d_tick_data.html">PIDTickData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a113e22ae44907eb92214c03dc1065d87">tickMoreData</a> (double e_i)</td></tr>
+<tr class="memitem:a5e95a7bffe8ace5719e720f4913884a1" id="r_a5e95a7bffe8ace5719e720f4913884a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e95a7bffe8ace5719e720f4913884a1">RegulatorPID</a> (double k, double T_i=0.0, double T_d=0.0, <a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537">IntegType</a> integration_type=<a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537ac30163615770c8b2b8873288e828de41">IntegType::outside</a>)</td></tr>
+<tr class="memitem:a97c267f8993ae8253e8030751cae7d22" id="r_a97c267f8993ae8253e8030751cae7d22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97c267f8993ae8253e8030751cae7d22">setK</a> (double k)</td></tr>
+<tr class="memitem:a1fd9ef980a24f6b438049d65189e2482" id="r_a1fd9ef980a24f6b438049d65189e2482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fd9ef980a24f6b438049d65189e2482">setT_i</a> (double T_i)</td></tr>
+<tr class="memitem:a3c4a46bf9c755309718ff93ff458cec9" id="r_a3c4a46bf9c755309718ff93ff458cec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c4a46bf9c755309718ff93ff458cec9">setT_d</a> (double T_d)</td></tr>
+<tr class="memitem:aefc49ed86cab3f07f2cb9be1363c1471" id="r_aefc49ed86cab3f07f2cb9be1363c1471"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefc49ed86cab3f07f2cb9be1363c1471">setIntegrationType</a> (<a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537">IntegType</a> integ_type)</td></tr>
+<tr class="memitem:aee529b70378a01a729814bccc27267e3" id="r_aee529b70378a01a729814bccc27267e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537">IntegType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee529b70378a01a729814bccc27267e3">getIntegrationType</a> () const</td></tr>
+<tr class="memitem:aa2180f299a452dd72e8f9edd757cb268" id="r_aa2180f299a452dd72e8f9edd757cb268"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa2180f299a452dd72e8f9edd757cb268">getK</a> () const</td></tr>
+<tr class="memitem:a5e9d8354b24b19dc00a6182ea1a55422" id="r_a5e9d8354b24b19dc00a6182ea1a55422"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e9d8354b24b19dc00a6182ea1a55422">getT_i</a> () const</td></tr>
+<tr class="memitem:a34a7fd3ec316d578e391c24b37267c39" id="r_a34a7fd3ec316d578e391c24b37267c39"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34a7fd3ec316d578e391c24b37267c39">getT_d</a> () const</td></tr>
+<tr class="memitem:a21274dd08872c175499cd04d0681a5f6" id="r_a21274dd08872c175499cd04d0681a5f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21274dd08872c175499cd04d0681a5f6">resetIntegrationPart</a> ()</td></tr>
+<tr class="memitem:a64dc02d3b15bf7074e1ba0272a92820f" id="r_a64dc02d3b15bf7074e1ba0272a92820f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64dc02d3b15bf7074e1ba0272a92820f">resetDerrivativePart</a> ()</td></tr>
+<tr class="memitem:a4a8e547b18693e8d94b7dd5ff27df7da" id="r_a4a8e547b18693e8d94b7dd5ff27df7da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a8e547b18693e8d94b7dd5ff27df7da">reset</a> ()</td></tr>
+</table>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Dokumentacja konstruktora i destruktora</h2>
+<a id="a5e95a7bffe8ace5719e720f4913884a1" name="a5e95a7bffe8ace5719e720f4913884a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e95a7bffe8ace5719e720f4913884a1">&#9670;&#160;</a></span>RegulatorPID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RegulatorPID::RegulatorPID </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>k</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>T_i</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>T_d</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537">IntegType</a></td>          <td class="paramname"><span class="paramname"><em>integration_type</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537ac30163615770c8b2b8873288e828de41">IntegType::outside</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">k</td><td></td></tr>
+    <tr><td class="paramname">T_i</td><td></td></tr>
+    <tr><td class="paramname">T_d</td><td></td></tr>
+    <tr><td class="paramname">integration_type</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji składowych</h2>
+<a id="aee529b70378a01a729814bccc27267e3" name="aee529b70378a01a729814bccc27267e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee529b70378a01a729814bccc27267e3">&#9670;&#160;</a></span>getIntegrationType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537">IntegType</a> RegulatorPID::getIntegrationType </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd><a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537">IntegType</a> </dd></dl>
+
+</div>
+</div>
+<a id="aa2180f299a452dd72e8f9edd757cb268" name="aa2180f299a452dd72e8f9edd757cb268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2180f299a452dd72e8f9edd757cb268">&#9670;&#160;</a></span>getK()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RegulatorPID::getK </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<a id="a34a7fd3ec316d578e391c24b37267c39" name="a34a7fd3ec316d578e391c24b37267c39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34a7fd3ec316d578e391c24b37267c39">&#9670;&#160;</a></span>getT_d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RegulatorPID::getT_d </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<a id="a5e9d8354b24b19dc00a6182ea1a55422" name="a5e9d8354b24b19dc00a6182ea1a55422"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e9d8354b24b19dc00a6182ea1a55422">&#9670;&#160;</a></span>getT_i()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RegulatorPID::getT_i </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<a id="a4a8e547b18693e8d94b7dd5ff27df7da" name="a4a8e547b18693e8d94b7dd5ff27df7da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a8e547b18693e8d94b7dd5ff27df7da">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RegulatorPID::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64dc02d3b15bf7074e1ba0272a92820f" name="a64dc02d3b15bf7074e1ba0272a92820f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64dc02d3b15bf7074e1ba0272a92820f">&#9670;&#160;</a></span>resetDerrivativePart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RegulatorPID::resetDerrivativePart </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21274dd08872c175499cd04d0681a5f6" name="a21274dd08872c175499cd04d0681a5f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21274dd08872c175499cd04d0681a5f6">&#9670;&#160;</a></span>resetIntegrationPart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RegulatorPID::resetIntegrationPart </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aefc49ed86cab3f07f2cb9be1363c1471" name="aefc49ed86cab3f07f2cb9be1363c1471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc49ed86cab3f07f2cb9be1363c1471">&#9670;&#160;</a></span>setIntegrationType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RegulatorPID::setIntegrationType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_regulator_p_i_d_8h.html#af43c48dd2710c212494ba6a7d8773537">IntegType</a></td>          <td class="paramname"><span class="paramname"><em>integ_type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">integ_type</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a97c267f8993ae8253e8030751cae7d22" name="a97c267f8993ae8253e8030751cae7d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c267f8993ae8253e8030751cae7d22">&#9670;&#160;</a></span>setK()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RegulatorPID::setK </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>k</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">k</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3c4a46bf9c755309718ff93ff458cec9" name="a3c4a46bf9c755309718ff93ff458cec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4a46bf9c755309718ff93ff458cec9">&#9670;&#160;</a></span>setT_d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RegulatorPID::setT_d </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>T_d</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T_d</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1fd9ef980a24f6b438049d65189e2482" name="a1fd9ef980a24f6b438049d65189e2482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fd9ef980a24f6b438049d65189e2482">&#9670;&#160;</a></span>setT_i()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RegulatorPID::setT_i </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>T_i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T_i</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9edafc5ac8d3fac2eb2732f567eeb9ce" name="a9edafc5ac8d3fac2eb2732f567eeb9ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9edafc5ac8d3fac2eb2732f567eeb9ce">&#9670;&#160;</a></span>tick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double RegulatorPID::tick </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>e_i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e_i</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<a id="a113e22ae44907eb92214c03dc1065d87" name="a113e22ae44907eb92214c03dc1065d87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a113e22ae44907eb92214c03dc1065d87">&#9670;&#160;</a></span>tickMoreData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_p_i_d_tick_data.html">PIDTickData</a> RegulatorPID::tickMoreData </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>e_i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e_i</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<hr/>Dokumentacja dla tej klasy została wygenerowana z plików:<ul>
+<li><a class="el" href="_regulator_p_i_d_8h_source.html">RegulatorPID.h</a></li>
+<li><a class="el" href="_regulator_p_i_d_8cpp.html">RegulatorPID.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_regulator_p_i_d.html">RegulatorPID</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

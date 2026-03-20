@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>27</x>
+      <y>45</y>
+      <w>360</w>
+      <h>369</h>
+    </coordinates>
+    <panel_attributes>ARX
+--
+- a: std::vector&lt;double&gt;
+- b: std::vector&lt;double&gt;
+- k: uint16_t
+- standard_deviation: double
+- y_i: std::deque&lt;double&gt;
+- u_i: std::deque&lt;double&gt;
+- limits_active: bool
+- output_limits: std::pair&lt;double, double&gt;
+- input_limits: std::pair&lt;double, double&gt;
+--
+- applyLimits(std::pair&lt;double, double&gt; &amp;limits,
+  double value): double 
+- getGaussianDistribValue(): double
++ ARX(std::vector&lt;double&gt; &amp;&amp;a, 
+    std::vector&lt;double&gt; &amp;&amp;b, uint16_t k = 1, 
+    double standard_deviation = 0.0)
++ tick(double u): double
++ setK(uint16_t k)
++ getK(): double
++ getA(): std::vector&lt;double&gt;
++ getB(): std::vector&lt;double&gt;
++ setAB(std::vector&lt;double&gt; a, std::vector&lt;double&gt; b)
++ reset()
++ disableLimits()
++ enableLimits()
++ getLimitsActive(): bool
++ setInputLimits(double low, double high)
++ setOutputLimits(double low, double high)
++ getInputLimits(): std::pair&lt;double, double&gt;&amp;
++ getOutputLimits(): std::pair&lt;double, double&gt;&amp;
++ setStandardDeviation(double standard_deviation)
++ getStandardDeviation(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1827</x>
+      <y>837</y>
+      <w>270</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Q_OBJECT&gt;&gt;
+DialogDebug
+--
+- ui: Ui::DialogDebug*
+--
++ write(QString message)
++ DialogDebug(QWidget *parent = nullptr)
++ ~DialogDebug()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>36</x>
+      <y>801</y>
+      <w>306</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>/Generator/
+--
+# amplitude: double
+# samples_per_cycle: uint16_t
+# bias: double
+# internal_clock: uint16_t
+--
++ Generator()
+# advanceClockAndReturn(double): double
+/+ tick(): double/
++ setAmplitude(double amplitude)
++ setSamplesPerCycle(uint16_t samples_per_cycle)
++ setBias(double bias)
++ getAmplitude(): double
++ getSamplesPerCycle(): uint16_t
++ getBias(): double
++ resetClock()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>702</y>
+      <w>225</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>GeneratorProstokatny
+--
+- duty_cycle: double
+--
++ GeneratorProstokatny();
++ tick(): double
++ setDutyCycle(double duty_cycle)
++ getDutyCycle(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>45</x>
+      <y>720</y>
+      <w>171</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>GeneratorSinusoida
+--
+--
++ GeneratorSinusoida();
++ tick(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>864</y>
+      <w>243</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>ListWithExtremes
+--
+- list: QList&lt;QPointF&gt;
+- values: std::map&lt;qreal, uint16_t&gt;
+--
++ ListWithExtremes()
++ getList(): QList&lt;QPointF&gt;*
++ getMaxValue(): qreal
++ getMinValue():qreal
++ appendLastValue(QPointF new_point)
++ deleteFirstValue()
++ clear()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>18</y>
+      <w>486</w>
+      <h>792</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Q_OBJECT&gt;&gt;
+MainWindow
+--
+- ui: Ui::MainWindow*
+- samples_count: uint32_t
+- debug_dialog: DialogDebug*
+- chart_wartosc_zadana_i_regulowana: QChart*
+- chart_uchyb: QChart*
+- chart_sterowanie: QChart*
+- chart_wszystko: QChart*
+- lista_wartosc_zadana: ListWithExtremes*
+- lista_wartosc_regulowana: ListWithExtremes*
+- lista_uchyb: ListWithExtremes*
+- lista_sterowanie: ListWithExtremes*
+- lista_sterowanie_P: ListWithExtremes*
+- lista_sterowanie_I: ListWithExtremes*
+- lista_sterowanie_D: ListWithExtremes*
+- miliseconds_of_simulation: qint64
+- debug_timer: QElapsedTimer
+- debug_last_time: int
+--
++ MainWindow(QWidget *parent = nullptr)
++ ~MainWindow()
+- updateUiFromState()
+- recalculate_generator_period();
+
+*SLOTS:*
++ addToPlots(TickData tick_data)
+- zapiszDoPliku()
+- wczytajZPliku()
+- przelaczOknoDebugowania()
+- on_pushButton_symulacja_star_stop_released()
+- on_spinBox_symulacja_interwal_valueChanged(int arg1)
+- on_horizontalSlider_symulacja_interwal_valueChanged(int value)
+- on_spinBox_symulacja_interwal_editingFinished()
+- on_horizontalSlider_symulacja_interwal_sliderReleased()
+- on_pushButton_dostosuj_parametry_clicked()
+- on_verticalSlider_generator_amplituda_sliderMoved(int position)
+- on_doubleSpinBox_generator_amplituda_valueChanged(double arg1)
+- on_doubleSpinBox_generator_amplituda_editingFinished()
+- on_verticalSlider_generator_amplituda_sliderReleased()
+- on_horizontalSlider_generator_okres_valueChanged(int value)
+- on_spinBox_generator_okres_valueChanged(int arg1)
+- on_spinBox_generator_okres_editingFinished()
+- on_horizontalSlider_generator_okres_sliderReleased()
+- on_comboBox_generator_typ_currentTextChanged(const QString &amp;arg1)
+- on_spinBox_generator_wypelnienie_editingFinished()
+- on_horizontalSlider_generator_wypelnienie_sliderReleased()
+- on_horizontalSlider_generator_wypelnienie_valueChanged(int value)
+- on_spinBox_generator_wypelnienie_valueChanged(int arg1)
+- on_pushButton_symulacja_reset_clicked()
+- on_horizontalSlider_symulacja_okno_obserwacji_valueChanged(int value)
+- on_spinBox_symulacja_okno_obserwacji_valueChanged(int arg1)
+- on_spinBox_symulacja_okno_obserwacji_editingFinished()
+- on_horizontalSlider_symulacja_okno_obserwacji_sliderReleased()
+- on_checkBoxOgraniczenia_checkStateChanged(const Qt::CheckState &amp;arg1)
+- on_pushButton_reset_pam_calk_clicked()
+- on_radioButton_stala_calkowania_przed_clicked()
+- on_radioButton_stala_calkowania_pod_clicked()
+- on_horizontalSlider_pid_k_valueChanged(int value)
+- on_doubleSpinBox_pid_k_editingFinished()
+- on_horizontalSlider_pid_k_sliderReleased()
+- on_doubleSpinBox_pid_k_valueChanged(double arg1)
+- on_horizontalSlider_pid_Ti_valueChanged(int value)
+- on_horizontalSlider_pid_Ti_sliderReleased()
+- on_doubleSpinBox_pid_Ti_valueChanged(double arg1)
+- on_doubleSpinBox_pid_Ti_editingFinished()
+- on_horizontalSlider_pid_Td_valueChanged(int value)
+- on_doubleSpinBox_pid_Td_valueChanged(double arg1)
+- on_doubleSpinBox_pid_Td_editingFinished()
+- on_horizontalSlider_pid_Td_sliderReleased()
+- on_pushButton_reset_pam_roz_clicked()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>828</y>
+      <w>477</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>QSaveState
+--
+
+--
++ QSaveState();
+- vectorToJsonArray(const std::vector&lt;double&gt;&amp; vec):  QJsonArray
+- qJsonArrayToVector(const QJsonArray&amp; jsonArray):  std::vector&lt;double&gt;
+
++ saveToFile(std::string&amp; path, UAR* uar, bool simmulation_running, 
+  State::TypGeneratora typ, GeneratorProstokatny* gen_pros, 
+  GeneratorSinusoida* gen_sin) 
+  
++ readFromFile(std::string&amp; path, UAR* uar, bool* simmulation_running, 
+  State::TypGeneratora* typ, GeneratorProstokatny* gen_pros, 
+  GeneratorSinusoida* gen_sin)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>414</x>
+      <y>54</y>
+      <w>405</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>RegulatorPID
+--
+- k: double
+- T_i: double
+- T_d: double
+- sum_of_e_inside_integ: double
+- sum_of_e_outside_integ: double
+- previous_e: double
+- integration_type: IntegType
+
+--
++ tick(double e_i): double
++ RegulatorPID(double k, double T_i = 0.0, double T_d = 0.0,
+  IntegType integration_type = IntegType::outside)
+
++ setK(double k)
++ setT_i(double T_i)
++ setT_d(double T_d)
++ setIntegrationType(IntegType integ_type)
++ getIntegrationType(): IntegType
++ getK(): double
++ getT_i(): double
++ getT_d(): double
++ resetIntegrationPart()
++ resetDerrivativePart()
++ reset()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>378</y>
+      <w>117</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ENUM CLASS&gt;&gt;
+IntegType
+--
+outside
+insde</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>891</x>
+      <y>198</y>
+      <w>504</w>
+      <h>585</h>
+    </coordinates>
+    <panel_attributes>State
+--
+- uar: UAR
+- gen_sin: GeneratorSinusoida
+- gen_pros: GeneratorProstokatny
+- gen_skok: GeneratorSkokJednostkowy
+- choosen_generator: Generator*
+- simmulation_running: bool
+- tick_callback: std::function&lt;void(TickData)&gt;
+- save: SaveStateInterface*
+- timer: TimerStateInterface*
+--
+- State()
+- ~State()
+- tick();
++ getInstance(): State&amp;
++ setSimmulationRunning(bool simmulation_running)
++ getSimmulationRunning(): bool
++ setSimmulationIntervalMS(uint32_t interval)
++ getSimmulationIntervalMS(): uint32_t
++ setOutputCallback(const std::function&lt;void(TickData)&gt; callback)
++ resetSimmulation()
++ setGenerator(TypGeneratora type)
++ getGenerator(): TypGeneratora
++ setGeneneratorAmplitude(const double&amp; amplitude)
++ setGeneneratorDutyCycle(const double&amp; duty_cycle)
++ setGeneneratorPeriodMS(uint32_t period)
++ getGeneneratorPeriodJumpMS(): uint8_t
++ setGeneratorUnitJumpTimeMS(uint32_t time)
++ resetGenerator()
++ setPIDProportional(double k)
++ setPIDIntegration(double T_i)
++ setPIDDerrivative(double T_d)
++ setPIDIntegrationType(IntegType integration_type)
++ resetPIDIntegration()
++ resetPIDDerrivative()
++ setARXCoefficients(std::vector&lt;double&gt; a, std::vector&lt;double&gt; b)
++ getARXCoefficientsA(): const std::vector&lt;double&gt;
++ getARXCoefficientsB(): const std::vector&lt;double&gt;
++ setARXTransportDelay(uint16_t k)
++ getARXTransportDelay(): uint16_t 
++ setARXInputLimits(double low, double high)
++ getARXInputLimits(): const std::pair&lt;double, double&gt;
++ setARXOutputLimits(double low, double high)
++ getARXOutputLimits(): const std::pair&lt;double, double&gt;
++ setARXNoiseStandardDeviation(double standard_deviation)
++ getARXNoiseStandardDeviation(): double
++ setARXLimitsEnabled(bool enabled)
++ resetARX()
++ setSaveStateObject(SaveStateInterface* object)
++ saveToFile(std::string path)
++ readFromFile(std::string path)
++ getAppState(): const std::tuple&lt;const ARX*, const RegulatorPID*,
+  const TypGeneratora,  const GeneratorSinusoida*, const GeneratorProstokatny*&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>945</x>
+      <y>90</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ENUM CLASS&gt;&gt;
+TypGeneratora
+--
+Sinusoidalny
+Prostokatny
+SkokJednostkowy</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>981</x>
+      <y>153</y>
+      <w>90</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=(+)-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>882</x>
+      <y>1017</y>
+      <w>414</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>/SaveStateInterface/
+--
+
+--
+/+ saveToFile(std::string&amp; path, UAR* uar, bool simmulation,/
+/  State::TypGeneratora typ, GeneratorProstokatny* gen_pros,/
+/  GeneratorSinusoida* gen_sin)/
+/+ readFromFile(std::string&amp; path, UAR* uar, bool* simmulation,/
+/  State::TypGeneratora* typ, GeneratorProstokatny* gen_pros,/
+/  GeneratorSinusoida* gen_sin)/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1107</x>
+      <y>45</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>StateGlobalAccess
+--
+--
++ operator()(): State&amp; </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1458</x>
+      <y>0</y>
+      <w>936</w>
+      <h>999</h>
+    </coordinates>
+    <panel_attributes>Warstwa GUI
+--
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>9</y>
+      <w>828</w>
+      <h>1026</h>
+    </coordinates>
+    <panel_attributes>Backend
+--
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>846</x>
+      <y>9</y>
+      <w>585</w>
+      <h>1296</h>
+    </coordinates>
+    <panel_attributes>Usługi
+--
+bg=CYAN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>477</y>
+      <w>306</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>UAR
+--
+- arx: ARX
+- pid: RegulatorPID
+- previous_y_i: double 
+--
++ UAR(ARX &amp;&amp;arx, RegulatorPID &amp;&amp;pid)
++ UAR(ARX &amp;arx, RegulatorPID &amp;pid)
++ tick(double input): double
++ tick_more_info(double input): TickData
++ resetAll()
++ getARX(): ARX&amp;
++ getRegulatorPID(): RegulatorPID&amp;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>216</x>
+      <y>1053</y>
+      <w>558</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>Test
+--
+
+--
+- TEST_ARX_ustawienie_K(): std::pair&lt;bool, const char*&gt;
+- TEST_ARX_nietypowe_AB(): std::pair&lt;bool, const char*&gt;
+- TEST_ARX_zaklocenia(): std::pair&lt;bool, const char*&gt;
+- TEST_PID_czlon_D_przyspiesza_regulacje(): std::pair&lt;bool, const char*&gt;
+- TEST_PID_czlon_P_regulacja_odwrotna(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Sinusoidalny(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Sinusoidalny_bias(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Sinusoidalny_zmiana_amplitudy(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Sinusoidalny_zmiana_okresu(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Prostokatny_zmiana_amplitudy(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Prostokatny_zmiana_okresu(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Prostokatny_bias(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Prostokatny_100_procent(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Prostokatny_50_procent(): std::pair&lt;bool, const char*&gt;
+- TEST_Generator_Prostokatny_10_procent(): std::pair&lt;bool, const char*&gt;
+- TEST_State_czy_jest_signletonem(): std::pair&lt;bool, const char*&gt;
+- TEST_State_zapis_i_odczyt_z_pliku(): std::pair&lt;bool, const char*&gt;
+- TEST_ListWithExtremes_poprawne_dzialanie(): std::pair&lt;bool, const char*&gt;
+- porownajZTolerancja(const double a, const double b, const double EPS = 1e-4): bool
++ wykonajTesty()
+fg=WHITE
+bg=BLACK</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>558</x>
+      <y>756</y>
+      <w>189</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;STRUCT&gt;&gt;
+TickData
+--
+wartosc_zadana: double
+wartosc_regulowana: double
+uchyb: double
+sterowanie: PIDTickData</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1089</x>
+      <y>981</y>
+      <w>27</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>261</x>
+      <y>774</y>
+      <w>45</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>126</x>
+      <y>765</y>
+      <w>45</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>405</y>
+      <w>54</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>387</x>
+      <y>324</y>
+      <w>108</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;170.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>468</x>
+      <y>594</y>
+      <w>441</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>470.0;10.0;260.0;10.0;70.0;150.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>135</x>
+      <y>558</y>
+      <w>774</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>840.0;10.0;530.0;10.0;360.0;140.0;10.0;140.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2043</x>
+      <y>333</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>*QMainWindow*
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2124</x>
+      <y>945</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>*QDialog*
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1989</x>
+      <y>351</y>
+      <w>99</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1890</x>
+      <y>909</y>
+      <w>252</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>260.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2007</x>
+      <y>423</y>
+      <w>369</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Q_OBJECT&gt;&gt;
+DialogArx
+--
+- ui: Ui::DialogArx*
+- chart_zaklocenia: QChart*
+- rozklad_zaklocen: QLineSeries*
+- axisX: QValueAxis*
+- axisY: QValueAxis*
+- arx_coefficients_widget: QWidget*
+- arx_coefficients_layout: QVBoxLayout*
+- arx_coefficients_items: QVector&lt;arxCoefficientItem*&gt;
+--
++ DialogArx(QWidget *parent = nullptr)
++ ~DialogArx()
+- addAXRCoefficientItem(const double A, const double B)
+
+*SLOTS:*
+- zaczytaj_dane()
+- on_zaklocenie_suwak_valueChanged(int value)
+- on_zaklocenie_wartosc_valueChanged(int arg1)
+- on_opoznienie_suwak_valueChanged(int value)
+- on_opoznienie_wartosc_valueChanged(int arg1)
+- on_dodaj_wspolczynnik_clicked()
+- on_usun_wspolczynnik_clicked()
+- on_buttonBox_accepted()
+- ustaw_wykres()
+- aktualizuj_widok(double odchylenie);
+
+
+
+
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2133</x>
+      <y>720</y>
+      <w>27</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1386</x>
+      <y>252</y>
+      <w>144</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1386</x>
+      <y>459</y>
+      <w>702</w>
+      <h>387</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0;100.0;410.0;760.0;410.0;760.0;300.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1791</x>
+      <y>801</y>
+      <w>54</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;40.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1989</x>
+      <y>720</y>
+      <w>63</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>50.0;10.0;50.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>459</x>
+      <y>495</y>
+      <w>450</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>480.0;10.0;110.0;10.0;110.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>747</x>
+      <y>324</y>
+      <w>27</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>459</x>
+      <y>567</y>
+      <w>162</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>160.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>666</x>
+      <y>666</y>
+      <w>243</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>72</y>
+      <w>27</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1260</x>
+      <y>45</y>
+      <w>270</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1260</x>
+      <y>63</y>
+      <w>819</w>
+      <h>774</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0;250.0;840.0;890.0;840.0;890.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1008</x>
+      <y>774</y>
+      <w>36</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>396</x>
+      <y>882</y>
+      <w>252</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>GeneratorSinusoida
+--
+- activation_time_int_tikcs: uint32_t
+--
++ GeneratorSkokJednostkowy();
++ tick(): double
++ setActivationTime(uint32_t activation_time_ticks)
++ getActivationTime(): uint32_t</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>477</x>
+      <y>630</y>
+      <w>432</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>460.0;10.0;250.0;10.0;10.0;190.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>333</x>
+      <y>909</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>513</x>
+      <y>378</y>
+      <w>153</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;STRUCT&gt;&gt;
+PIDTickData
+--
+Proportional: double
+Integral: double
+Derrivative: double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>522</x>
+      <y>324</y>
+      <w>63</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=(+)-</panel_attributes>
+    <additional_attributes>10.0;60.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>594</x>
+      <y>441</y>
+      <w>81</w>
+      <h>333</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1161</x>
+      <y>1143</y>
+      <w>261</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Q_OBJECT&gt;&gt;
+QTimerState
+--
+- timer: QTimer 
+- callback: std::function&lt;void()&gt;
+--
++ QTimerState();
++ setTimeout(std::function&lt;void()&gt;)
++ setIntervalMS(unsigned int)
++ getIntervalMS(): unsigned int 
++ setRunning(bool running)
+
+*SLOTS:*
++ runCallback()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>882</x>
+      <y>1152</y>
+      <w>225</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>/TimerStateInterface/
+--
+
+--
+/setTimeout(std::function&lt;void()&gt;)/
+/setIntervalMS(unsigned int)/
+/getIntervalMS(): unsigned int/
+/unsigned int getIntervalMS()/
+/setRunning(bool running)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1098</x>
+      <y>1188</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1368</x>
+      <y>774</y>
+      <w>36</w>
+      <h>387</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;410.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1602</x>
+      <y>801</y>
+      <w>27</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=
+m2=</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2034</x>
+      <y>99</y>
+      <w>315</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Q_OBJECT&gt;&gt;
+ArxCoefficientItem
+--
+- ui: Ui::ArxCoefficientItem*
+
+--
++ ArxCoefficientItem(qint32 index, double A, double B, QWidget *parent = nullptr)
++ ~ArxCoefficientItem()
++ getA(): double
++ getB(): double
+
+*SLOTS:*
+- on_doubleSpinBox_a_valueChanged(double arg1)
+- on_doubleSpinBox_b_valueChanged(double arg1)
+- on_horizontalSlider_b_valueChanged(int value)
+- on_horizontalSlider_a_valueChanged(int value)
+
+
+
+
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2034</x>
+      <y>45</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>*QWidget*
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2043</x>
+      <y>63</y>
+      <w>27</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2241</x>
+      <y>261</y>
+      <w>36</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Symulator UAR: Plik źródłowy UAR.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Symulator UAR
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_u_a_r_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">UAR.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_u_a_r_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef UAR_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define UAR_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_a_r_x_8h.html">ARX.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="_regulator_p_i_d_8h.html">RegulatorPID.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="struct_tick_data.html">    6</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_tick_data.html">TickData</a></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="struct_tick_data.html#ad1db71a5195293053116c33bc9350427">    8</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="struct_tick_data.html#ad1db71a5195293053116c33bc9350427">wartosc_zadana</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_tick_data.html#ab83f2a622c4aea00ca6a3c2b85f747a2">    9</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="struct_tick_data.html#ab83f2a622c4aea00ca6a3c2b85f747a2">wartosc_regulowana</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_tick_data.html#ac7e2c3634107f8e9434f1b9c74478da5">   10</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="struct_tick_data.html#ac7e2c3634107f8e9434f1b9c74478da5">uchyb</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_tick_data.html#a5cca7f82f7422477ada2b24da7e89ce9">   11</a></span>    <a class="code hl_struct" href="struct_p_i_d_tick_data.html">PIDTickData</a> <a class="code hl_variable" href="struct_tick_data.html#a5cca7f82f7422477ada2b24da7e89ce9">sterowanie</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>};</div>
+</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_u_a_r.html">   14</a></span><span class="keyword">class </span><a class="code hl_function" href="class_u_a_r.html#a42a208694800c753d3a08561284f699d">UAR</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="class_a_r_x.html">ARX</a> arx;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_class" href="class_regulator_p_i_d.html">RegulatorPID</a> pid;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">double</span> previous_y_i;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_function" href="class_u_a_r.html#a42a208694800c753d3a08561284f699d">UAR</a>(<a class="code hl_class" href="class_a_r_x.html">ARX</a> &amp;&amp;arx, <a class="code hl_class" href="class_regulator_p_i_d.html">RegulatorPID</a> &amp;&amp;pid);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_function" href="class_u_a_r.html#a42a208694800c753d3a08561284f699d">UAR</a>(<a class="code hl_class" href="class_a_r_x.html">ARX</a> &amp;arx, <a class="code hl_class" href="class_regulator_p_i_d.html">RegulatorPID</a> &amp;pid);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="class_u_a_r.html#afb9d27fe4e7e24cc6af18d2824512786">tick</a>(<span class="keywordtype">double</span> input);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_struct" href="struct_tick_data.html">TickData</a> <a class="code hl_function" href="class_u_a_r.html#a4184176c7c2266b6d6efdf61fc7de6ad">tickMoreInfo</a>(<span class="keywordtype">double</span> input);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_u_a_r.html#ae934333c24eeced0a14c3d56cbb92be6">resetAll</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_class" href="class_a_r_x.html">ARX</a> &amp;<a class="code hl_function" href="class_u_a_r.html#aa49253f42d255d2bd0e444e735d79471">getARX</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_class" href="class_regulator_p_i_d.html">RegulatorPID</a> &amp;<a class="code hl_function" href="class_u_a_r.html#acf8b6b428aace3112773858b58dbe576">getRegulatorPID</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif </span><span class="comment">// UAR_H</span></div>
+<div class="ttc" id="a_a_r_x_8h_html"><div class="ttname"><a href="_a_r_x_8h.html">ARX.h</a></div></div>
+<div class="ttc" id="a_regulator_p_i_d_8h_html"><div class="ttname"><a href="_regulator_p_i_d_8h.html">RegulatorPID.h</a></div></div>
+<div class="ttc" id="aclass_a_r_x_html"><div class="ttname"><a href="class_a_r_x.html">ARX</a></div><div class="ttdoc">Klasa implementująca obiek ARX.</div><div class="ttdef"><b>Definicja</b> ARX.h:13</div></div>
+<div class="ttc" id="aclass_regulator_p_i_d_html"><div class="ttname"><a href="class_regulator_p_i_d.html">RegulatorPID</a></div><div class="ttdef"><b>Definicja</b> RegulatorPID.h:29</div></div>
+<div class="ttc" id="aclass_u_a_r_html_a4184176c7c2266b6d6efdf61fc7de6ad"><div class="ttname"><a href="class_u_a_r.html#a4184176c7c2266b6d6efdf61fc7de6ad">UAR::tickMoreInfo</a></div><div class="ttdeci">TickData tickMoreInfo(double input)</div><div class="ttdef"><b>Definicja</b> UAR.cpp:18</div></div>
+<div class="ttc" id="aclass_u_a_r_html_a42a208694800c753d3a08561284f699d"><div class="ttname"><a href="class_u_a_r.html#a42a208694800c753d3a08561284f699d">UAR::UAR</a></div><div class="ttdeci">UAR(ARX &amp;&amp;arx, RegulatorPID &amp;&amp;pid)</div><div class="ttdef"><b>Definicja</b> UAR.cpp:3</div></div>
+<div class="ttc" id="aclass_u_a_r_html_aa49253f42d255d2bd0e444e735d79471"><div class="ttname"><a href="class_u_a_r.html#aa49253f42d255d2bd0e444e735d79471">UAR::getARX</a></div><div class="ttdeci">ARX &amp; getARX()</div><div class="ttdef"><b>Definicja</b> UAR.cpp:35</div></div>
+<div class="ttc" id="aclass_u_a_r_html_acf8b6b428aace3112773858b58dbe576"><div class="ttname"><a href="class_u_a_r.html#acf8b6b428aace3112773858b58dbe576">UAR::getRegulatorPID</a></div><div class="ttdeci">RegulatorPID &amp; getRegulatorPID()</div><div class="ttdef"><b>Definicja</b> UAR.cpp:39</div></div>
+<div class="ttc" id="aclass_u_a_r_html_ae934333c24eeced0a14c3d56cbb92be6"><div class="ttname"><a href="class_u_a_r.html#ae934333c24eeced0a14c3d56cbb92be6">UAR::resetAll</a></div><div class="ttdeci">void resetAll()</div><div class="ttdef"><b>Definicja</b> UAR.cpp:29</div></div>
+<div class="ttc" id="aclass_u_a_r_html_afb9d27fe4e7e24cc6af18d2824512786"><div class="ttname"><a href="class_u_a_r.html#afb9d27fe4e7e24cc6af18d2824512786">UAR::tick</a></div><div class="ttdeci">double tick(double input)</div><div class="ttdef"><b>Definicja</b> UAR.cpp:13</div></div>
+<div class="ttc" id="astruct_p_i_d_tick_data_html"><div class="ttname"><a href="struct_p_i_d_tick_data.html">PIDTickData</a></div><div class="ttdef"><b>Definicja</b> RegulatorPID.h:14</div></div>
+<div class="ttc" id="astruct_tick_data_html"><div class="ttname"><a href="struct_tick_data.html">TickData</a></div><div class="ttdef"><b>Definicja</b> UAR.h:7</div></div>
+<div class="ttc" id="astruct_tick_data_html_a5cca7f82f7422477ada2b24da7e89ce9"><div class="ttname"><a href="struct_tick_data.html#a5cca7f82f7422477ada2b24da7e89ce9">TickData::sterowanie</a></div><div class="ttdeci">PIDTickData sterowanie</div><div class="ttdef"><b>Definicja</b> UAR.h:11</div></div>
+<div class="ttc" id="astruct_tick_data_html_ab83f2a622c4aea00ca6a3c2b85f747a2"><div class="ttname"><a href="struct_tick_data.html#ab83f2a622c4aea00ca6a3c2b85f747a2">TickData::wartosc_regulowana</a></div><div class="ttdeci">double wartosc_regulowana</div><div class="ttdef"><b>Definicja</b> UAR.h:9</div></div>
+<div class="ttc" id="astruct_tick_data_html_ac7e2c3634107f8e9434f1b9c74478da5"><div class="ttname"><a href="struct_tick_data.html#ac7e2c3634107f8e9434f1b9c74478da5">TickData::uchyb</a></div><div class="ttdeci">double uchyb</div><div class="ttdef"><b>Definicja</b> UAR.h:10</div></div>
+<div class="ttc" id="astruct_tick_data_html_ad1db71a5195293053116c33bc9350427"><div class="ttname"><a href="struct_tick_data.html#ad1db71a5195293053116c33bc9350427">TickData::wartosc_zadana</a></div><div class="ttdeci">double wartosc_zadana</div><div class="ttdef"><b>Definicja</b> UAR.h:8</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="_u_a_r_8h.html">UAR.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

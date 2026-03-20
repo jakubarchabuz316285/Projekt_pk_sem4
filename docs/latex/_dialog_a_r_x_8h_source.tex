@@ -1,0 +1,58 @@
+\doxysection{Dialog\+ARX.\+h}
+\hypertarget{_dialog_a_r_x_8h_source}{}\label{_dialog_a_r_x_8h_source}\mbox{\hyperlink{_dialog_a_r_x_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DIALOGARX\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DIALOGARX\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_state_8h}{State.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_r_x_coefficient_item_8hpp}{ARXCoefficientItem.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QDialog>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <QtCharts>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_ui}{Ui}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }DialogArx;}
+\DoxyCodeLine{00011\ \}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_dialog_arx_ad61fdde334e1fc47e55a1e3cdedd8b50}{DialogArx}}\ :\ \textcolor{keyword}{public}\ QDialog}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_dialog_arx_ad61fdde334e1fc47e55a1e3cdedd8b50}{DialogArx}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_dialog_arx_a891e8143e4836b4f75a825f62ecbec4f}{\string~DialogArx}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ zaczytaj\_dane();}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ on\_zaklocenie\_suwak\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ on\_zaklocenie\_wartosc\_valueChanged(\textcolor{keywordtype}{double}\ arg1);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ on\_opoznienie\_suwak\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ on\_opoznienie\_wartosc\_valueChanged(\textcolor{keywordtype}{int}\ arg1);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ on\_dodaj\_wspolczynnik\_clicked();}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ on\_usun\_wspolczynnik\_clicked();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ on\_buttonBox\_accepted();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ustaw\_wykres();}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ aktualizuj\_widok(\textcolor{keywordtype}{double}\ odchylenie);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ MAX\_WSPOLCZYNNIKOW\ =\ 10;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ MIN\_WSPOLCZYNNIKOW\ =\ 3;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ addAXRCoefficientItem(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ A,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ B);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ QChart\ *chart\_zaklocenia;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ QLineSeries\ *rozklad\_zaklocen;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ QValueAxis\ \ *axisX;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ QValueAxis\ \ *axisY;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ QWidget*\ arx\_coefficients\_widget;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ QVBoxLayout*\ arx\_coefficients\_layout;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ QVector<arxCoefficientItem*>\ arx\_coefficients\_items;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ LICZBA\_PUNKTOW\ =\ 300;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ Ui::DialogArx\ *ui;}
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DIALOGARX\_H}}
+
+\end{DoxyCode}

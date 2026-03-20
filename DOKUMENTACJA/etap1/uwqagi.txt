@@ -1,0 +1,6 @@
+1 zamienic vectory w funkcji tick na liste (lub zrobić coś swojego) - zrobione
+2. kolejność usuwania - zmienic insert na push_front - zrobione
+3. poprawic uml ;)> -zrobione
+4. złączyć okna dialogowe ustawień -zrobione
+5. klasa dla testów -jest
+

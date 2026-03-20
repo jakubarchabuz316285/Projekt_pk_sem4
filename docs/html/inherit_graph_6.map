@@ -1,0 +1,7 @@
+<map id="Graficzna hierarchia klas" name="Graficzna hierarchia klas">
+<area shape="rect" id="Node000000" title=" " alt="" coords="39,5,108,32"/>
+<area shape="rect" id="Node000001" href="$class_q_timer_state.html" title=" " alt="" coords="190,31,285,57"/>
+<area shape="poly" id="edge9_Node000000_Node000001" title=" " alt="" coords="123,24,192,36,187,38,123,29"/>
+<area shape="rect" id="Node000002" href="$class_timer_state_interface.html" title=" " alt="" coords="5,56,142,83"/>
+<area shape="poly" id="edge10_Node000002_Node000001" title=" " alt="" coords="157,54,192,51,187,52,158,59"/>
+</map>

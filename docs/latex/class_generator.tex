@@ -1,0 +1,211 @@
+\doxysection{Dokumentacja klasy Generator}
+\hypertarget{class_generator}{}\label{class_generator}\index{Generator@{Generator}}
+
+
+{\ttfamily \#include $<$Generator.\+h$>$}
+
+
+
+Diagram dziedziczenia dla Generator
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_generator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Diagram współpracy dla Generator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{class_generator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_generator_aaaf1e5f3a47ede3ef8a96a301ee04a10}{Generator}} ()
+\item 
+virtual double \mbox{\hyperlink{class_generator_ab6634f2223b14b6406a79bfdb73f886c}{tick}} ()=0
+\item 
+void \mbox{\hyperlink{class_generator_aa5e6f29f5965aa90853f9ce8db03d61d}{set\+Amplitude}} (double \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}})
+\item 
+void \mbox{\hyperlink{class_generator_a957b177f9aa1182a20d78c851bd0de08}{set\+Samples\+Per\+Cycle}} (uint16\+\_\+t \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\+\_\+per\+\_\+cycle}})
+\item 
+void \mbox{\hyperlink{class_generator_adfe47046f181b0709b70d0d0f02b6aa2}{set\+Bias}} (double \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}})
+\item 
+double \mbox{\hyperlink{class_generator_ada6e8934c7d0c6098b91beab54e7b618}{get\+Amplitude}} () const
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a8085a2bfe88269c34624d567edf6d840}{get\+Samples\+Per\+Cycle}} () const
+\item 
+double \mbox{\hyperlink{class_generator_a7462fb16fb6f5ad77af9a7980b36a91c}{get\+Bias}} () const
+\item 
+void \mbox{\hyperlink{class_generator_ae2d975627a34d706cd86f5238e7b87d8}{reset\+Clock}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Metody chronione}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_generator_aaea4dd2d574cf658962076427a1e95c6}{advance\+Clock\+And\+Return}} (double)
+\begin{DoxyCompactList}\small\item\em funckja zwiększa zegar wewnętrzny i zwraca wartość podaną jako arguemnt + bias \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Atrybuty chronione}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\+\_\+per\+\_\+cycle}}
+\item 
+double \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_generator_a0a9529ddc1a3ea6c6b659e4e22c772b2}{internal\+\_\+clock}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_generator_doc-constructors}
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_generator_aaaf1e5f3a47ede3ef8a96a301ee04a10}\index{Generator@{Generator}!Generator@{Generator}}
+\index{Generator@{Generator}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{Generator()}{Generator()}}
+{\footnotesize\ttfamily \label{class_generator_aaaf1e5f3a47ede3ef8a96a301ee04a10} 
+Generator\+::\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_generator_doc-func-members}
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_generator_aaea4dd2d574cf658962076427a1e95c6}\index{Generator@{Generator}!advanceClockAndReturn@{advanceClockAndReturn}}
+\index{advanceClockAndReturn@{advanceClockAndReturn}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{advanceClockAndReturn()}{advanceClockAndReturn()}}
+{\footnotesize\ttfamily \label{class_generator_aaea4dd2d574cf658962076427a1e95c6} 
+double Generator\+::advance\+Clock\+And\+Return (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+funckja zwiększa zegar wewnętrzny i zwraca wartość podaną jako arguemnt + bias 
+
+
+\begin{DoxyParams}{Parametry}
+{\em double} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+\Hypertarget{class_generator_ada6e8934c7d0c6098b91beab54e7b618}\index{Generator@{Generator}!getAmplitude@{getAmplitude}}
+\index{getAmplitude@{getAmplitude}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{getAmplitude()}{getAmplitude()}}
+{\footnotesize\ttfamily \label{class_generator_ada6e8934c7d0c6098b91beab54e7b618} 
+double Generator\+::get\+Amplitude (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+\Hypertarget{class_generator_a7462fb16fb6f5ad77af9a7980b36a91c}\index{Generator@{Generator}!getBias@{getBias}}
+\index{getBias@{getBias}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{getBias()}{getBias()}}
+{\footnotesize\ttfamily \label{class_generator_a7462fb16fb6f5ad77af9a7980b36a91c} 
+double Generator\+::get\+Bias (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+\Hypertarget{class_generator_a8085a2bfe88269c34624d567edf6d840}\index{Generator@{Generator}!getSamplesPerCycle@{getSamplesPerCycle}}
+\index{getSamplesPerCycle@{getSamplesPerCycle}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{getSamplesPerCycle()}{getSamplesPerCycle()}}
+{\footnotesize\ttfamily \label{class_generator_a8085a2bfe88269c34624d567edf6d840} 
+uint16\+\_\+t Generator\+::get\+Samples\+Per\+Cycle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Zwraca}
+uint16\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{class_generator_ae2d975627a34d706cd86f5238e7b87d8}\index{Generator@{Generator}!resetClock@{resetClock}}
+\index{resetClock@{resetClock}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{resetClock()}{resetClock()}}
+{\footnotesize\ttfamily \label{class_generator_ae2d975627a34d706cd86f5238e7b87d8} 
+void Generator\+::reset\+Clock (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_generator_aa5e6f29f5965aa90853f9ce8db03d61d}\index{Generator@{Generator}!setAmplitude@{setAmplitude}}
+\index{setAmplitude@{setAmplitude}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{setAmplitude()}{setAmplitude()}}
+{\footnotesize\ttfamily \label{class_generator_aa5e6f29f5965aa90853f9ce8db03d61d} 
+void Generator\+::set\+Amplitude (\begin{DoxyParamCaption}\item[{double}]{amplitude}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parametry}
+{\em amplitude} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_generator_adfe47046f181b0709b70d0d0f02b6aa2}\index{Generator@{Generator}!setBias@{setBias}}
+\index{setBias@{setBias}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{setBias()}{setBias()}}
+{\footnotesize\ttfamily \label{class_generator_adfe47046f181b0709b70d0d0f02b6aa2} 
+void Generator\+::set\+Bias (\begin{DoxyParamCaption}\item[{double}]{bias}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parametry}
+{\em bias} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_generator_a957b177f9aa1182a20d78c851bd0de08}\index{Generator@{Generator}!setSamplesPerCycle@{setSamplesPerCycle}}
+\index{setSamplesPerCycle@{setSamplesPerCycle}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{setSamplesPerCycle()}{setSamplesPerCycle()}}
+{\footnotesize\ttfamily \label{class_generator_a957b177f9aa1182a20d78c851bd0de08} 
+void Generator\+::set\+Samples\+Per\+Cycle (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{samples\+\_\+per\+\_\+cycle}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parametry}
+{\em samples\+\_\+per\+\_\+cycle} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_generator_ab6634f2223b14b6406a79bfdb73f886c}\index{Generator@{Generator}!tick@{tick}}
+\index{tick@{tick}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily \label{class_generator_ab6634f2223b14b6406a79bfdb73f886c} 
+virtual double Generator\+::tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+
+
+Implementowany w \mbox{\hyperlink{class_generator_prostokatny_a5e0954dca878701e53ad77f0c8e8454a}{Generator\+Prostokatny}}, \mbox{\hyperlink{class_generator_sinusoida_a990c16dff98ae294db2c01d9065ab1fe}{Generator\+Sinusoida}} i \mbox{\hyperlink{class_generator_skok_jednostkowy_afb2de594f588a70a2ce8939f217b97cb}{Generator\+Skok\+Jednostkowy}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_generator_doc-variable-members}
+\doxysubsection{Dokumentacja atrybutów składowych}
+\Hypertarget{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}\index{Generator@{Generator}!amplitude@{amplitude}}
+\index{amplitude@{amplitude}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{amplitude}{amplitude}}
+{\footnotesize\ttfamily \label{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c} 
+double Generator\+::amplitude\hspace{0.3cm}{\ttfamily [protected]}}
+
+amplituda generowanego sygnału \Hypertarget{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}\index{Generator@{Generator}!bias@{bias}}
+\index{bias@{bias}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{bias}{bias}}
+{\footnotesize\ttfamily \label{class_generator_a842934bc8ceedd59c0597f3cbeda8e85} 
+double Generator\+::bias\hspace{0.3cm}{\ttfamily [protected]}}
+
+offset sygnału \Hypertarget{class_generator_a0a9529ddc1a3ea6c6b659e4e22c772b2}\index{Generator@{Generator}!internal\_clock@{internal\_clock}}
+\index{internal\_clock@{internal\_clock}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{internal\_clock}{internal\_clock}}
+{\footnotesize\ttfamily \label{class_generator_a0a9529ddc1a3ea6c6b659e4e22c772b2} 
+uint16\+\_\+t Generator\+::internal\+\_\+clock\hspace{0.3cm}{\ttfamily [protected]}}
+
+wartośc wewnętrzna. nie ruszać \Hypertarget{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}\index{Generator@{Generator}!samples\_per\_cycle@{samples\_per\_cycle}}
+\index{samples\_per\_cycle@{samples\_per\_cycle}!Generator@{Generator}}
+\doxysubsubsection{\texorpdfstring{samples\_per\_cycle}{samples\_per\_cycle}}
+{\footnotesize\ttfamily \label{class_generator_a8ad4e443f597ef4581b5e64d222a1c02} 
+uint16\+\_\+t Generator\+::samples\+\_\+per\+\_\+cycle\hspace{0.3cm}{\ttfamily [protected]}}
+
+ile impulsów zegarywch an jeden okres 
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_generator_8h}{Generator.\+h}}\item 
+\mbox{\hyperlink{_generator_8cpp}{Generator.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\doxysection{mainwindow.\+h}
+\hypertarget{mainwindow_8h_source}{}\label{mainwindow_8h_source}\mbox{\hyperlink{mainwindow_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MAINWINDOW\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MAINWINDOW\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QtCharts>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_u_a_r_8h}{UAR.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_ui}{Ui}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }MainWindow;}
+\DoxyCodeLine{00010\ \}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{MainWindow}}\ :\ \textcolor{keyword}{public}\ QMainWindow}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{MainWindow}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}{\string~MainWindow}}();}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_main_window_af3376d873de37dda25db7c21f1308661}{addToPlots}}(\mbox{\hyperlink{struct_tick_data}{TickData}}\ tick\_data);}
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButton\_symulacja\_star\_stop\_released();}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_symulacja\_interwal\_valueChanged(\textcolor{keywordtype}{int}\ arg1);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_symulacja\_interwal\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_symulacja\_interwal\_editingFinished();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_symulacja\_interwal\_sliderReleased();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButton\_dostosuj\_parametry\_clicked();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_verticalSlider\_generator\_amplituda\_sliderMoved(\textcolor{keywordtype}{int}\ position);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_generator\_amplituda\_valueChanged(\textcolor{keywordtype}{double}\ arg1);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_generator\_amplituda\_editingFinished();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_verticalSlider\_generator\_amplituda\_sliderReleased();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_generator\_okres\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_generator\_okres\_valueChanged(\textcolor{keywordtype}{int}\ arg1);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_generator\_okres\_editingFinished();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_generator\_okres\_sliderReleased();}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_comboBox\_generator\_typ\_currentTextChanged(\textcolor{keyword}{const}\ QString\ \&arg1);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_generator\_wypelnienie\_editingFinished();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_generator\_wypelnienie\_sliderReleased();}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_generator\_wypelnienie\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_generator\_wypelnienie\_valueChanged(\textcolor{keywordtype}{int}\ arg1);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButton\_symulacja\_reset\_clicked();}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_symulacja\_okno\_obserwacji\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_symulacja\_okno\_obserwacji\_valueChanged(\textcolor{keywordtype}{int}\ arg1);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_spinBox\_symulacja\_okno\_obserwacji\_editingFinished();}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_symulacja\_okno\_obserwacji\_sliderReleased();}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_checkBoxOgraniczenia\_checkStateChanged(\textcolor{keyword}{const}\ Qt::CheckState\ \&arg1);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButton\_reset\_pam\_calk\_clicked();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_radioButton\_stala\_calkowania\_przed\_clicked();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_radioButton\_stala\_calkowania\_pod\_clicked();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_pid\_k\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_pid\_k\_editingFinished();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_pid\_k\_sliderReleased();}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_pid\_k\_valueChanged(\textcolor{keywordtype}{double}\ arg1);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_pid\_Ti\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_pid\_Ti\_sliderReleased();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_pid\_Ti\_valueChanged(\textcolor{keywordtype}{double}\ arg1);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_pid\_Ti\_editingFinished();}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_pid\_Td\_valueChanged(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_pid\_Td\_valueChanged(\textcolor{keywordtype}{double}\ arg1);}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_doubleSpinBox\_pid\_Td\_editingFinished();}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_horizontalSlider\_pid\_Td\_sliderReleased();}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ on\_pushButton\_reset\_pam\_roz\_clicked();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ uint32\_t\ samples\_count;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ Ui::MainWindow\ *ui;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ QChart\ *chart\_wartosc\_zadana\_i\_regulowana;}
+\DoxyCodeLine{00070\ \ \ \ \ QChart\ *chart\_uchyb;}
+\DoxyCodeLine{00071\ \ \ \ \ QChart\ *chart\_sterowanie;}
+\DoxyCodeLine{00072\ \ \ \ \ QChart\ *chart\_wszystko;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ QList<QPointF>\ *lista\_wartosc\_zadana;}
+\DoxyCodeLine{00075\ \ \ \ \ QList<QPointF>\ *lista\_wartosc\_regulowana;}
+\DoxyCodeLine{00076\ \ \ \ \ QList<QPointF>\ *lista\_uchyb;}
+\DoxyCodeLine{00077\ \ \ \ \ QList<QPointF>\ *lista\_sterowanie;}
+\DoxyCodeLine{00078\ \ \ \ \ qint64\ miliseconds\_of\_simulation;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ QElapsedTimer\ debug\_timer;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{int}\ debug\_last\_time;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ recalculate\_generator\_period();}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAINWINDOW\_H}}
+
+\end{DoxyCode}

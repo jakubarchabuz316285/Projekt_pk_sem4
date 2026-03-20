@@ -1,0 +1,12 @@
+compilation_database_dir: 'C:\Users\kamil\AppData\Local\Temp\QtCreator-EDECJq\Clang-TidyMABslg'
+output_directory: uml
+diagrams:
+  hierarchia_klas:
+    type: class
+    title: Wszyskie klasy w kodzie
+    exclude:
+      namespaces:
+      - std
+      - Ui
+
+

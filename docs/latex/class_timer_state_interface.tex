@@ -1,0 +1,87 @@
+\doxysection{Dokumentacja klasy Timer\+State\+Interface}
+\hypertarget{class_timer_state_interface}{}\label{class_timer_state_interface}\index{TimerStateInterface@{TimerStateInterface}}
+
+
+{\ttfamily \#include $<$State.\+h$>$}
+
+
+
+Diagram dziedziczenia dla Timer\+State\+Interface
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{class_timer_state_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Diagram współpracy dla Timer\+State\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{class_timer_state_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_timer_state_interface_ad3609383d95ae061f3f09efec2c95f37}{set\+Timeout}} (std\+::function$<$ void()$>$)=0
+\item 
+virtual void \mbox{\hyperlink{class_timer_state_interface_ac2a88d890a7ce4db7890ea3d744bd68c}{set\+Interval\+MS}} (unsigned int)=0
+\item 
+virtual unsigned int \mbox{\hyperlink{class_timer_state_interface_ac28ff27b7101f0d02fa2f648cd6cb12f}{get\+Interval\+MS}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_timer_state_interface_a50f33ec7bc72f6e3d6373c938864463e}{set\+Running}} (bool running)=0
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_timer_state_interface_doc-func-members}
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_timer_state_interface_ac28ff27b7101f0d02fa2f648cd6cb12f}\index{TimerStateInterface@{TimerStateInterface}!getIntervalMS@{getIntervalMS}}
+\index{getIntervalMS@{getIntervalMS}!TimerStateInterface@{TimerStateInterface}}
+\doxysubsubsection{\texorpdfstring{getIntervalMS()}{getIntervalMS()}}
+{\footnotesize\ttfamily \label{class_timer_state_interface_ac28ff27b7101f0d02fa2f648cd6cb12f} 
+virtual unsigned int Timer\+State\+Interface\+::get\+Interval\+MS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implementowany w \mbox{\hyperlink{class_q_timer_state_ad6322fec4a2badbf2ef04ec987570384}{QTimer\+State}}.
+
+\Hypertarget{class_timer_state_interface_ac2a88d890a7ce4db7890ea3d744bd68c}\index{TimerStateInterface@{TimerStateInterface}!setIntervalMS@{setIntervalMS}}
+\index{setIntervalMS@{setIntervalMS}!TimerStateInterface@{TimerStateInterface}}
+\doxysubsubsection{\texorpdfstring{setIntervalMS()}{setIntervalMS()}}
+{\footnotesize\ttfamily \label{class_timer_state_interface_ac2a88d890a7ce4db7890ea3d744bd68c} 
+virtual void Timer\+State\+Interface\+::set\+Interval\+MS (\begin{DoxyParamCaption}\item[{unsigned int}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implementowany w \mbox{\hyperlink{class_q_timer_state_ab84c8269d24a0c76b3bf1f31cbd02e56}{QTimer\+State}}.
+
+\Hypertarget{class_timer_state_interface_a50f33ec7bc72f6e3d6373c938864463e}\index{TimerStateInterface@{TimerStateInterface}!setRunning@{setRunning}}
+\index{setRunning@{setRunning}!TimerStateInterface@{TimerStateInterface}}
+\doxysubsubsection{\texorpdfstring{setRunning()}{setRunning()}}
+{\footnotesize\ttfamily \label{class_timer_state_interface_a50f33ec7bc72f6e3d6373c938864463e} 
+virtual void Timer\+State\+Interface\+::set\+Running (\begin{DoxyParamCaption}\item[{bool}]{running}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implementowany w \mbox{\hyperlink{class_q_timer_state_a52264db20de22c6bf28960328b4b0e47}{QTimer\+State}}.
+
+\Hypertarget{class_timer_state_interface_ad3609383d95ae061f3f09efec2c95f37}\index{TimerStateInterface@{TimerStateInterface}!setTimeout@{setTimeout}}
+\index{setTimeout@{setTimeout}!TimerStateInterface@{TimerStateInterface}}
+\doxysubsubsection{\texorpdfstring{setTimeout()}{setTimeout()}}
+{\footnotesize\ttfamily \label{class_timer_state_interface_ad3609383d95ae061f3f09efec2c95f37} 
+virtual void Timer\+State\+Interface\+::set\+Timeout (\begin{DoxyParamCaption}\item[{std\+::function$<$ void()$>$}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implementowany w \mbox{\hyperlink{class_q_timer_state_acfb607b6ee7296eeb68f8a998423c540}{QTimer\+State}}.
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_state_8h}{State.\+h}}\end{DoxyCompactItemize}

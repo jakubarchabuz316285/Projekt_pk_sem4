@@ -1,0 +1,31 @@
+\doxysection{QTimer\+State.\+hpp}
+\hypertarget{_q_timer_state_8hpp_source}{}\label{_q_timer_state_8hpp_source}\mbox{\hyperlink{_q_timer_state_8hpp}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ QTIMERSTATE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ QTIMERSTATE\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_state_8h}{State.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <qtimer.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_q_timer_state_a99ed2a4070aa7af6ca55a63a3ecda9c7}{QTimerState}}\ :\ \textcolor{keyword}{public}\ QObject,\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_timer_state_interface}{TimerStateInterface}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ QTimer\ timer;}
+\DoxyCodeLine{00013\ \ \ \ \ std::function<void()>\ callback;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_q_timer_state_a20d7329a5c95699dbfa13f6940fac7f7}{runCallback}}();}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_q_timer_state_a99ed2a4070aa7af6ca55a63a3ecda9c7}{QTimerState}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_q_timer_state_acfb607b6ee7296eeb68f8a998423c540}{setTimeout}}(std::function<\textcolor{keywordtype}{void}()>)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_q_timer_state_ab84c8269d24a0c76b3bf1f31cbd02e56}{setIntervalMS}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_q_timer_state_ad6322fec4a2badbf2ef04ec987570384}{getIntervalMS}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_q_timer_state_a52264db20de22c6bf28960328b4b0e47}{setRunning}}(\textcolor{keywordtype}{bool}\ running)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ QTIMERSTATE\_HPP}}
+
+\end{DoxyCode}

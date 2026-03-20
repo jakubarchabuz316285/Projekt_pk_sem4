@@ -1,0 +1,334 @@
+\doxysection{Dokumentacja klasy ARX}
+\hypertarget{class_a_r_x}{}\label{class_a_r_x}\index{ARX@{ARX}}
+
+
+Klasa implementująca obiek \doxylink{class_a_r_x}{ARX}.  
+
+
+
+
+{\ttfamily \#include $<$ARX.\+h$>$}
+
+
+
+Diagram współpracy dla ARX\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_a_r_x__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_r_x_ae2852296666fda6486b80314cad16b52}{ARX}} (std\+::vector$<$ double $>$ \&\&a, std\+::vector$<$ double $>$ \&\&b, uint16\+\_\+t k=1, double standard\+\_\+deviation=0.\+0)
+\begin{DoxyCompactList}\small\item\em Konstruktowr obiektu \doxylink{class_a_r_x}{ARX}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_a_r_x_ade537f24f33ba60fd4ac77214d11da05}{tick}} (double u)
+\begin{DoxyCompactList}\small\item\em Wynikuje jeden krok symualcji dla obiektu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_afe2718758d4c13483425103a72659f80}{setK}} (uint16\+\_\+t k)
+\begin{DoxyCompactList}\small\item\em ustawia opóżnienie transportowe \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_a_r_x_a3e74030dc1538d23bb7148b20544a0f7}{getK}} () const
+\begin{DoxyCompactList}\small\item\em opóżnienie transportowe \end{DoxyCompactList}\item 
+const std\+::vector$<$ double $>$ \mbox{\hyperlink{class_a_r_x_ad229ee7398f095d6665addef0ac78f4e}{getA}} () const
+\begin{DoxyCompactList}\small\item\em tablica współczynników A \end{DoxyCompactList}\item 
+const std\+::vector$<$ double $>$ \mbox{\hyperlink{class_a_r_x_af8bba827a9bfa716ac22ed633129533d}{getB}} () const
+\begin{DoxyCompactList}\small\item\em tablica współczynników B \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_aa3f9d12a24e81dba88cc7d64e471a8d8}{set\+AB}} (std\+::vector$<$ double $>$ a, std\+::vector$<$ double $>$ b)
+\begin{DoxyCompactList}\small\item\em ustawia tablice współczynników A i B. Zwaradca wyjątek przy niepowodzeniu \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_a8c8b7fe3b0de9023d68c30d6be3f64af}{reset}} ()
+\begin{DoxyCompactList}\small\item\em resetuje wewnętrzene bufory obiektu. Przydantne podczas resetowania symualcji \doxylink{class_u_a_r}{UAR} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_a52ba1f41750cb8940c6bbcf7f6a1bd67}{disable\+Limits}} ()
+\begin{DoxyCompactList}\small\item\em wyłącza limity na wejściu i wyjściu \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_a7b8c1614ff11f72c1141e8ea33477b58}{enable\+Limits}} ()
+\begin{DoxyCompactList}\small\item\em włącza limity na wejściu i wyjściu \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_r_x_a520db8abaa14aab864ed1db7c7f826c4}{get\+Limits\+Active}} () const
+\begin{DoxyCompactList}\small\item\em informuje czy aktywne są limity na wejściu i wyjściu \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_a9870be5f917a9b57fe6f30628fcb506b}{set\+Input\+Limits}} (double low, double high)
+\begin{DoxyCompactList}\small\item\em ustawia limity na wejściu \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_acb43c40299e7cbda5077ac0546cab0c5}{set\+Output\+Limits}} (double low, double high)
+\begin{DoxyCompactList}\small\item\em ustawia limity na wyjściu \end{DoxyCompactList}\item 
+const std\+::pair$<$ double, double $>$ \& \mbox{\hyperlink{class_a_r_x_a12155f3d9ccc112666e4f9249490aad4}{get\+Input\+Limits}} () const
+\begin{DoxyCompactList}\small\item\em zwraca limity na wejściu \end{DoxyCompactList}\item 
+const std\+::pair$<$ double, double $>$ \& \mbox{\hyperlink{class_a_r_x_af266e8d79de2b2aa1e2ed7c2d9984ecc}{get\+Output\+Limits}} () const
+\begin{DoxyCompactList}\small\item\em ustawia limity na wyjściu \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_r_x_af238ca6925d01891725c938d1cee2996}{set\+Standard\+Deviation}} (double standard\+\_\+deviation)
+\begin{DoxyCompactList}\small\item\em ustawia wartość odchylenia dla zakłócen obiektu. Wartość 0.\+0 wyłącza zakłówcenia \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_a_r_x_a317f5c29a1d0c006c3c58720990b82f5}{get\+Standard\+Deviation}} () const
+\begin{DoxyCompactList}\small\item\em zwraca wartość odchylenia dla zakłócen obiektu \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Przyjaciele}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_a_r_x_a5b78b1c2e1fa07ffed92da365593eaa4}{Test}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa implementująca obiek \doxylink{class_a_r_x}{ARX}. 
+
+\label{doc-constructors}
+\Hypertarget{class_a_r_x_doc-constructors}
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\Hypertarget{class_a_r_x_ae2852296666fda6486b80314cad16b52}\index{ARX@{ARX}!ARX@{ARX}}
+\index{ARX@{ARX}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{ARX()}{ARX()}}
+{\footnotesize\ttfamily \label{class_a_r_x_ae2852296666fda6486b80314cad16b52} 
+ARX\+::\+ARX (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&\&}]{a}{, }\item[{std\+::vector$<$ double $>$ \&\&}]{b}{, }\item[{uint16\+\_\+t}]{k}{ = {\ttfamily 1}, }\item[{double}]{standard\+\_\+deviation}{ = {\ttfamily 0.0}}\end{DoxyParamCaption})}
+
+
+
+Konstruktowr obiektu \doxylink{class_a_r_x}{ARX}. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+{\em k} & \\
+\hline
+{\em standard\+\_\+deviation} & \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{class_a_r_x_doc-func-members}
+\doxysubsection{Dokumentacja funkcji składowych}
+\Hypertarget{class_a_r_x_a52ba1f41750cb8940c6bbcf7f6a1bd67}\index{ARX@{ARX}!disableLimits@{disableLimits}}
+\index{disableLimits@{disableLimits}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{disableLimits()}{disableLimits()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a52ba1f41750cb8940c6bbcf7f6a1bd67} 
+void ARX\+::disable\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+wyłącza limity na wejściu i wyjściu 
+
+\Hypertarget{class_a_r_x_a7b8c1614ff11f72c1141e8ea33477b58}\index{ARX@{ARX}!enableLimits@{enableLimits}}
+\index{enableLimits@{enableLimits}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{enableLimits()}{enableLimits()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a7b8c1614ff11f72c1141e8ea33477b58} 
+void ARX\+::enable\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+włącza limity na wejściu i wyjściu 
+
+\Hypertarget{class_a_r_x_ad229ee7398f095d6665addef0ac78f4e}\index{ARX@{ARX}!getA@{getA}}
+\index{getA@{getA}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{getA()}{getA()}}
+{\footnotesize\ttfamily \label{class_a_r_x_ad229ee7398f095d6665addef0ac78f4e} 
+const std\+::vector$<$ double $>$ ARX\+::getA (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+tablica współczynników A 
+
+\begin{DoxyReturn}{Zwraca}
+const std\+::vector$<$double$>$ 
+\end{DoxyReturn}
+\Hypertarget{class_a_r_x_af8bba827a9bfa716ac22ed633129533d}\index{ARX@{ARX}!getB@{getB}}
+\index{getB@{getB}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{getB()}{getB()}}
+{\footnotesize\ttfamily \label{class_a_r_x_af8bba827a9bfa716ac22ed633129533d} 
+const std\+::vector$<$ double $>$ ARX\+::getB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+tablica współczynników B 
+
+\begin{DoxyReturn}{Zwraca}
+const std\+::vector$<$double$>$ 
+\end{DoxyReturn}
+\Hypertarget{class_a_r_x_a12155f3d9ccc112666e4f9249490aad4}\index{ARX@{ARX}!getInputLimits@{getInputLimits}}
+\index{getInputLimits@{getInputLimits}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{getInputLimits()}{getInputLimits()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a12155f3d9ccc112666e4f9249490aad4} 
+const std\+::pair$<$ double, double $>$ \& ARX\+::get\+Input\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+zwraca limity na wejściu 
+
+\begin{DoxyReturn}{Zwraca}
+const std\+::pair$<$double, double$>$ 
+\end{DoxyReturn}
+\Hypertarget{class_a_r_x_a3e74030dc1538d23bb7148b20544a0f7}\index{ARX@{ARX}!getK@{getK}}
+\index{getK@{getK}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{getK()}{getK()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a3e74030dc1538d23bb7148b20544a0f7} 
+double ARX\+::getK (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+opóżnienie transportowe 
+
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+\Hypertarget{class_a_r_x_a520db8abaa14aab864ed1db7c7f826c4}\index{ARX@{ARX}!getLimitsActive@{getLimitsActive}}
+\index{getLimitsActive@{getLimitsActive}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{getLimitsActive()}{getLimitsActive()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a520db8abaa14aab864ed1db7c7f826c4} 
+bool ARX\+::get\+Limits\+Active (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+informuje czy aktywne są limity na wejściu i wyjściu 
+
+\begin{DoxyReturn}{Zwraca}
+bool 
+\end{DoxyReturn}
+\Hypertarget{class_a_r_x_af266e8d79de2b2aa1e2ed7c2d9984ecc}\index{ARX@{ARX}!getOutputLimits@{getOutputLimits}}
+\index{getOutputLimits@{getOutputLimits}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{getOutputLimits()}{getOutputLimits()}}
+{\footnotesize\ttfamily \label{class_a_r_x_af266e8d79de2b2aa1e2ed7c2d9984ecc} 
+const std\+::pair$<$ double, double $>$ \& ARX\+::get\+Output\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+ustawia limity na wyjściu 
+
+\begin{DoxyReturn}{Zwraca}
+const std\+::pair$<$double, double$>$ 
+\end{DoxyReturn}
+\Hypertarget{class_a_r_x_a317f5c29a1d0c006c3c58720990b82f5}\index{ARX@{ARX}!getStandardDeviation@{getStandardDeviation}}
+\index{getStandardDeviation@{getStandardDeviation}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{getStandardDeviation()}{getStandardDeviation()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a317f5c29a1d0c006c3c58720990b82f5} 
+double ARX\+::get\+Standard\+Deviation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+zwraca wartość odchylenia dla zakłócen obiektu 
+
+\begin{DoxyReturn}{Zwraca}
+double 
+\end{DoxyReturn}
+\Hypertarget{class_a_r_x_a8c8b7fe3b0de9023d68c30d6be3f64af}\index{ARX@{ARX}!reset@{reset}}
+\index{reset@{reset}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a8c8b7fe3b0de9023d68c30d6be3f64af} 
+void ARX\+::reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+resetuje wewnętrzene bufory obiektu. Przydantne podczas resetowania symualcji \doxylink{class_u_a_r}{UAR} 
+
+\Hypertarget{class_a_r_x_aa3f9d12a24e81dba88cc7d64e471a8d8}\index{ARX@{ARX}!setAB@{setAB}}
+\index{setAB@{setAB}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{setAB()}{setAB()}}
+{\footnotesize\ttfamily \label{class_a_r_x_aa3f9d12a24e81dba88cc7d64e471a8d8} 
+void ARX\+::set\+AB (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{a}{, }\item[{std\+::vector$<$ double $>$}]{b}{}\end{DoxyParamCaption})}
+
+
+
+ustawia tablice współczynników A i B. Zwaradca wyjątek przy niepowodzeniu 
+
+
+\begin{DoxyParams}{Parametry}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_a_r_x_a9870be5f917a9b57fe6f30628fcb506b}\index{ARX@{ARX}!setInputLimits@{setInputLimits}}
+\index{setInputLimits@{setInputLimits}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{setInputLimits()}{setInputLimits()}}
+{\footnotesize\ttfamily \label{class_a_r_x_a9870be5f917a9b57fe6f30628fcb506b} 
+void ARX\+::set\+Input\+Limits (\begin{DoxyParamCaption}\item[{double}]{low}{, }\item[{double}]{high}{}\end{DoxyParamCaption})}
+
+
+
+ustawia limity na wejściu 
+
+
+\begin{DoxyParams}{Parametry}
+{\em low} & \\
+\hline
+{\em high} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_a_r_x_afe2718758d4c13483425103a72659f80}\index{ARX@{ARX}!setK@{setK}}
+\index{setK@{setK}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{setK()}{setK()}}
+{\footnotesize\ttfamily \label{class_a_r_x_afe2718758d4c13483425103a72659f80} 
+void ARX\+::setK (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{k}{}\end{DoxyParamCaption})}
+
+
+
+ustawia opóżnienie transportowe 
+
+
+\begin{DoxyParams}{Parametry}
+{\em k} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_a_r_x_acb43c40299e7cbda5077ac0546cab0c5}\index{ARX@{ARX}!setOutputLimits@{setOutputLimits}}
+\index{setOutputLimits@{setOutputLimits}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{setOutputLimits()}{setOutputLimits()}}
+{\footnotesize\ttfamily \label{class_a_r_x_acb43c40299e7cbda5077ac0546cab0c5} 
+void ARX\+::set\+Output\+Limits (\begin{DoxyParamCaption}\item[{double}]{low}{, }\item[{double}]{high}{}\end{DoxyParamCaption})}
+
+
+
+ustawia limity na wyjściu 
+
+
+\begin{DoxyParams}{Parametry}
+{\em low} & \\
+\hline
+{\em high} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_a_r_x_af238ca6925d01891725c938d1cee2996}\index{ARX@{ARX}!setStandardDeviation@{setStandardDeviation}}
+\index{setStandardDeviation@{setStandardDeviation}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{setStandardDeviation()}{setStandardDeviation()}}
+{\footnotesize\ttfamily \label{class_a_r_x_af238ca6925d01891725c938d1cee2996} 
+void ARX\+::set\+Standard\+Deviation (\begin{DoxyParamCaption}\item[{double}]{standard\+\_\+deviation}{}\end{DoxyParamCaption})}
+
+
+
+ustawia wartość odchylenia dla zakłócen obiektu. Wartość 0.\+0 wyłącza zakłówcenia 
+
+
+\begin{DoxyParams}{Parametry}
+{\em standard\+\_\+deviation} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_a_r_x_ade537f24f33ba60fd4ac77214d11da05}\index{ARX@{ARX}!tick@{tick}}
+\index{tick@{tick}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily \label{class_a_r_x_ade537f24f33ba60fd4ac77214d11da05} 
+double ARX\+::tick (\begin{DoxyParamCaption}\item[{double}]{u}{}\end{DoxyParamCaption})}
+
+
+
+Wynikuje jeden krok symualcji dla obiektu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em u} & wartość na wejściu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+double wartośc na wyjściu 
+\end{DoxyReturn}
+
+
+\label{doc-related-members}
+\Hypertarget{class_a_r_x_doc-related-members}
+\doxysubsection{Dokumentacja przyjaciół i powiązanych symboli}
+\Hypertarget{class_a_r_x_a5b78b1c2e1fa07ffed92da365593eaa4}\index{ARX@{ARX}!Test@{Test}}
+\index{Test@{Test}!ARX@{ARX}}
+\doxysubsubsection{\texorpdfstring{Test}{Test}}
+{\footnotesize\ttfamily \label{class_a_r_x_a5b78b1c2e1fa07ffed92da365593eaa4} 
+friend class \mbox{\hyperlink{class_test}{Test}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_a_r_x_8h}{ARX.\+h}}\item 
+\mbox{\hyperlink{_a_r_x_8cpp}{ARX.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,35 @@
+\doxysection{UAR.\+h}
+\hypertarget{_u_a_r_8h_source}{}\label{_u_a_r_8h_source}\mbox{\hyperlink{_u_a_r_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UAR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UAR\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_a_r_x_8h}{ARX.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_regulator_p_i_d_8h}{RegulatorPID.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_tick_data}{TickData}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_tick_data_ad1db71a5195293053116c33bc9350427}{wartosc\_zadana}};}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_tick_data_ab83f2a622c4aea00ca6a3c2b85f747a2}{wartosc\_regulowana}};}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{struct_tick_data_ac7e2c3634107f8e9434f1b9c74478da5}{uchyb}};}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{struct_p_i_d_tick_data}{PIDTickData}}\ \mbox{\hyperlink{struct_tick_data_a5cca7f82f7422477ada2b24da7e89ce9}{sterowanie}};}
+\DoxyCodeLine{00012\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_u_a_r_a42a208694800c753d3a08561284f699d}{UAR}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_a_r_x}{ARX}}\ arx;}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_regulator_p_i_d}{RegulatorPID}}\ pid;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{double}\ previous\_y\_i;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_u_a_r_a42a208694800c753d3a08561284f699d}{UAR}}(\mbox{\hyperlink{class_a_r_x}{ARX}}\ \&\&arx,\ \mbox{\hyperlink{class_regulator_p_i_d}{RegulatorPID}}\ \&\&pid);}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_u_a_r_a42a208694800c753d3a08561284f699d}{UAR}}(\mbox{\hyperlink{class_a_r_x}{ARX}}\ \&arx,\ \mbox{\hyperlink{class_regulator_p_i_d}{RegulatorPID}}\ \&pid);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_u_a_r_afb9d27fe4e7e24cc6af18d2824512786}{tick}}(\textcolor{keywordtype}{double}\ input);}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{struct_tick_data}{TickData}}\ \mbox{\hyperlink{class_u_a_r_a4184176c7c2266b6d6efdf61fc7de6ad}{tickMoreInfo}}(\textcolor{keywordtype}{double}\ input);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_u_a_r_ae934333c24eeced0a14c3d56cbb92be6}{resetAll}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_a_r_x}{ARX}}\ \&\mbox{\hyperlink{class_u_a_r_aa49253f42d255d2bd0e444e735d79471}{getARX}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_regulator_p_i_d}{RegulatorPID}}\ \&\mbox{\hyperlink{class_u_a_r_acf8b6b428aace3112773858b58dbe576}{getRegulatorPID}}();}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ UAR\_H}}
+
+\end{DoxyCode}

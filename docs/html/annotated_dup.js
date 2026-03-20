@@ -1,0 +1,26 @@
+var annotated_dup =
+[
+    [ "ARX", "class_a_r_x.html", "class_a_r_x" ],
+    [ "arxCoefficientItem", "classarx_coefficient_item.html", "classarx_coefficient_item" ],
+    [ "DialogArx", "class_dialog_arx.html", "class_dialog_arx" ],
+    [ "DialogARXCooeficients", "class_dialog_a_r_x_cooeficients.html", "class_dialog_a_r_x_cooeficients" ],
+    [ "DialogARXnoise", "class_dialog_a_r_xnoise.html", "class_dialog_a_r_xnoise" ],
+    [ "DialogDebug", "class_dialog_debug.html", "class_dialog_debug" ],
+    [ "Generator", "class_generator.html", "class_generator" ],
+    [ "GeneratorProstokatny", "class_generator_prostokatny.html", "class_generator_prostokatny" ],
+    [ "GeneratorSinusoida", "class_generator_sinusoida.html", "class_generator_sinusoida" ],
+    [ "GeneratorSkokJednostkowy", "class_generator_skok_jednostkowy.html", "class_generator_skok_jednostkowy" ],
+    [ "ListWithExtremes", "class_list_with_extremes.html", "class_list_with_extremes" ],
+    [ "MainWindow", "class_main_window.html", "class_main_window" ],
+    [ "PIDTickData", "struct_p_i_d_tick_data.html", "struct_p_i_d_tick_data" ],
+    [ "QSaveState", "class_q_save_state.html", "class_q_save_state" ],
+    [ "QTimerState", "class_q_timer_state.html", "class_q_timer_state" ],
+    [ "RegulatorPID", "class_regulator_p_i_d.html", "class_regulator_p_i_d" ],
+    [ "SaveStateInterface", "class_save_state_interface.html", "class_save_state_interface" ],
+    [ "State", "class_state.html", "class_state" ],
+    [ "StateGlobalAccess", "class_state_global_access.html", "class_state_global_access" ],
+    [ "Test", "class_test.html", "class_test" ],
+    [ "TickData", "struct_tick_data.html", "struct_tick_data" ],
+    [ "TimerStateInterface", "class_timer_state_interface.html", "class_timer_state_interface" ],
+    [ "UAR", "class_u_a_r.html", "class_u_a_r" ]
+];

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Symulator UAR: Plik źródłowy ARX.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Symulator UAR
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_a_r_x_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ARX.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_a_r_x_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef ARX_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define ARX_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_test_8h.html">Test.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;deque&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_a_r_x.html">   12</a></span><span class="keyword">class </span><a class="code hl_function" href="class_a_r_x.html#ae2852296666fda6486b80314cad16b52">ARX</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_a_r_x.html#a5b78b1c2e1fa07ffed92da365593eaa4">   14</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_friend" href="class_a_r_x.html#a5b78b1c2e1fa07ffed92da365593eaa4">Test</a>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::vector&lt;double&gt; a; </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;double&gt; b; </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    uint16_t k; </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">double</span> standard_deviation; </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    std::deque&lt;double&gt; y_i; </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::deque&lt;double&gt; u_i; </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">bool</span> limits_active; </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    std::pair&lt;double, double&gt; output_limits; </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::pair&lt;double, double&gt; input_limits; </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">inline</span> <span class="keywordtype">double</span> applyLimits(std::pair&lt;double, double&gt; &amp;limits, <span class="keywordtype">double</span> value);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">inline</span> <span class="keywordtype">double</span> getGaussianDistribValue();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_function" href="class_a_r_x.html#ae2852296666fda6486b80314cad16b52">ARX</a>(std::vector&lt;double&gt; &amp;&amp;a,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        std::vector&lt;double&gt; &amp;&amp;b,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        uint16_t k = 1,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">double</span> standard_deviation = 0.0);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keywordtype">double</span> <a class="code hl_function" href="class_a_r_x.html#ade537f24f33ba60fd4ac77214d11da05">tick</a>(<span class="keywordtype">double</span> u);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#afe2718758d4c13483425103a72659f80">setK</a>(uint16_t k);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keywordtype">double</span> <a class="code hl_function" href="class_a_r_x.html#a3e74030dc1538d23bb7148b20544a0f7">getK</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">const</span> std::vector&lt;double&gt; <a class="code hl_function" href="class_a_r_x.html#ad229ee7398f095d6665addef0ac78f4e">getA</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">const</span> std::vector&lt;double&gt; <a class="code hl_function" href="class_a_r_x.html#af8bba827a9bfa716ac22ed633129533d">getB</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#aa3f9d12a24e81dba88cc7d64e471a8d8">setAB</a>(std::vector&lt;double&gt; a, std::vector&lt;double&gt; b);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#a8c8b7fe3b0de9023d68c30d6be3f64af">reset</a>();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#a52ba1f41750cb8940c6bbcf7f6a1bd67">disableLimits</a>();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#a7b8c1614ff11f72c1141e8ea33477b58">enableLimits</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keywordtype">bool</span> <a class="code hl_function" href="class_a_r_x.html#a520db8abaa14aab864ed1db7c7f826c4">getLimitsActive</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#a9870be5f917a9b57fe6f30628fcb506b">setInputLimits</a>(<span class="keywordtype">double</span> low, <span class="keywordtype">double</span> high);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#acb43c40299e7cbda5077ac0546cab0c5">setOutputLimits</a>(<span class="keywordtype">double</span> low, <span class="keywordtype">double</span> high);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keyword">const</span> std::pair&lt;double, double&gt;&amp; <a class="code hl_function" href="class_a_r_x.html#a12155f3d9ccc112666e4f9249490aad4">getInputLimits</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keyword">const</span> std::pair&lt;double, double&gt;&amp; <a class="code hl_function" href="class_a_r_x.html#af266e8d79de2b2aa1e2ed7c2d9984ecc">getOutputLimits</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keywordtype">void</span> <a class="code hl_function" href="class_a_r_x.html#af238ca6925d01891725c938d1cee2996">setStandardDeviation</a>(<span class="keywordtype">double</span> standard_deviation);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keywordtype">double</span> <a class="code hl_function" href="class_a_r_x.html#a317f5c29a1d0c006c3c58720990b82f5">getStandardDeviation</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>};</div>
+</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#endif </span><span class="comment">// ARX_H</span></div>
+<div class="ttc" id="a_test_8h_html"><div class="ttname"><a href="_test_8h.html">Test.h</a></div></div>
+<div class="ttc" id="aclass_a_r_x_html_a12155f3d9ccc112666e4f9249490aad4"><div class="ttname"><a href="class_a_r_x.html#a12155f3d9ccc112666e4f9249490aad4">ARX::getInputLimits</a></div><div class="ttdeci">const std::pair&lt; double, double &gt; &amp; getInputLimits() const</div><div class="ttdoc">zwraca limity na wejściu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:148</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a317f5c29a1d0c006c3c58720990b82f5"><div class="ttname"><a href="class_a_r_x.html#a317f5c29a1d0c006c3c58720990b82f5">ARX::getStandardDeviation</a></div><div class="ttdeci">double getStandardDeviation() const</div><div class="ttdoc">zwraca wartość odchylenia dla zakłócen obiektu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:160</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a3e74030dc1538d23bb7148b20544a0f7"><div class="ttname"><a href="class_a_r_x.html#a3e74030dc1538d23bb7148b20544a0f7">ARX::getK</a></div><div class="ttdeci">double getK() const</div><div class="ttdoc">opóżnienie transportowe</div><div class="ttdef"><b>Definicja</b> ARX.cpp:85</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a520db8abaa14aab864ed1db7c7f826c4"><div class="ttname"><a href="class_a_r_x.html#a520db8abaa14aab864ed1db7c7f826c4">ARX::getLimitsActive</a></div><div class="ttdeci">bool getLimitsActive() const</div><div class="ttdoc">informuje czy aktywne są limity na wejściu i wyjściu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:131</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a52ba1f41750cb8940c6bbcf7f6a1bd67"><div class="ttname"><a href="class_a_r_x.html#a52ba1f41750cb8940c6bbcf7f6a1bd67">ARX::disableLimits</a></div><div class="ttdeci">void disableLimits()</div><div class="ttdoc">wyłącza limity na wejściu i wyjściu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:123</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a5b78b1c2e1fa07ffed92da365593eaa4"><div class="ttname"><a href="class_a_r_x.html#a5b78b1c2e1fa07ffed92da365593eaa4">ARX::Test</a></div><div class="ttdeci">friend class Test</div><div class="ttdef"><b>Definicja</b> ARX.h:14</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a7b8c1614ff11f72c1141e8ea33477b58"><div class="ttname"><a href="class_a_r_x.html#a7b8c1614ff11f72c1141e8ea33477b58">ARX::enableLimits</a></div><div class="ttdeci">void enableLimits()</div><div class="ttdoc">włącza limity na wejściu i wyjściu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:127</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a8c8b7fe3b0de9023d68c30d6be3f64af"><div class="ttname"><a href="class_a_r_x.html#a8c8b7fe3b0de9023d68c30d6be3f64af">ARX::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdoc">resetuje wewnętrzene bufory obiektu. Przydantne podczas resetowania symualcji UAR</div><div class="ttdef"><b>Definicja</b> ARX.cpp:118</div></div>
+<div class="ttc" id="aclass_a_r_x_html_a9870be5f917a9b57fe6f30628fcb506b"><div class="ttname"><a href="class_a_r_x.html#a9870be5f917a9b57fe6f30628fcb506b">ARX::setInputLimits</a></div><div class="ttdeci">void setInputLimits(double low, double high)</div><div class="ttdoc">ustawia limity na wejściu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:136</div></div>
+<div class="ttc" id="aclass_a_r_x_html_aa3f9d12a24e81dba88cc7d64e471a8d8"><div class="ttname"><a href="class_a_r_x.html#aa3f9d12a24e81dba88cc7d64e471a8d8">ARX::setAB</a></div><div class="ttdeci">void setAB(std::vector&lt; double &gt; a, std::vector&lt; double &gt; b)</div><div class="ttdoc">ustawia tablice współczynników A i B. Zwaradca wyjątek przy niepowodzeniu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:97</div></div>
+<div class="ttc" id="aclass_a_r_x_html_acb43c40299e7cbda5077ac0546cab0c5"><div class="ttname"><a href="class_a_r_x.html#acb43c40299e7cbda5077ac0546cab0c5">ARX::setOutputLimits</a></div><div class="ttdeci">void setOutputLimits(double low, double high)</div><div class="ttdoc">ustawia limity na wyjściu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:142</div></div>
+<div class="ttc" id="aclass_a_r_x_html_ad229ee7398f095d6665addef0ac78f4e"><div class="ttname"><a href="class_a_r_x.html#ad229ee7398f095d6665addef0ac78f4e">ARX::getA</a></div><div class="ttdeci">const std::vector&lt; double &gt; getA() const</div><div class="ttdoc">tablica współczynników A</div><div class="ttdef"><b>Definicja</b> ARX.cpp:89</div></div>
+<div class="ttc" id="aclass_a_r_x_html_ade537f24f33ba60fd4ac77214d11da05"><div class="ttname"><a href="class_a_r_x.html#ade537f24f33ba60fd4ac77214d11da05">ARX::tick</a></div><div class="ttdeci">double tick(double u)</div><div class="ttdoc">Wynikuje jeden krok symualcji dla obiektu.</div><div class="ttdef"><b>Definicja</b> ARX.cpp:36</div></div>
+<div class="ttc" id="aclass_a_r_x_html_ae2852296666fda6486b80314cad16b52"><div class="ttname"><a href="class_a_r_x.html#ae2852296666fda6486b80314cad16b52">ARX::ARX</a></div><div class="ttdeci">ARX(std::vector&lt; double &gt; &amp;&amp;a, std::vector&lt; double &gt; &amp;&amp;b, uint16_t k=1, double standard_deviation=0.0)</div><div class="ttdoc">Konstruktowr obiektu ARX.</div><div class="ttdef"><b>Definicja</b> ARX.cpp:22</div></div>
+<div class="ttc" id="aclass_a_r_x_html_af238ca6925d01891725c938d1cee2996"><div class="ttname"><a href="class_a_r_x.html#af238ca6925d01891725c938d1cee2996">ARX::setStandardDeviation</a></div><div class="ttdeci">void setStandardDeviation(double standard_deviation)</div><div class="ttdoc">ustawia wartość odchylenia dla zakłócen obiektu. Wartość 0.0 wyłącza zakłówcenia</div><div class="ttdef"><b>Definicja</b> ARX.cpp:156</div></div>
+<div class="ttc" id="aclass_a_r_x_html_af266e8d79de2b2aa1e2ed7c2d9984ecc"><div class="ttname"><a href="class_a_r_x.html#af266e8d79de2b2aa1e2ed7c2d9984ecc">ARX::getOutputLimits</a></div><div class="ttdeci">const std::pair&lt; double, double &gt; &amp; getOutputLimits() const</div><div class="ttdoc">ustawia limity na wyjściu</div><div class="ttdef"><b>Definicja</b> ARX.cpp:152</div></div>
+<div class="ttc" id="aclass_a_r_x_html_af8bba827a9bfa716ac22ed633129533d"><div class="ttname"><a href="class_a_r_x.html#af8bba827a9bfa716ac22ed633129533d">ARX::getB</a></div><div class="ttdeci">const std::vector&lt; double &gt; getB() const</div><div class="ttdoc">tablica współczynników B</div><div class="ttdef"><b>Definicja</b> ARX.cpp:93</div></div>
+<div class="ttc" id="aclass_a_r_x_html_afe2718758d4c13483425103a72659f80"><div class="ttname"><a href="class_a_r_x.html#afe2718758d4c13483425103a72659f80">ARX::setK</a></div><div class="ttdeci">void setK(uint16_t k)</div><div class="ttdoc">ustawia opóżnienie transportowe</div><div class="ttdef"><b>Definicja</b> ARX.cpp:70</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="_a_r_x_8h.html">ARX.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

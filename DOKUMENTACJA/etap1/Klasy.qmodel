@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qmt>
+ <project>
+  <uid>{f4613c80-4235-41dd-b172-a4477ddfcaa1}</uid>
+  <root-package>
+   <instance>
+    <MPackage>
+     <base-MObject>
+      <MObject>
+       <base-MElement>
+        <MElement>
+         <uid>{2a5bfd65-36be-4134-9a8b-aeab464a4a79}</uid>
+        </MElement>
+       </base-MElement>
+       <name>class</name>
+       <children>
+        <handles>
+         <handles>
+          <qlist>
+           <item>
+            <handle>
+             <uid>{325edc25-ee5a-41ea-b22d-4154b8b8fd4f}</uid>
+             <target>
+              <instance type="MCanvasDiagram">
+               <MCanvasDiagram>
+                <base-MDiagram>
+                 <MDiagram>
+                  <base-MObject>
+                   <MObject>
+                    <base-MElement>
+                     <MElement>
+                      <uid>{325edc25-ee5a-41ea-b22d-4154b8b8fd4f}</uid>
+                     </MElement>
+                    </base-MElement>
+                    <name>class</name>
+                   </MObject>
+                  </base-MObject>
+                  <last-modified>1760730296361</last-modified>
+                  <toolbarid>Classes</toolbarid>
+                 </MDiagram>
+                </base-MDiagram>
+               </MCanvasDiagram>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{a3a07c0b-ff19-487c-b42a-8f70450b023f}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{a3a07c0b-ff19-487c-b42a-8f70450b023f}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>ARX</name>
+                 </MObject>
+                </base-MObject>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{4bc28971-2c93-434c-971c-a985148fc003}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>a: std::vector&lt;double&gt;</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{648efe71-0a0b-449f-bccc-3d909367cc37}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>b: std::vector&lt;double&gt;</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{c2ecdbde-1937-43c2-9be7-b088aeb9a225}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>k: uint16_t</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{7384f298-3535-4bea-a29c-88a373ae2974}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>z: double</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{f906e384-6728-46ab-92a4-fcca977892c6}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>y_i std::vector&lt;double&gt;</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{4f532088-0bdd-4763-8ec0-98af8769959c}</uid>
+                    <visibility>3</visibility>
+                    <type>1</type>
+                    <declaration>u_i std::vector&lt;double&gt;</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{284b3799-941a-49e2-b645-32688207c598}</uid>
+                    <visibility>1</visibility>
+                    <type>2</type>
+                    <declaration>double tick(double u)</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{72db74d2-9e29-4c90-85c7-41a6283d97bd}</uid>
+                    <visibility>1</visibility>
+                    <type>2</type>
+                    <declaration>setK(uint16_t k)</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{f0e0a661-d2b8-4e7b-8854-fa7be055c9fd}</uid>
+                    <visibility>1</visibility>
+                    <type>2</type>
+                    <declaration>double getK()</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{a7cbcf81-d2ff-4232-b3e9-1748bc81adb4}</uid>
+                    <visibility>1</visibility>
+                    <type>2</type>
+                    <declaration>std::vector&lt;double&gt; getA()</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{659a19e7-4c3c-4cb0-968f-55d68791c790}</uid>
+                    <visibility>1</visibility>
+                    <type>2</type>
+                    <declaration>std::vector&lt;double&gt; getB()</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{eb18b662-7f49-43ba-8788-6fc12d57f5c1}</uid>
+                    <visibility>1</visibility>
+                    <type>2</type>
+                    <declaration>setAB(std::vector&lt;double&gt; a, std::vector&lt;double&gt; b)</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{fd28f70f-d551-4986-b9d6-0a1e361c63ff}</uid>
+                    <visibility>1</visibility>
+                    <type>2</type>
+                    <declaration>reset()</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{541f270f-fac7-4a60-849b-fbfd629524f1}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{541f270f-fac7-4a60-849b-fbfd629524f1}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>Nowy Class</name>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+          </qlist>
+         </handles>
+        </handles>
+       </children>
+      </MObject>
+     </base-MObject>
+    </MPackage>
+   </instance>
+  </root-package>
+ </project>
+</qmt>

@@ -1,0 +1,109 @@
+\doxysection{State.\+h}
+\hypertarget{_state_8h_source}{}\label{_state_8h_source}\mbox{\hyperlink{_state_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STATE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STATE\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_generator_prostokatny_8h}{GeneratorProstokatny.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_generator_sinusoida_8h}{GeneratorSinusoida.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_u_a_r_8h}{UAR.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_generator_skok_jednostkowy_8hpp}{GeneratorSkokJednostkowy.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_save_state_interface}{SaveStateInterface}};}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_timer_state_interface}{TimerStateInterface}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }State}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{TypGeneratora}}\ \{\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86ca6376a6572edb8bb9bfb839975889f873}{Sinusoidalny}},\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86ca371082d49f2fa541f722c0e927a68872}{Prostokatny}},\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86ca4ab3b7b3d89734ff028ef86dfd9f5848}{SkokJednostkowy}}\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_state}{State}}\ \&\mbox{\hyperlink{class_state_a61fc39a383c1fc6b4465289e60e48637}{getInstance}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ae5ffd45c0a3375b1d5ba30f7ebe9aa43}{setSimmulationRunning}}(\textcolor{keywordtype}{bool}\ simmulation\_running);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_state_ada966480fd99438beb2d1b9b6c94b928}{getSimmulationRunning}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a3cd04aadf916149ef079006b59a2e441}{setSimmulationIntervalMS}}(uint32\_t\ interval);}
+\DoxyCodeLine{00026\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{class_state_ae1ba3bce43d4ba132f0a05ea87b6a72b}{getSimmulationIntervalMS}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a5246ca69518068b359617d738f180700}{setOutputCallback}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{struct_tick_data}{TickData}})>\ callback);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_aefe26920d68714b87650f5cb9831d2cb}{resetSimmulation}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_acf186c66733e8c97a0ec9d2a9a537f86}{setGenerator}}(\mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{TypGeneratora}}\ type);}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{TypGeneratora}}\ \mbox{\hyperlink{class_state_a2dfb3b672eae2d6bc649b1d95d8b44b9}{getGenerator}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ad58fccfeb748a84eacb8c3e28294cbd7}{setGeneneratorAmplitude}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ amplitude);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a8126cb151b5b942e226c089e7cbe6f43}{setGeneneratorDutyCycle}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ duty\_cycle);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a077fd5ca4c731ebc7a13939c21028e6f}{setGeneneratorPeriodMS}}(uint32\_t\ period);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ac8b75daadce0cdd535174a264ddcdee7}{setGeneratorSkladowaStala}}(\textcolor{keywordtype}{double}\ skladowa\_stala);}
+\DoxyCodeLine{00036\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_state_a9cc67a9ee078d240b2f998120ef39f54}{getGeneneratorPeriodJumpMS}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ad2fb22b73ba7aec391fd1d8f32fd94b5}{setGeneratorUnitJumpTimeMS}}(uint32\_t\ time);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ad1fae3b24c3a78978d4587a9ac6e2a47}{resetGenerator}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a571911a9003385f606db2e961a9e0b2c}{setPIDProportional}}(\textcolor{keywordtype}{double}\ k);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a744abce496dd9fbc69c175b1b1cd9808}{setPIDIntegration}}(\textcolor{keywordtype}{double}\ T\_i);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a5bd74dcf7ab687a62b58aebb188f03e5}{setPIDDerrivative}}(\textcolor{keywordtype}{double}\ T\_d);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a7745042c1be54bb436e02a59cbb54b80}{setPIDIntegrationType}}(\mbox{\hyperlink{_regulator_p_i_d_8h_af43c48dd2710c212494ba6a7d8773537}{IntegType}}\ integration\_type);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_aabf6a980426d3f3ca8815e700cc70f72}{resetPIDIntegration}}();}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a36257ec6dff2757d3d1d70808a23dd79}{resetPIDDerrivative}}();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a6e219e6dbaab2021d86f7ec44049ff46}{setARXCoefficients}}(std::vector<double>\ a,\ std::vector<double>\ b);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \mbox{\hyperlink{class_state_aaf262a5c6d9a5bcc67646942da59cd7a}{getARXCoefficientsA}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \mbox{\hyperlink{class_state_a244178910f1cd858a8e5d3a138a34776}{getARXCoefficientsB}}();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ad84089bba785b6fa8cbd33ec5745ff72}{setARXTransportDelay}}(uint16\_t\ k);}
+\DoxyCodeLine{00051\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{class_state_a9aac0a0555a705ee3b22da4a9ddfde64}{getARXTransportDelay}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a62388d3b79be6ae4b29021ae15b577b7}{setARXInputLimits}}(\textcolor{keywordtype}{double}\ low,\ \textcolor{keywordtype}{double}\ high);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ std::pair<double,\ double>\&\ \mbox{\hyperlink{class_state_a2fd7e8b411acca20d8c6e67024c477e9}{getARXInputLimits}}();}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ab4b3ab76b3f4fbc504d6ad070e8eaa94}{setARXOutputLimits}}(\textcolor{keywordtype}{double}\ low,\ \textcolor{keywordtype}{double}\ high);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ std::pair<double,\ double>\&\ \mbox{\hyperlink{class_state_a4d02853812c2666630b50e0dc3359ec4}{getARXOutputLimits}}();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ad1d71d0fc3eb5dbd95d27194c03141d8}{setARXNoiseStandardDeviation}}(\textcolor{keywordtype}{double}\ standard\_deviation);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_state_ac9f426d323c4cfdc0cebc0bae3076dad}{getARXNoiseStandardDeviation}}();}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a8b9ba7544bbbe85bcdfd6293be21cc86}{setARXLimitsEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_af07b6abc4b8bf6a57f9cf6af677c8586}{resetARX}}();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_ae8423af0e5b03cb4ef2d3c02fc11f0b4}{setSaveStateObject}}(\mbox{\hyperlink{class_save_state_interface}{SaveStateInterface}}*\ \textcolor{keywordtype}{object});}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a6ef44c3a2e38f42557155fd14fb908c4}{saveToFile}}(std::string\ path);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_acc81c4cc4b52d64063a33a402e563d2b}{readFromFile}}(std::string\ path);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{const}\ std::tuple<const\ ARX*,\ const\ RegulatorPID*,\ const\ TypGeneratora,\ \ const\ GeneratorSinusoida*,\ const\ GeneratorProstokatny*>\ \mbox{\hyperlink{class_state_acfa01808f22630fc5dfbf2e75a0bd755}{getAppState}}();}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_state_a8ddce70c7307fe0e3425e14ee584c87c}{tick}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{class_u_a_r}{UAR}}\ uar;}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{class_generator_sinusoida}{GeneratorSinusoida}}\ gen\_sin;}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_generator_prostokatny}{GeneratorProstokatny}}\ gen\_pros;}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{class_generator_skok_jednostkowy}{GeneratorSkokJednostkowy}}\ gen\_skok;}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{class_generator}{Generator}}*\ choosen\_generator;}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ simmulation\_running;}
+\DoxyCodeLine{00075\ \ \ \ \ std::function<void(\mbox{\hyperlink{struct_tick_data}{TickData}})>\ tick\_callback;}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{class_save_state_interface}{SaveStateInterface}}*\ save;}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{class_timer_state_interface}{TimerStateInterface}}*\ timer;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{_state_8h_ab1f106bd4a6f12540e52d8b4b610c7a9}{State}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_state}{State}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{class_state}{State}}\ \&operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_state}{State}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{_state_8h_ab1f106bd4a6f12540e52d8b4b610c7a9}{State}}();}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{class_state}{\string~State}}();}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_save_state_interface}{SaveStateInterface}}}
+\DoxyCodeLine{00086\ \{}
+\DoxyCodeLine{00087\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_save_state_interface_a31b93056070d3a7f5e2f2a0be256af3b}{saveToFile}}(std::string\&\ path,\ \mbox{\hyperlink{class_u_a_r}{UAR}}*\ uar,\ \textcolor{keywordtype}{bool}\ simmulation,\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State::TypGeneratora}}\ typ,\ \mbox{\hyperlink{class_generator_prostokatny}{GeneratorProstokatny}}*\ gen\_pros,\ \mbox{\hyperlink{class_generator_sinusoida}{GeneratorSinusoida}}*\ gen\_sin)\ =\ 0;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_save_state_interface_a0e4181caf35dd54f21a62a1ddd82fb8e}{readFromFile}}(std::string\&\ path,\ \mbox{\hyperlink{class_u_a_r}{UAR}}*\ uar,\ \textcolor{keywordtype}{bool}*\ simmulation,\ \mbox{\hyperlink{class_state_a839e188a6b92a8e2d69b73c02f29a86c}{State::TypGeneratora}}*\ typ,\ \mbox{\hyperlink{class_generator_prostokatny}{GeneratorProstokatny}}*\ gen\_pros,\ \mbox{\hyperlink{class_generator_sinusoida}{GeneratorSinusoida}}*\ gen\_sin)\ =\ 0;}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_timer_state_interface}{TimerStateInterface}}}
+\DoxyCodeLine{00093\ \{}
+\DoxyCodeLine{00094\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_timer_state_interface_ad3609383d95ae061f3f09efec2c95f37}{setTimeout}}(std::function<\textcolor{keywordtype}{void}()>)\ =\ 0;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_timer_state_interface_ac2a88d890a7ce4db7890ea3d744bd68c}{setIntervalMS}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})\ =\ 0;}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_timer_state_interface_ac28ff27b7101f0d02fa2f648cd6cb12f}{getIntervalMS}}()\ =\ 0;}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_timer_state_interface_a50f33ec7bc72f6e3d6373c938864463e}{setRunning}}(\textcolor{keywordtype}{bool}\ running)\ =\ 0;}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_state_global_access}{StateGlobalAccess}}}
+\DoxyCodeLine{00103\ \{}
+\DoxyCodeLine{00104\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{class_state}{State}}\&\ \mbox{\hyperlink{class_state_global_access_a759597da594140234704457834001689}{operator()}}();}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{class_state_global_access}{StateGlobalAccess}}\ \mbox{\hyperlink{class_state}{State}};}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ STATE\_H}}
+
+\end{DoxyCode}

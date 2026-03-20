@@ -1,0 +1,53 @@
+\doxysection{ARX.\+h}
+\hypertarget{_a_r_x_8h_source}{}\label{_a_r_x_8h_source}\mbox{\hyperlink{_a_r_x_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ARX\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ARX\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_test_8h}{Test.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_r_x_ae2852296666fda6486b80314cad16b52}{ARX}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_r_x_a5b78b1c2e1fa07ffed92da365593eaa4}{Test}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ std::vector<double>\ a;\ }
+\DoxyCodeLine{00018\ \ \ \ \ std::vector<double>\ b;\ }
+\DoxyCodeLine{00019\ \ \ \ \ uint16\_t\ k;\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{double}\ standard\_deviation;\ }
+\DoxyCodeLine{00021\ \ \ \ \ std::deque<double>\ y\_i;\ }
+\DoxyCodeLine{00022\ \ \ \ \ std::deque<double>\ u\_i;\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ limits\_active;\ }
+\DoxyCodeLine{00024\ \ \ \ \ std::pair<double,\ double>\ output\_limits;\ }
+\DoxyCodeLine{00025\ \ \ \ \ std::pair<double,\ double>\ input\_limits;\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ applyLimits(std::pair<double,\ double>\ \&limits,\ \textcolor{keywordtype}{double}\ value);}
+\DoxyCodeLine{00039\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ getGaussianDistribValue();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{class_a_r_x_ae2852296666fda6486b80314cad16b52}{ARX}}(std::vector<double>\ \&\&a,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::vector<double>\ \&\&b,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ uint16\_t\ k\ =\ 1,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ standard\_deviation\ =\ 0.0);}
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_a_r_x_ade537f24f33ba60fd4ac77214d11da05}{tick}}(\textcolor{keywordtype}{double}\ u);}
+\DoxyCodeLine{00066\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_afe2718758d4c13483425103a72659f80}{setK}}(uint16\_t\ k);}
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_a_r_x_a3e74030dc1538d23bb7148b20544a0f7}{getK}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ \textcolor{keyword}{const}\ std::vector<double>\ \mbox{\hyperlink{class_a_r_x_ad229ee7398f095d6665addef0ac78f4e}{getA}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ \textcolor{keyword}{const}\ std::vector<double>\ \mbox{\hyperlink{class_a_r_x_af8bba827a9bfa716ac22ed633129533d}{getB}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_aa3f9d12a24e81dba88cc7d64e471a8d8}{setAB}}(std::vector<double>\ a,\ std::vector<double>\ b);}
+\DoxyCodeLine{00096\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_a8c8b7fe3b0de9023d68c30d6be3f64af}{reset}}();}
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_a52ba1f41750cb8940c6bbcf7f6a1bd67}{disableLimits}}();}
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_a7b8c1614ff11f72c1141e8ea33477b58}{enableLimits}}();}
+\DoxyCodeLine{00112\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_a_r_x_a520db8abaa14aab864ed1db7c7f826c4}{getLimitsActive}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_a9870be5f917a9b57fe6f30628fcb506b}{setInputLimits}}(\textcolor{keywordtype}{double}\ low,\ \textcolor{keywordtype}{double}\ high);}
+\DoxyCodeLine{00126\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_acb43c40299e7cbda5077ac0546cab0c5}{setOutputLimits}}(\textcolor{keywordtype}{double}\ low,\ \textcolor{keywordtype}{double}\ high);}
+\DoxyCodeLine{00132\ \textcolor{keyword}{const}\ std::pair<double,\ double>\&\ \mbox{\hyperlink{class_a_r_x_a12155f3d9ccc112666e4f9249490aad4}{getInputLimits}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00138\ \textcolor{keyword}{const}\ std::pair<double,\ double>\&\ \mbox{\hyperlink{class_a_r_x_af266e8d79de2b2aa1e2ed7c2d9984ecc}{getOutputLimits}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00144\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_r_x_af238ca6925d01891725c938d1cee2996}{setStandardDeviation}}(\textcolor{keywordtype}{double}\ standard\_deviation);}
+\DoxyCodeLine{00150\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_a_r_x_a317f5c29a1d0c006c3c58720990b82f5}{getStandardDeviation}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00151\ \};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ARX\_H}}
+
+\end{DoxyCode}

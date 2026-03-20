@@ -1,0 +1,31 @@
+\doxysection{Generator.\+h}
+\hypertarget{_generator_8h_source}{}\label{_generator_8h_source}\mbox{\hyperlink{_generator_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GENERATOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GENERATOR\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_generator_aaaf1e5f3a47ede3ef8a96a301ee04a10}{Generator}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}};\ }
+\DoxyCodeLine{00013\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\_per\_cycle}};\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}};\ }
+\DoxyCodeLine{00015\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{class_generator_a0a9529ddc1a3ea6c6b659e4e22c772b2}{internal\_clock}};\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_aaea4dd2d574cf658962076427a1e95c6}{advanceClockAndReturn}}(\textcolor{keywordtype}{double});}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_generator_aaaf1e5f3a47ede3ef8a96a301ee04a10}{Generator}}();}
+\DoxyCodeLine{00035\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_ab6634f2223b14b6406a79bfdb73f886c}{tick}}()\ =\ 0;}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_generator_aa5e6f29f5965aa90853f9ce8db03d61d}{setAmplitude}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_aca88dad0c3a63dd8db6198f7f98ecb8c}{amplitude}});}
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_generator_a957b177f9aa1182a20d78c851bd0de08}{setSamplesPerCycle}}(uint16\_t\ \mbox{\hyperlink{class_generator_a8ad4e443f597ef4581b5e64d222a1c02}{samples\_per\_cycle}});}
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_generator_adfe47046f181b0709b70d0d0f02b6aa2}{setBias}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_a842934bc8ceedd59c0597f3cbeda8e85}{bias}});}
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_ada6e8934c7d0c6098b91beab54e7b618}{getAmplitude}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ uint16\_t\ \mbox{\hyperlink{class_generator_a8085a2bfe88269c34624d567edf6d840}{getSamplesPerCycle}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_generator_a7462fb16fb6f5ad77af9a7980b36a91c}{getBias}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_generator_ae2d975627a34d706cd86f5238e7b87d8}{resetClock}}();}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GENERATOR\_H}}
+
+\end{DoxyCode}

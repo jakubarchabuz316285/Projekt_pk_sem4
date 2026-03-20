@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Symulator UAR: Dokumentacja klasy Generator</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Symulator UAR
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('class_generator.html','','class_generator-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja klasy Generator<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_generator_8h_source.html">Generator.h</a>&gt;</code></p>
+<div class="dynheader">
+Diagram dziedziczenia dla Generator</div>
+<div class="dyncontent">
+<div class="center"><img src="class_generator__inherit__graph.png" border="0" usemap="#a_generator_inherit__map" loading="lazy" alt="Inheritance graph"/></div>
+<map name="a_generator_inherit__map" id="a_generator_inherit__map">
+<area shape="rect" title=" " alt="" coords="171,5,382,459"/>
+<area shape="rect" href="class_generator_prostokatny.html" title=" " alt="" coords="5,525,179,691"/>
+<area shape="poly" title=" " alt="" coords="166,459,135,527,130,524,163,463"/>
+<area shape="rect" href="class_generator_sinusoida.html" title=" " alt="" coords="203,563,349,653"/>
+<area shape="poly" title=" " alt="" coords="278,472,279,564,274,562,275,476"/>
+<area shape="rect" href="class_generator_skok_jednostkowy.html" title=" " alt="" coords="373,507,569,709"/>
+<area shape="poly" title=" " alt="" coords="390,446,421,507,416,506,388,451"/>
+</map>
+</div>
+<div class="dynheader">
+Diagram współpracy dla Generator:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_generator__coll__graph.png" border="0" usemap="#a_generator_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<map name="a_generator_coll__map" id="a_generator_coll__map">
+<area shape="rect" title=" " alt="" coords="5,5,216,459"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Metody publiczne</h2></td></tr>
+<tr class="memitem:aaaf1e5f3a47ede3ef8a96a301ee04a10" id="r_aaaf1e5f3a47ede3ef8a96a301ee04a10"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaf1e5f3a47ede3ef8a96a301ee04a10">Generator</a> ()</td></tr>
+<tr class="memitem:ab6634f2223b14b6406a79bfdb73f886c" id="r_ab6634f2223b14b6406a79bfdb73f886c"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6634f2223b14b6406a79bfdb73f886c">tick</a> ()=0</td></tr>
+<tr class="memitem:aa5e6f29f5965aa90853f9ce8db03d61d" id="r_aa5e6f29f5965aa90853f9ce8db03d61d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa5e6f29f5965aa90853f9ce8db03d61d">setAmplitude</a> (double <a class="el" href="#aca88dad0c3a63dd8db6198f7f98ecb8c">amplitude</a>)</td></tr>
+<tr class="memitem:a957b177f9aa1182a20d78c851bd0de08" id="r_a957b177f9aa1182a20d78c851bd0de08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a957b177f9aa1182a20d78c851bd0de08">setSamplesPerCycle</a> (uint16_t <a class="el" href="#a8ad4e443f597ef4581b5e64d222a1c02">samples_per_cycle</a>)</td></tr>
+<tr class="memitem:adfe47046f181b0709b70d0d0f02b6aa2" id="r_adfe47046f181b0709b70d0d0f02b6aa2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfe47046f181b0709b70d0d0f02b6aa2">setBias</a> (double <a class="el" href="#a842934bc8ceedd59c0597f3cbeda8e85">bias</a>)</td></tr>
+<tr class="memitem:ada6e8934c7d0c6098b91beab54e7b618" id="r_ada6e8934c7d0c6098b91beab54e7b618"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada6e8934c7d0c6098b91beab54e7b618">getAmplitude</a> () const</td></tr>
+<tr class="memitem:a8085a2bfe88269c34624d567edf6d840" id="r_a8085a2bfe88269c34624d567edf6d840"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8085a2bfe88269c34624d567edf6d840">getSamplesPerCycle</a> () const</td></tr>
+<tr class="memitem:a7462fb16fb6f5ad77af9a7980b36a91c" id="r_a7462fb16fb6f5ad77af9a7980b36a91c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7462fb16fb6f5ad77af9a7980b36a91c">getBias</a> () const</td></tr>
+<tr class="memitem:ae2d975627a34d706cd86f5238e7b87d8" id="r_ae2d975627a34d706cd86f5238e7b87d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2d975627a34d706cd86f5238e7b87d8">resetClock</a> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Metody chronione</h2></td></tr>
+<tr class="memitem:aaea4dd2d574cf658962076427a1e95c6" id="r_aaea4dd2d574cf658962076427a1e95c6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaea4dd2d574cf658962076427a1e95c6">advanceClockAndReturn</a> (double)</td></tr>
+<tr class="memdesc:aaea4dd2d574cf658962076427a1e95c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">funckja zwiększa zegar wewnętrzny i zwraca wartość podaną jako arguemnt + bias  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Atrybuty chronione</h2></td></tr>
+<tr class="memitem:aca88dad0c3a63dd8db6198f7f98ecb8c" id="r_aca88dad0c3a63dd8db6198f7f98ecb8c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca88dad0c3a63dd8db6198f7f98ecb8c">amplitude</a></td></tr>
+<tr class="memitem:a8ad4e443f597ef4581b5e64d222a1c02" id="r_a8ad4e443f597ef4581b5e64d222a1c02"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ad4e443f597ef4581b5e64d222a1c02">samples_per_cycle</a></td></tr>
+<tr class="memitem:a842934bc8ceedd59c0597f3cbeda8e85" id="r_a842934bc8ceedd59c0597f3cbeda8e85"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a842934bc8ceedd59c0597f3cbeda8e85">bias</a></td></tr>
+<tr class="memitem:a0a9529ddc1a3ea6c6b659e4e22c772b2" id="r_a0a9529ddc1a3ea6c6b659e4e22c772b2"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a9529ddc1a3ea6c6b659e4e22c772b2">internal_clock</a></td></tr>
+</table>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Dokumentacja konstruktora i destruktora</h2>
+<a id="aaaf1e5f3a47ede3ef8a96a301ee04a10" name="aaaf1e5f3a47ede3ef8a96a301ee04a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf1e5f3a47ede3ef8a96a301ee04a10">&#9670;&#160;</a></span>Generator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Generator::Generator </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji składowych</h2>
+<a id="aaea4dd2d574cf658962076427a1e95c6" name="aaea4dd2d574cf658962076427a1e95c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaea4dd2d574cf658962076427a1e95c6">&#9670;&#160;</a></span>advanceClockAndReturn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Generator::advanceClockAndReturn </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>funckja zwiększa zegar wewnętrzny i zwraca wartość podaną jako arguemnt + bias </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">double</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<a id="ada6e8934c7d0c6098b91beab54e7b618" name="ada6e8934c7d0c6098b91beab54e7b618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6e8934c7d0c6098b91beab54e7b618">&#9670;&#160;</a></span>getAmplitude()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Generator::getAmplitude </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<a id="a7462fb16fb6f5ad77af9a7980b36a91c" name="a7462fb16fb6f5ad77af9a7980b36a91c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7462fb16fb6f5ad77af9a7980b36a91c">&#9670;&#160;</a></span>getBias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Generator::getBias </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+</div>
+</div>
+<a id="a8085a2bfe88269c34624d567edf6d840" name="a8085a2bfe88269c34624d567edf6d840"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8085a2bfe88269c34624d567edf6d840">&#9670;&#160;</a></span>getSamplesPerCycle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t Generator::getSamplesPerCycle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd>uint16_t </dd></dl>
+
+</div>
+</div>
+<a id="ae2d975627a34d706cd86f5238e7b87d8" name="ae2d975627a34d706cd86f5238e7b87d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2d975627a34d706cd86f5238e7b87d8">&#9670;&#160;</a></span>resetClock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Generator::resetClock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5e6f29f5965aa90853f9ce8db03d61d" name="aa5e6f29f5965aa90853f9ce8db03d61d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5e6f29f5965aa90853f9ce8db03d61d">&#9670;&#160;</a></span>setAmplitude()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Generator::setAmplitude </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>amplitude</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">amplitude</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adfe47046f181b0709b70d0d0f02b6aa2" name="adfe47046f181b0709b70d0d0f02b6aa2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfe47046f181b0709b70d0d0f02b6aa2">&#9670;&#160;</a></span>setBias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Generator::setBias </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>bias</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bias</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a957b177f9aa1182a20d78c851bd0de08" name="a957b177f9aa1182a20d78c851bd0de08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957b177f9aa1182a20d78c851bd0de08">&#9670;&#160;</a></span>setSamplesPerCycle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Generator::setSamplesPerCycle </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>samples_per_cycle</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">samples_per_cycle</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab6634f2223b14b6406a79bfdb73f886c" name="ab6634f2223b14b6406a79bfdb73f886c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6634f2223b14b6406a79bfdb73f886c">&#9670;&#160;</a></span>tick()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double Generator::tick </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Zwraca</dt><dd>double </dd></dl>
+
+<p>Implementowany w <a class="el" href="class_generator_prostokatny.html#a5e0954dca878701e53ad77f0c8e8454a">GeneratorProstokatny</a>, <a class="el" href="class_generator_sinusoida.html#a990c16dff98ae294db2c01d9065ab1fe">GeneratorSinusoida</a> i <a class="el" href="class_generator_skok_jednostkowy.html#afb2de594f588a70a2ce8939f217b97cb">GeneratorSkokJednostkowy</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Dokumentacja atrybutów składowych</h2>
+<a id="aca88dad0c3a63dd8db6198f7f98ecb8c" name="aca88dad0c3a63dd8db6198f7f98ecb8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca88dad0c3a63dd8db6198f7f98ecb8c">&#9670;&#160;</a></span>amplitude</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Generator::amplitude</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>amplituda generowanego sygnału </p>
+
+</div>
+</div>
+<a id="a842934bc8ceedd59c0597f3cbeda8e85" name="a842934bc8ceedd59c0597f3cbeda8e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a842934bc8ceedd59c0597f3cbeda8e85">&#9670;&#160;</a></span>bias</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Generator::bias</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>offset sygnału </p>
+
+</div>
+</div>
+<a id="a0a9529ddc1a3ea6c6b659e4e22c772b2" name="a0a9529ddc1a3ea6c6b659e4e22c772b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a9529ddc1a3ea6c6b659e4e22c772b2">&#9670;&#160;</a></span>internal_clock</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t Generator::internal_clock</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>wartośc wewnętrzna. nie ruszać </p>
+
+</div>
+</div>
+<a id="a8ad4e443f597ef4581b5e64d222a1c02" name="a8ad4e443f597ef4581b5e64d222a1c02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ad4e443f597ef4581b5e64d222a1c02">&#9670;&#160;</a></span>samples_per_cycle</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t Generator::samples_per_cycle</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>ile impulsów zegarywch an jeden okres </p>
+
+</div>
+</div>
+<hr/>Dokumentacja dla tej klasy została wygenerowana z plików:<ul>
+<li><a class="el" href="_generator_8h_source.html">Generator.h</a></li>
+<li><a class="el" href="_generator_8cpp.html">Generator.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="class_generator.html">Generator</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

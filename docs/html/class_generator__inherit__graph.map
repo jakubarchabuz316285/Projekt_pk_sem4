@@ -1,0 +1,9 @@
+<map id="Generator" name="Generator">
+<area shape="rect" id="Node000001" title=" " alt="" coords="171,5,382,459"/>
+<area shape="rect" id="Node000002" href="$class_generator_prostokatny.html" title=" " alt="" coords="5,525,179,691"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,459,135,527,130,524,163,463"/>
+<area shape="rect" id="Node000003" href="$class_generator_sinusoida.html" title=" " alt="" coords="203,563,349,653"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="278,472,279,564,274,562,275,476"/>
+<area shape="rect" id="Node000004" href="$class_generator_skok_jednostkowy.html" title=" " alt="" coords="373,507,569,709"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="390,446,421,507,416,506,388,451"/>
+</map>
