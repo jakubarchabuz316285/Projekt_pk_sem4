@@ -17,7 +17,7 @@ class State
 {
 public:
     enum class TypGeneratora { Sinusoidalny, Prostokatny, SkokJednostkowy };
-
+    enum class TypPakietu : quint8 { USample = 1, YSample = 2, FullConfig = 3};
 
     static State &getInstance();
     void setSimmulationRunning(bool simmulation_running);
@@ -64,6 +64,10 @@ public:
 
     const std::tuple<const ARX*, const RegulatorPID*, const TypGeneratora,  const GeneratorSinusoida*, const GeneratorProstokatny*> getAppState();
     void tick();
+
+    QByteArray serializeU(double u);
+    QByteArray serializeY(double y);
+    QByteArray serializeState(State& state);
 
 private:
     UAR uar;

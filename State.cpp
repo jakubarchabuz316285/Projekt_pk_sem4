@@ -1,8 +1,10 @@
 #include "State.h"
 #include "QSaveState.hpp"
 #include "QTimerState.hpp"
+#include "qimage.h"
 #include <cassert>
 #include <stdexcept>
+#include <QIODevice>
 
 
 State::State()
@@ -250,6 +252,49 @@ const std::tuple<const ARX*, const RegulatorPID*, const State::TypGeneratora, co
 class State& StateGlobalAccess::operator()()
 {
     return State::getInstance();
+}
+
+QByteArray State::serializeU(double u)
+{
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out<<(quint8)TypPakietu::USample << u;
+    return data;
+}
+
+QByteArray State::serializeY(double y)
+{
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out<<(quint8)TypPakietu::YSample << y;
+    return data;
+}
+
+QByteArray State::serializeState(State& state)
+{
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_0);
+
+    out << (quint8)TypPakietu::FullConfig;
+    out << state.getSimmulationRunning();
+    out << (quint32)state.getSimmulationIntervalMS();
+    out << (qint32)state.getGenerator();
+
+    std::vector<double> a = state.getARXCoefficientsA();
+    std::vector<double> b = state.getARXCoefficientsB();
+    out << QList<double>(a.begin(), a.end());
+    out << QList<double>(b.begin(), b.end());
+
+    out << (quint16)state.getARXTransportDelay();
+    out << state.getARXNoiseStandardDeviation();
+
+    out << state.getARXInputLimits().first << state.getARXInputLimits().second;
+    out << state.getARXOutputLimits().first << state.getARXOutputLimits().second;
+
+
+    //TODO serializacja generatora i pid
+    return data;
 }
 
 StateGlobalAccess State;
