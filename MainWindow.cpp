@@ -3,6 +3,7 @@
 #include "ui_MainWindow.h"
 #include "DialogARX.h"
 #include "BUILD_DEFINE.h"
+#include "workdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -666,6 +667,9 @@ void MainWindow::on_doubleSpinBox_generator_czas_skoku_editingFinished()
     ui->doubleSpinBox_generator_czas_skoku->setValue(0.0);
 }
 
-
-
+void MainWindow::on_BtnTrybPracy_clicked()
+{
+    WorkDialog *dialog = new WorkDialog();
+    dialog->show();
+}
 

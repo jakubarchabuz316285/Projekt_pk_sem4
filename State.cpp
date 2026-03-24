@@ -292,10 +292,17 @@ QByteArray State::serializeState(State& state)
     out << state.getARXInputLimits().first << state.getARXInputLimits().second;
     out << state.getARXOutputLimits().first << state.getARXOutputLimits().second;
 
+    out << uar.getRegulatorPID().getK();
+    out << uar.getRegulatorPID().getT_d();
+    out << uar.getRegulatorPID().getT_i();
+    out << uar.getRegulatorPID().getIntegrationType();
 
-    //TODO serializacja generatora i pid
+    out << choosen_generator->getAmplitude();
+    out << choosen_generator->getBias();
+    out << choosen_generator->getSamplesPerCycle();
     return data;
 }
+
 
 StateGlobalAccess State;
 

@@ -27,7 +27,8 @@ SOURCES += \
     DialogDebug.cpp \
     ARXCoefficientItem.cpp \
     GeneratorSkokJednostkowy.cpp \
-    QTimerState.cpp
+    QTimerState.cpp \
+    workdialog.cpp
     
 HEADERS += \
     BUILD_DEFINE.h \
@@ -47,6 +48,7 @@ HEADERS += \
     QSaveState.hpp \
     DialogDebug.hpp \
     ARXCoefficientItem.hpp \
+    workdialog.h
 
 
 FORMS += \
@@ -54,6 +56,7 @@ FORMS += \
     MainWindow.ui \
     ARXCoefficientItem.ui \
     DialogDebug.ui \
+    workdialog.ui
 
 
 # Default rules for deployment.
