@@ -15,6 +15,13 @@ public:
     explicit WorkDialog(QWidget *parent = nullptr);
     ~WorkDialog();
 
+private slots:
+    void on_ChkLocalSimulation_checkStateChanged(const Qt::CheckState &arg1);
+
+    void on_RdioLocal_clicked();
+
+    void on_RdioLocal_toggled(bool checked);
+
 private:
     Ui::WorkDialog *ui;
 };

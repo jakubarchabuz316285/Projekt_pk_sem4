@@ -104,7 +104,6 @@ public:
     virtual void setRunning(bool running) = 0;
 };
 
-
 class StateGlobalAccess
 {
 public:

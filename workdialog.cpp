@@ -12,3 +12,8 @@ WorkDialog::~WorkDialog()
 {
     delete ui;
 }
+
+void WorkDialog::on_RdioLocal_toggled(bool checked)
+{
+    ui->GBoxNetwork->setEnabled(!checked);
+}
