@@ -17,7 +17,7 @@ protected:
     // ERROR - kamil
 
     // uint16_t internal_clock; /**< wartośc wewnętrzna. nie ruszać */
-    char internal_clock; /**< wartośc wewnętrzna. nie ruszać */
+    uint16_t internal_clock; /**< wartośc wewnętrzna. nie ruszać */
 
     /**
      * @brief funckja zwiększa zegar wewnętrzny i zwraca wartość podaną jako arguemnt + bias
