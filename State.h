@@ -17,7 +17,7 @@ class State
 {
 public:
     enum class TypGeneratora { Sinusoidalny, Prostokatny, SkokJednostkowy };
-    enum class TypPakietu : quint8 { USample = 1, YSample = 2, FullConfig = 3};
+    enum class TypPakietu : quint8 { USample = 1, YSample = 2, FullConfig = 3, PIDSample = 4, GENSample = 5};
 
     static State &getInstance();
     void setSimmulationRunning(bool simmulation_running);
@@ -68,6 +68,11 @@ public:
     QByteArray serializeU(double u);
     QByteArray serializeY(double y);
     QByteArray serializeState(State& state);
+
+    //Pid i Gen serializacja
+
+    QByteArray serializePIDOutput();
+    QByteArray serializeGENOutput();
 
 private:
     UAR uar;

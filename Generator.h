@@ -9,6 +9,7 @@
 class Generator
 {
 protected:
+    double last_output;
     double amplitude; /**< amplituda generowanego sygnału */
     uint16_t samples_per_cycle; /**< ile impulsów zegarywch an jeden okres */
     double bias; /**< offset sygnału */
@@ -78,6 +79,7 @@ double getBias() const;
      *
      */
 void resetClock();
+double getLastOutput();
 };
 
 #endif // GENERATOR_H

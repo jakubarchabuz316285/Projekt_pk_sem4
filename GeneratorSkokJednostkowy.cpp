@@ -21,7 +21,8 @@ double GeneratorSkokJednostkowy::tick()
     if(activation_time_int_tikcs > 0)
         activation_time_int_tikcs--;
     if(activation_time_int_tikcs == 0)
-        return 1.0 * amplitude + bias;
+        last_output = 1.0 * amplitude + bias;
     else
-        return 0.0 + bias;
+        last_output =  0.0 + bias;
+    return last_output;
 }

@@ -17,3 +17,10 @@ void WorkDialog::on_RdioLocal_toggled(bool checked)
 {
     ui->GBoxNetwork->setEnabled(!checked);
 }
+void WorkDialog::on_ChkLocalSimulation_checkStateChanged(const Qt::CheckState &arg1){
+    return;
+}
+
+void WorkDialog::on_RdioLocal_clicked(){
+    return;
+}

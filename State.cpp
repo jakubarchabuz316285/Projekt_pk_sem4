@@ -107,7 +107,7 @@ void State::setGeneneratorAmplitude(const double& amplitude)
     this->gen_pros.setAmplitude(amplitude);
     this->gen_sin.setAmplitude(amplitude);
 }
-void State::setGeneneratorDutyCycle(const double& duty_cycle)
+void State::setGeneneratorDutyCycle(const double& duty_cycle) // ustawia kiedy sygnal jest w gorze
 {
     this->gen_pros.setDutyCycle(duty_cycle);
 }
@@ -120,7 +120,7 @@ void State::setGeneratorSkladowaStala(double skladowa_stala)
 void State::setGeneneratorPeriodMS(uint32_t period)
 {
     uint32_t sample = period / getSimmulationIntervalMS();
-    sample -= (sample & 1);
+    //sample -= (sample & 1);
     this->gen_pros.setSamplesPerCycle(sample);
     this->gen_sin.setSamplesPerCycle(sample);
 }
@@ -300,6 +300,21 @@ QByteArray State::serializeState(State& state)
     out << choosen_generator->getAmplitude();
     out << choosen_generator->getBias();
     out << choosen_generator->getSamplesPerCycle();
+    return data;
+}
+
+QByteArray State::serializePIDOutput(){
+    double output = this->uar.getRegulatorPID().getLastOutput();
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out<<(quint8)TypPakietu::PIDSample << output;
+    return data;
+}
+QByteArray State::serializeGENOutput(){
+    double output = this->choosen_generator->getLastOutput();
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out<<(quint8)TypPakietu::GENSample << output;
     return data;
 }
 

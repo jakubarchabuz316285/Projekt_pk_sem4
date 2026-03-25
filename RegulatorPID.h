@@ -1,6 +1,7 @@
 #ifndef REGULATOR_PID_H
 #define REGULATOR_PID_H
-
+#include <iostream>
+#include <vector>
 /**
  * @brief typ całkowania
  *
@@ -38,6 +39,7 @@ class RegulatorPID
     double sum_of_e_outside_integ; /**< TODO: describe */
     double previous_e; /**< TODO: describe */
     IntegType integration_type; /**< TODO: describe */
+    double last_output;
 
 public:
 
@@ -70,6 +72,8 @@ double getK() const;
 double getT_i() const;
 
 double getT_d() const;
+
+double getLastOutput() const;
 
 void resetIntegrationPart();
 

@@ -21,6 +21,7 @@ class UAR
     RegulatorPID pid;
     double previous_y_i;
 
+
 public:
     UAR(ARX &&arx, RegulatorPID &&pid);
     UAR(ARX &arx, RegulatorPID &pid);

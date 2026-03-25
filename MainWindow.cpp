@@ -275,6 +275,7 @@ void MainWindow::addToPlots(TickData tick_data)
         lista_sterowanie_P->deleteFirstValue();
         lista_sterowanie_I->deleteFirstValue();
         lista_sterowanie_D->deleteFirstValue();
+
         if (lista_uchyb->getList()->count() > liczba_probek) {
             lista_wartosc_zadana->deleteFirstValue();
             lista_wartosc_regulowana->deleteFirstValue();
@@ -285,6 +286,7 @@ void MainWindow::addToPlots(TickData tick_data)
             lista_sterowanie_I->deleteFirstValue();
             lista_sterowanie_D->deleteFirstValue();
         }
+
     }
 }
 

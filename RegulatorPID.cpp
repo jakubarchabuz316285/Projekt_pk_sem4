@@ -31,7 +31,8 @@ PIDTickData RegulatorPID::tickMoreData(double e_i)
 
 double RegulatorPID::tick(double e_i)
 {
-    return static_cast<double>(tickMoreData(e_i));
+    last_output = static_cast<double>(tickMoreData(e_i));
+    return last_output;
 }
 
 RegulatorPID::RegulatorPID(double k, double T_i, double T_d, IntegType integration_type)
@@ -82,6 +83,10 @@ double RegulatorPID::getT_i() const
 double RegulatorPID::getT_d() const
 {
     return T_d;
+}
+double RegulatorPID::getLastOutput() const
+{
+    return last_output;
 }
 void RegulatorPID::resetIntegrationPart()
 {
