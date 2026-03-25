@@ -1,8 +1,9 @@
 QT       += core gui charts
-
+QT       += network
 greaterThan(QT_MAJOR_VERSION, 6): QT += widgets
 
 CONFIG += c++17
+
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -28,6 +29,7 @@ SOURCES += \
     ARXCoefficientItem.cpp \
     GeneratorSkokJednostkowy.cpp \
     QTimerState.cpp \
+    networkmanager.cpp \
     workdialog.cpp
     
 HEADERS += \
@@ -48,6 +50,7 @@ HEADERS += \
     QSaveState.hpp \
     DialogDebug.hpp \
     ARXCoefficientItem.hpp \
+    networkmanager.h \
     workdialog.h
 
 
