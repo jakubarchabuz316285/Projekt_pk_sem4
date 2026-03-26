@@ -310,13 +310,6 @@ QByteArray State::serializePIDOutput(){
     out<<(quint8)TypPakietu::PIDSample << output;
     return data;
 }
-QByteArray State::serializeGENOutput(){
-    double output = this->choosen_generator->getLastOutput();
-    QByteArray data;
-    QDataStream out(&data, QIODevice::WriteOnly);
-    out<<(quint8)TypPakietu::GENSample << output;
-    return data;
-}
 
 
 StateGlobalAccess State;
