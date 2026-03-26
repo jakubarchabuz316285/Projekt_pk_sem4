@@ -311,6 +311,35 @@ QByteArray State::serializePIDOutput(){
     return data;
 }
 
+void State::receivePacket(QByteArray msg){
+
+}
+
+State::Packet State::deserialize(const QByteArray& data){
+    Packet packet;
+    packet.valid = false;
+
+    QDataStream in(data);
+
+    quint8 typeRaw;
+    double value;
+
+    // ❗ sprawdzenie czy da się czytać
+    if (data.size() < sizeof(quint8) + sizeof(double))
+        return packet;
+
+    in >> typeRaw >> value;
+
+    // ❗ sprawdzenie statusu streama
+    if (in.status() != QDataStream::Ok)
+        return packet;
+
+    packet.type = static_cast<TypPakietu>(typeRaw);
+    packet.value = value;
+    packet.valid = true;
+
+    return packet;
+}
 
 StateGlobalAccess State;
 

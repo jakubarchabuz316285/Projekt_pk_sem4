@@ -3,31 +3,33 @@
 
 #include "QTcpServer"
 #include "QTcpSocket"
-class TcpServer
+#include "QObject"
+
+class TcpServer : public QObject
 {
+    Q_OBJECT
 private:
     QTcpServer _server;
     QTcpSocket* _client;
     int _port;
     bool _isListening;
+    std::function<void(QByteArray)> _callback;
 public:
-    TcpServer();
-    bool startListening(int port)
-    {
-        _port = port;
-        _isListening = _server.listen(QHostAddress::Any, port);
-        return _isListening;
-    }
+    TcpServer(std::function<void(QByteArray)>, QObject *parent = nullptr);
 
-    void stopListening()
-    {
-        _server.close();
-        _isListening = false;
-    }
-    void sendPacket(QString msg)
-    {
-        _client->write(msg.toUtf8()); // TODO Zmienić argument na QByteArray i message
-    }
+    bool startListening(int port);
+
+    void stopListening();
+
+    void sendMsg(QString msg, int numCli);
+
+    void slot_new_client();
+
+    void slot_client_disconnetcted();
+
+    void slot_newMsg();
+
+    void onReadyRead();
 };
 
 #endif // TCPSERVER_H

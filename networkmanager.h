@@ -3,16 +3,39 @@
 
 #include "qobject.h"
 #include "tcpserver.h"
-#include "QTcpSocket"
+#include "tcpclient.h"
 
 class NetworkManager
 {
 public:
-    enum Role {Local, Server, Client};
+    enum class Role {Local, Server, Client};
     NetworkManager(Role role, QObject *parent = nullptr);
-    TcpServer *_pid = nullptr;
-    QTcpSocket *_arx = nullptr;
+    TcpServer *_server = nullptr;
+    QTcpSocket *_client = nullptr;
     bool isConnected();
+    void deleteOldConnections(){
+        if(_server != nullptr) {
+            _server->stopListening();
+            delete _server;
+        }
+        if(_client != nullptr) {
+            _client->disconnect();
+            delete _server;
+        }
+    }
+
+    void setRole(Role role){
+        deleteOldConnections();
+        if(role == Role::Local){
+
+        }
+        if (role == Role::Server){
+            _server = new TcpServer(this);
+        }
+        if (role == Role::Client){
+            _client = new TcpClient(this);
+        }
+    }
 
 private:
 

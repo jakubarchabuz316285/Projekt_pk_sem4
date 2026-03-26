@@ -4,9 +4,12 @@
 #include "GeneratorSinusoida.h"
 #include "UAR.h"
 #include "GeneratorSkokJednostkowy.hpp"
+#include "tcpserver.h"
+#include "tcpclient.h"
 
 class SaveStateInterface;
 class TimerStateInterface;
+
 
 
 /**
@@ -16,9 +19,15 @@ class TimerStateInterface;
 class State
 {
 public:
+
     enum class TypGeneratora { Sinusoidalny, Prostokatny, SkokJednostkowy };
     enum class TypPakietu : quint8 { USample = 1, YSample = 2, FullConfig = 3, PIDSample = 4, GENSample = 5};
-
+    struct Packet
+    {
+        TypPakietu type;
+        double value;
+        bool valid;
+    };
     static State &getInstance();
     void setSimmulationRunning(bool simmulation_running);
     bool getSimmulationRunning();
@@ -72,7 +81,10 @@ public:
     //Pid i Gen serializacja
 
     QByteArray serializePIDOutput();
-    QByteArray serializeGENOutput();
+    Packet deserialize(const QByteArray& data);
+
+    void receivePacket(QByteArray packet);
+    void sendPacket();
 
 private:
     UAR uar;
@@ -84,6 +96,37 @@ private:
     std::function<void(TickData)> tick_callback;
     SaveStateInterface* save;
     TimerStateInterface* timer;
+
+
+    // Online
+
+    enum class Role {Local, Server, Client};
+    TcpServer *_server = nullptr;
+    TcpClient *_client = nullptr;
+    bool isConnected();
+    void deleteOldConnections(){
+        if(_server != nullptr) {
+            _server->stopListening();
+            delete _server;
+        }
+        if(_client != nullptr) {
+            _client->deleteLater();
+            _client = nullptr;
+        }
+    }
+
+    void setRole(Role role){
+        deleteOldConnections();
+        if(role == Role::Local){
+
+        }
+        if (role == Role::Server){
+            _server = new TcpServer(std::bind(&State::receivePacket, this, std::placeholders::_1));
+        }
+        if (role == Role::Client){
+            _client = new TcpClient(std::bind(&State::receivePacket, this, std::placeholders::_1));
+        }
+    }
 
     State(const State &) = delete;
     State &operator=(const State &) = delete;
