@@ -30,10 +30,10 @@ public:
 
         }
         if (role == Role::Server){
-            _server = new TcpServer(this);
+            //_server = new TcpServer(this);
         }
         if (role == Role::Client){
-            _client = new TcpClient(this);
+           // _client = new TcpClient(this);
         }
     }
 
