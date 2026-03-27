@@ -9,6 +9,11 @@ WorkDialog::WorkDialog(QWidget *parent)
     , ui(new Ui::WorkDialog)
 {
     ui->setupUi(this);
+
+    if (this->layout()) {
+        this->layout()->setSizeConstraint(QLayout::SetFixedSize);
+    }
+
     if(LocalSimulation) {
         ui->RdioLocal->setChecked(true);
     } else {
@@ -41,11 +46,7 @@ void WorkDialog::UpdateNetworkUI()
     bool isArx = ui->rdio_arx->isChecked();
     bool isPid = ui->rdio_reg->isChecked();
 
-    ui->LblIP->setVisible(isArx);
-    ui->SpnFirst->setVisible(isArx);
-    ui->SpnSecond->setVisible(isArx);
-    ui->SpnThird->setVisible(isArx);
-    ui->SpnFourth->setVisible(isArx);
+    ui->IPContainter->setVisible(isArx);
 
     ui->BtnConnect->setVisible(isArx);
 
@@ -54,6 +55,7 @@ void WorkDialog::UpdateNetworkUI()
     ui->LblPort->setVisible(true);
     ui->spinBox->setVisible(true);
     ui->BtnDisconnect->setVisible(true);
+    this->adjustSize();
 }
 
 
