@@ -4,8 +4,7 @@
 #include "GeneratorSinusoida.h"
 #include "UAR.h"
 #include "GeneratorSkokJednostkowy.hpp"
-#include "tcpserver.h"
-#include "tcpclient.h"
+#include "networkmanager.h"
 
 class SaveStateInterface;
 class TimerStateInterface;
@@ -97,36 +96,9 @@ private:
     SaveStateInterface* save;
     TimerStateInterface* timer;
 
-
     // Online
 
-    enum class Role {Local, Server, Client};
-    TcpServer *_server = nullptr;
-    TcpClient *_client = nullptr;
-    bool isConnected();
-    void deleteOldConnections(){
-        if(_server != nullptr) {
-            _server->stopListening();
-            delete _server;
-        }
-        if(_client != nullptr) {
-            _client->deleteLater();
-            _client = nullptr;
-        }
-    }
-
-    void setRole(Role role){
-        deleteOldConnections();
-        if(role == Role::Local){
-
-        }
-        if (role == Role::Server){
-            _server = new TcpServer(std::bind(&State::receivePacket, this, std::placeholders::_1));
-        }
-        if (role == Role::Client){
-            _client = new TcpClient(std::bind(&State::receivePacket, this, std::placeholders::_1));
-        }
-    }
+    NetworkManager _networkManager;
 
     State(const State &) = delete;
     State &operator=(const State &) = delete;

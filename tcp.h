@@ -1,0 +1,31 @@
+#ifndef TCP_H
+#define TCP_H
+
+#pragma once
+#include <functional>
+#include <QByteArray>
+
+class Tcp
+{
+public:
+    using Callback = std::function<void(const QByteArray&)>;
+
+    virtual ~Tcp() = default;
+
+    virtual void SendMsg(const QByteArray& msg) = 0;
+    virtual void ReadMsg(const QByteArray& msg) = 0;
+
+    virtual void Connected();
+    virtual void Disconnected();
+
+    void SetCallback(Callback cb)
+    {
+        _callback = cb;
+    }
+
+protected:
+    int _port = -1;
+    Callback _callback;
+};
+
+#endif // TCP_H

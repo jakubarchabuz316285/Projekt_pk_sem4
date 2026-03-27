@@ -39,12 +39,12 @@ private:
         QHostAddress ipAdr(adr);
         if(ipAdr.protocol() != QAbstractSocket::IPv4Protocol)
         {
-            ui->statusbar->showMessage("Invalid IPv4 Address!");
+            //ui->statusbar->showMessage("Invalid IPv4 Address!");
             return false;
         }
         if(port < 0 || 65535 < port)
         {
-            ui->statusbar->showMessage("Invalid TCP port number!");
+            //ui->statusbar->showMessage("Invalid TCP port number!");
             return false;
         }
         return true;

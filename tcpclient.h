@@ -1,28 +1,72 @@
 #ifndef TCPCLIENT_H
 #define TCPCLIENT_H
 
-
+#include "tcp.h"
 #include <QTcpSocket>
-class TcpClient : public QObject
+
+class TcpClient : public Tcp
 {
-    Q_OBJECT
-private:
-    QTcpSocket _client;
-    QString _ipAddress = "127.0.0.1";
-    int _port = 12345;
-    std::function<void(QByteArray)> _callback;
 public:
-    TcpClient(std::function<void(QByteArray)>, QObject *parent = nullptr);
+    TcpClient()
+    {
+        _socket = new QTcpSocket();
 
-    void connectTo(QString address, int port);
+        QObject::connect(_socket, &QTcpSocket::readyRead, [this]() {
+            QByteArray data = _socket->readAll();
+            ReadMsg(data);
+        });
+    }
 
-    void disconnectFrom();
+    ~TcpClient()
+    {
+        Disconnect();
+        delete _socket;
+    }
 
-    void sendMsg(QString msg);
+    void Connect(const std::string& ip, int p)
+    {
+        _socket->connectToHost(QString::fromStdString(ip), p);
 
-    void slot_connected();
+        if (!_socket->waitForConnected())
+            throw std::runtime_error("Connection failed");
 
-    void slot_readyRead();
+        _port = p;
+        _address = ip;
+    }
+
+    void Disconnect()
+    {
+        _socket->disconnectFromHost();
+        _port = -1;
+    }
+
+    void SendMsg(const QByteArray& msg) override
+    {
+        if (_socket->state() != QAbstractSocket::ConnectedState)
+            throw std::runtime_error("Not connected");
+
+        _socket->write(msg);
+    }
+
+    void ReadMsg(const QByteArray& msg) override
+    {
+        if (_callback)
+            _callback(msg);
+    }
+
+    void Connected() override
+    {
+        // TODO LOGIKA
+    }
+
+    void Disconnected() override
+    {
+        // TODO LOGIKA
+    }
+
+private:
+    QTcpSocket* _socket;
+    std::string _address;
 };
 
 #endif // TCPCLIENT_H

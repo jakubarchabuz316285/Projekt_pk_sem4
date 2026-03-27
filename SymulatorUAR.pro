@@ -30,6 +30,7 @@ SOURCES += \
     GeneratorSkokJednostkowy.cpp \
     QTimerState.cpp \
     networkmanager.cpp \
+    tcp.cpp \
     tcpclient.cpp \
     tcpserver.cpp \
     workdialog.cpp
@@ -53,6 +54,7 @@ HEADERS += \
     DialogDebug.hpp \
     ARXCoefficientItem.hpp \
     networkmanager.h \
+    tcp.h \
     tcpclient.h \
     tcpserver.h \
     workdialog.h
