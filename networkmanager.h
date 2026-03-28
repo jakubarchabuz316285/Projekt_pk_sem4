@@ -18,7 +18,7 @@ public:
     }
     ~NetworkManager() = default;
 
-    void SetMode(Mode newMode)
+    void SetMode(const Mode& newMode)
     {
         // cleanup starego trybu
         Cleanup();

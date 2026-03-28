@@ -82,12 +82,12 @@ public:
     QByteArray serializePIDOutput();
     Packet deserialize(const QByteArray& data);
 
-    void receivePacket(QByteArray packet);
+    void receivePacket(const QByteArray& packet);
     void sendPacket();
 
     // ONLINE
 
-    void setMode(NetworkManager::Mode mode){
+    void setMode(const NetworkManager::Mode& mode){
         _networkManager.SetMode(mode);
     }
 

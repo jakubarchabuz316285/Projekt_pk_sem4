@@ -316,7 +316,7 @@ QByteArray State::serializePIDOutput(){
     return data;
 }
 
-void State::receivePacket(QByteArray msg){
+void State::receivePacket(const QByteArray& msg){
 
 }
 
