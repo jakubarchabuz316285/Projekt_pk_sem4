@@ -25,7 +25,7 @@ private slots:
     void on_RdioLocal_toggled(bool checked);
 
 
-    void on_RdioNet_toggled(bool checked);
+    //void on_RdioNet_toggled(bool checked);
     void UpdateNetworkUI();
     void on_rdio_reg_toggled(bool checked);
 

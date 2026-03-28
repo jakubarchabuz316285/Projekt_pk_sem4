@@ -118,7 +118,6 @@ public:
 
     Mode GetMode() const { return _mode; }
 
-private:
     void Cleanup()
     {
         if (_server)
@@ -126,19 +125,11 @@ private:
             _server->StopListening();
             _server.reset();
         }
-<<<<<<< HEAD
 
         if (_client)
         {
             _client->Disconnect();
             _client.reset();
-=======
-        if (role == Role::Server){
-            //_server = new TcpServer(this);
-        }
-        if (role == Role::Client){
-           // _client = new TcpClient(this);
->>>>>>> 38aa3ccd14bbeed04558741732b7ab87369dda0e
         }
     }
 
