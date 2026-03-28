@@ -3,7 +3,7 @@
 
 #include "ui_workdialog.h"
 #include <QWidget>
-#include "networkmanager.h"
+#include "State.h"
 
 namespace Ui {
 class WorkDialog;
@@ -30,6 +30,12 @@ private slots:
     void on_rdio_reg_toggled(bool checked);
 
     void on_rdio_arx_toggled(bool checked);
+
+    void on_BtnListen_clicked();
+
+    void on_BtnConnect_clicked();
+
+    void on_BtnDisconnect_clicked();
 
 private:
     static bool LocalSimulation;

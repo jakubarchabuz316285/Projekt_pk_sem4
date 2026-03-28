@@ -99,7 +99,7 @@ public:
     }
 
     // CLIENT
-    void Connect(const std::string& ip, int port)
+    void Connect(const QString& ip, int port)
     {
         if (_mode != ARX)
             throw std::runtime_error("Not in client mode");
@@ -134,6 +134,12 @@ public:
             _client->Disconnect();
             _client.reset();
         }
+    }
+
+    bool IsListening()
+    {
+        if(_server == nullptr) return false;
+        return _server->IsListening();
     }
 
 private:

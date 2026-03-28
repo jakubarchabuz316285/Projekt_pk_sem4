@@ -23,9 +23,9 @@ public:
         delete _socket;
     }
 
-    void Connect(const std::string& ip, int p)
+    void Connect(const QString& ip, int p)
     {
-        _socket->connectToHost(QString::fromStdString(ip), p);
+        _socket->connectToHost(ip, p);
 
         if (!_socket->waitForConnected())
             throw std::runtime_error("Connection failed");
@@ -66,7 +66,7 @@ public:
 
 private:
     QTcpSocket* _socket;
-    std::string _address;
+    QString _address;
 };
 
 #endif // TCPCLIENT_H

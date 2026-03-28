@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>475</width>
-    <height>300</height>
+    <height>341</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -124,7 +124,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox"/>
+              <widget class="QSpinBox" name="spnBoxPort"/>
              </item>
              <item>
               <spacer name="horizontalSpacer">

@@ -91,7 +91,7 @@ public:
         _networkManager.SetMode(mode);
     }
 
-    void connect(std::string ip, int port){
+    void connect(const QString& ip, int port){
         _networkManager.Connect(ip, port);
     }
 
@@ -105,6 +105,10 @@ public:
 
     void stopListening(){
         _networkManager.StopListening();
+    }
+
+    bool isListening(){
+        return _networkManager.IsListening();
     }
 
 private:

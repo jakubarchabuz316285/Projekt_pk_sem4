@@ -15,8 +15,8 @@ public:
     virtual void SendMsg(const QByteArray& msg) = 0;
     virtual void ReadMsg(const QByteArray& msg) = 0;
 
-    virtual void Connected();
-    virtual void Disconnected();
+    virtual void Connected() = 0;
+    virtual void Disconnected() = 0;
 
     void SetCallback(Callback cb)
     {

@@ -83,6 +83,19 @@ public:
             _callback(msg);
     }
 
+    bool IsListening(){
+        return _server->isListening();
+    }
+
+    void Connected() override
+    {
+
+    }
+
+    void Disconnected() override
+    {
+
+    }
 private:
     QTcpServer* _server;
     QTcpSocket* _socket;
