@@ -48,10 +48,10 @@ public:
         _callback = cb;
 
         if (_server) _server->SetCallback(cb);
-        if (_client) _client->SetCallback(cb);
+        else if (_client) _client->SetCallback(cb);
     }
 
-    // 🔹 SEND
+    // SEND
     void SendMsg(const QByteArray& msg)
     {
         if (_mode == Local)
@@ -65,7 +65,7 @@ public:
             throw std::runtime_error("No active connection");
     }
 
-    // 🔹 SERVER
+    // SERVER
     void StartListening(int port)
     {
         if (_mode != PID)
@@ -98,7 +98,7 @@ public:
         _server->DisconnectClient();
     }
 
-    // 🔹 CLIENT
+    // CLIENT
     void Connect(const std::string& ip, int port)
     {
         if (_mode != ARX)
