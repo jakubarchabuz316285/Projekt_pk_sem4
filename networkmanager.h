@@ -13,6 +13,9 @@ public:
     enum Mode { Local, PID, ARX };
 
     NetworkManager() = default;
+    NetworkManager(std::function<void(QByteArray)> fun){
+        SetCallback(fun);
+    }
     ~NetworkManager() = default;
 
     void SetMode(Mode newMode)

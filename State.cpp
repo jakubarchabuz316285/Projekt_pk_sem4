@@ -13,6 +13,7 @@ State::State()
     , gen_pros{}
     , gen_skok{}
     , simmulation_running(false)
+    , _networkManager(std::bind(&State::receivePacket, this, std::placeholders::_1))
 {
     choosen_generator = &gen_sin;
     save = new QSaveState();
@@ -28,6 +29,10 @@ State::State()
     //     simmulation_timer->start();
     // else
     //     simmulation_timer->stop();
+
+    // ONLINE
+
+
 
 }
 State::~State()
@@ -324,13 +329,13 @@ State::Packet State::deserialize(const QByteArray& data){
     quint8 typeRaw;
     double value;
 
-    // ❗ sprawdzenie czy da się czytać
+    // sprawdzenie czy da się czytać
     if (data.size() < sizeof(quint8) + sizeof(double))
         return packet;
 
     in >> typeRaw >> value;
 
-    // ❗ sprawdzenie statusu streama
+    // sprawdzenie statusu streama
     if (in.status() != QDataStream::Ok)
         return packet;
 
@@ -340,6 +345,8 @@ State::Packet State::deserialize(const QByteArray& data){
 
     return packet;
 }
+
+
 
 StateGlobalAccess State;
 

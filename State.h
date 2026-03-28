@@ -85,6 +85,28 @@ public:
     void receivePacket(QByteArray packet);
     void sendPacket();
 
+    // ONLINE
+
+    void setMode(NetworkManager::Mode mode){
+        _networkManager.SetMode(mode);
+    }
+
+    void connect(std::string ip, int port){
+        _networkManager.Connect(ip, port);
+    }
+
+    void disconnect(){
+        _networkManager.Disconnect();
+    }
+
+    void startListening(int port){
+        _networkManager.StartListening(port);
+    }
+
+    void stopListening(){
+        _networkManager.StopListening();
+    }
+
 private:
     UAR uar;
     GeneratorSinusoida gen_sin;
@@ -104,6 +126,8 @@ private:
     State &operator=(const State &) = delete;
     State();
     ~State();
+
+
 };
 
 class SaveStateInterface
