@@ -24,15 +24,24 @@ struct RegulatorInstancePackage{
 };
 
 struct ArxInstancePackage{
-    // TODO Parametry arx do przesłania
+    std::vector<double> wsp_a;
+    std::vector<double> wsp_b;
+    int transport_delay;
+    double noise;
+    int input_min;
+    int input_max;
+    int output_min;
+    int output_max;
+    bool is_limited;
 };
 
 /**
  * @brief Klasa warstwy usług
  *
  */
-class State
+class State: public QObject
 {
+    Q_OBJECT
 public:
 
     enum class TypGeneratora { Sinusoidalny = 0, Prostokatny = 1, SkokJednostkowy = 2 };
@@ -67,6 +76,21 @@ public:
     void setPIDIntegrationType(IntegType integration_type);
     void resetPIDIntegration();
     void resetPIDDerrivative();
+
+    ArxInstancePackage getArxConfig(){
+        ArxInstancePackage package;
+
+        //ARX
+        package.wsp_a = uar.getARX().getA();
+        package.wsp_b = uar.getARX().getB();
+        package.transport_delay = uar.getARX().getK();
+        package.noise = uar.getARX().getStandardDeviation();
+        package.is_limited = uar.getARX().getLimitsActive();
+        package.input_max = uar.getARX().getInputLimits().second;
+        package.input_min = uar.getARX().getInputLimits().first;
+        package.output_max = uar.getARX().getOutputLimits().second;
+        package.output_min = uar.getARX().getOutputLimits().first;
+    }
     RegulatorInstancePackage getPIDConfig(){
         RegulatorInstancePackage package;
 
@@ -190,7 +214,8 @@ private:
     State();
     ~State();
 
-
+signals:
+    void statusChanged(bool connected);
 };
 
 class SaveStateInterface

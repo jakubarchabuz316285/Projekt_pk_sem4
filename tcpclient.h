@@ -54,16 +54,14 @@ public:
             _callback(msg);
     }
 
-    void Connected() override
-    {
+    void Connected() override {
         qDebug() << "Polaczono (client)";
-        // TODO LOGIKA
+        emit statusChanged(true); // Emitujemy prawdę
     }
 
-    void Disconnected() override
-    {
+    void Disconnected() override {
         qDebug() << "Rozlaczono (client)";
-        // TODO LOGIKA
+        emit statusChanged(false); // Emitujemy fałsz
     }
 
 private:

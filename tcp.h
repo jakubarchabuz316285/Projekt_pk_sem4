@@ -28,6 +28,8 @@ public:
 protected:
     int _port = -1;
     Callback _callback;
+signals:
+    void statusChanged(bool connected);
 };
 
 #endif // TCP_H

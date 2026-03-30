@@ -74,16 +74,23 @@ public:
         return _server->isListening();
     }
 
-    void Connected() override
-    {
-        qDebug() << "Polaczono (server)";
-        // TODO tu masz sloty do sygnałów connected i disconnected i przyda ci się to do logiki lampek w gui to samow tcp client
+    void Connected() override {
+        _socket = _server->nextPendingConnection();
+
+        connect(_socket, &QTcpSocket::readyRead, this, &TcpServer::ReadMsg);
+        connect(_socket, &QTcpSocket::disconnected, this, &TcpServer::Disconnected);
+
+        qDebug() << "Klient polaczony z serwerem";
+        emit statusChanged(true);
     }
 
-    void Disconnected() override
-    {
-        qDebug() << "Polaczono (server)";
-        // TODO
+    void Disconnected() override {
+        qDebug() << "Klient rozlaczony od serwera";
+        if (_socket) {
+            _socket->deleteLater();
+            _socket = nullptr;
+        }
+        emit statusChanged(false);
     }
 private:
     QTcpServer* _server;

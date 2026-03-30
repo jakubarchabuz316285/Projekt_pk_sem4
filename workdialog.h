@@ -41,7 +41,7 @@ private slots:
 
 private:
     static bool LocalSimulation;
-
+    void updateLedStatus(bool connected);
     QString composeIPAddres()
     {
         QString address = ui->SpnFirst->text() + "." +

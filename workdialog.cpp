@@ -10,7 +10,7 @@ WorkDialog::WorkDialog(QWidget *parent)
 {
     ui->setupUi(this);
     ui->rdio_arx->setChecked(true);
-
+    updateLedStatus(false);
     if (this->layout()) {
         this->layout()->setSizeConstraint(QLayout::SetFixedSize);
     }
@@ -28,11 +28,33 @@ WorkDialog::WorkDialog(QWidget *parent)
     ui->SpnThird->setMaximum(255);
     ui->SpnFourth->setMaximum(255);
     UpdateNetworkUI();
+    connect(&State::getInstance(), &State::statusChanged, this, [this](bool connected){
+        if(connected) {
+            ui->LblStatusLed->setStyleSheet("background-color: #2ecc71; border-radius: 8px; border: 1px solid #27ae60;");
+            ui->LblStatusText->setText("Połączono");
+        } else {
+            ui->LblStatusLed->setStyleSheet("background-color: #e74c3c; border-radius: 8px; border: 1px solid #c0392b;");
+            ui->LblStatusText->setText("Rozłączono");
+        }
+    });
+
+    ui->LblStatusLed->setStyleSheet("background-color: #95a5a6; border-radius: 8px;");
+    ui->LblStatusText->setText("Brak połączenia");
 }
 
 WorkDialog::~WorkDialog()
 {
     delete ui;
+}
+void WorkDialog::updateLedStatus(bool connected) {
+    QString color = connected ? "#2ecc71" : "#e74c3c";
+    QString style = QString(
+                        "border-radius: 7px;"
+                        "background-color: %1;"
+                        "border: 1px solid #555;"
+                        ).arg(color);
+
+    ui->LblStatusLed->setStyleSheet(style);
 }
 
 void WorkDialog::on_RdioLocal_toggled(bool checked)

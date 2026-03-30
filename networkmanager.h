@@ -7,8 +7,9 @@
 #include <stdexcept>
 #include <memory>
 
-class NetworkManager
+class NetworkManager: public QObject
 {
+    Q_OBJECT
 public:
     enum Mode { Local, PID, ARX };
 
@@ -30,11 +31,13 @@ public:
         case PID:
             _server = std::make_unique<TcpServer>();
             _server->SetCallback(_callback);
+            connect(_server.get(), &Tcp::statusChanged, this, &NetworkManager::statusChanged);
             break;
 
         case ARX:
             _client = std::make_unique<TcpClient>();
             _client->SetCallback(_callback);
+            connect(_client.get(), &Tcp::statusChanged, this, &NetworkManager::statusChanged);
             break;
 
         case Local:
@@ -146,7 +149,8 @@ public:
         if(_server == nullptr) return false;
         return _server->IsListening();
     }
-
+signals:
+    void statusChanged(bool connected);
 private:
     Mode _mode = Local;
 

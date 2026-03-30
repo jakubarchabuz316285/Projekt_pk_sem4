@@ -21,7 +21,7 @@ State::State()
     timer->setIntervalMS(200);
     timer->setTimeout(std::bind(&State::tick, this));
     timer->setRunning(simmulation_running);
-    // simmulation_timer = new QTimer();
+    QObject::connect(&_networkManager, &NetworkManager::statusChanged, this, &State::statusChanged);    // simmulation_timer = new QTimer();
     // simmulation_timer->setSingleShot(false);
     // simmulation_timer->setInterval(200);
     // simmulation_timer->connect(simmulation_timer, &QTimer::timeout, this, &State::tick);
