@@ -11,10 +11,9 @@ public:
     {
         _socket = new QTcpSocket();
 
-        QObject::connect(_socket, &QTcpSocket::readyRead, [this]() {
-            QByteArray data = _socket->readAll();
-            ReadMsg(data);
-        });
+        QObject::connect(_socket, &QTcpSocket::readyRead, this, &TcpClient::ReadMsg);
+        QObject::connect(_socket, &QTcpSocket::connected, this, &TcpClient::Connected);
+        QObject::connect(_socket, &QTcpSocket::disconnected, this, &TcpClient::Disconnected);
     }
 
     ~TcpClient()
@@ -48,19 +47,22 @@ public:
         _socket->write(msg);
     }
 
-    void ReadMsg(const QByteArray& msg) override
+    void ReadMsg() override
     {
+        QByteArray msg = _socket->readAll();
         if (_callback)
             _callback(msg);
     }
 
     void Connected() override
     {
+        qDebug() << "Polaczono (client)";
         // TODO LOGIKA
     }
 
     void Disconnected() override
     {
+        qDebug() << "Rozlaczono (client)";
         // TODO LOGIKA
     }
 

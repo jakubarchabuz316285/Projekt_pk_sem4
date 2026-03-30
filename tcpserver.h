@@ -13,28 +13,10 @@ public:
         _server = new QTcpServer();
         _socket = nullptr;
 
-        QObject::connect(_server, &QTcpServer::newConnection, [this]() {
-            if (_socket != nullptr)
-            {
-                // już ktoś jest podłączony → odrzucamy
-                QTcpSocket* extra = _server->nextPendingConnection();
-                extra->disconnectFromHost();
-                extra->deleteLater();
-                return;
-            }
+        QObject::connect(_server, &QTcpServer::newConnection, this, &TcpServer::Connected);
+        QObject::connect(_socket, &QTcpSocket::readyRead, this, &TcpServer::ReadMsg);
+        QObject::connect(_socket, &QTcpSocket::disconnected, this, &TcpServer::Disconnected);
 
-            _socket = _server->nextPendingConnection();
-
-            QObject::connect(_socket, &QTcpSocket::readyRead, [this]() {
-                QByteArray data = _socket->readAll();
-                ReadMsg(data);
-            });
-
-            QObject::connect(_socket, &QTcpSocket::disconnected, [this]() {
-                _socket->deleteLater();
-                _socket = nullptr;
-            });
-        });
     }
 
     ~TcpServer()
@@ -81,8 +63,9 @@ public:
         _socket->write(msg);
     }
 
-    void ReadMsg(const QByteArray& msg) override
+    void ReadMsg() override
     {
+        const QByteArray& msg = _socket->readAll();
         if (_callback)
             _callback(msg);
     }
@@ -93,11 +76,13 @@ public:
 
     void Connected() override
     {
+        qDebug() << "Polaczono (server)";
         // TODO tu masz sloty do sygnałów connected i disconnected i przyda ci się to do logiki lampek w gui to samow tcp client
     }
 
     void Disconnected() override
     {
+        qDebug() << "Polaczono (server)";
         // TODO
     }
 private:
