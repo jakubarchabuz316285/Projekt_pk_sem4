@@ -14,6 +14,7 @@ struct RegulatorInstancePackage{
     double k;
     double T_i;
     double T_d;
+    uint8_t integType;
     // GEN
     double amplitude;
     uint16_t samples_per_cycle;
@@ -24,28 +25,19 @@ struct RegulatorInstancePackage{
 };
 
 struct ArxInstancePackage{
-    std::vector<double> wsp_a;
-    std::vector<double> wsp_b;
-    int transport_delay;
-    double noise;
-    int input_min;
-    int input_max;
-    int output_min;
-    int output_max;
-    bool is_limited;
+    // TODO Parametry arx do przesłania
 };
 
 /**
  * @brief Klasa warstwy usług
  *
  */
-class State: public QObject
+class State
 {
-    Q_OBJECT
 public:
 
     enum class TypGeneratora { Sinusoidalny = 0, Prostokatny = 1, SkokJednostkowy = 2 };
-    enum class TypPakietu : quint8 { USample = 1, YSample = 2, FullConfig = 3, PIDSample = 4, GENSample = 5};
+    enum class TypPakietu : quint8 { USample = 1, YSample = 2, PidConfig = 3, ArxConfig = 4, PIDSample = 5, GENSample = 6, ResetGen = 7, ResetPid = 8};
     struct Packet
     {
         TypPakietu type;
@@ -76,41 +68,7 @@ public:
     void setPIDIntegrationType(IntegType integration_type);
     void resetPIDIntegration();
     void resetPIDDerrivative();
-
-    ArxInstancePackage getArxConfig(){
-        ArxInstancePackage package;
-
-        //ARX
-        package.wsp_a = uar.getARX().getA();
-        package.wsp_b = uar.getARX().getB();
-        package.transport_delay = uar.getARX().getK();
-        package.noise = uar.getARX().getStandardDeviation();
-        package.is_limited = uar.getARX().getLimitsActive();
-        package.input_max = uar.getARX().getInputLimits().second;
-        package.input_min = uar.getARX().getInputLimits().first;
-        package.output_max = uar.getARX().getOutputLimits().second;
-        package.output_min = uar.getARX().getOutputLimits().first;
-    }
-    RegulatorInstancePackage getPIDConfig(){
-        RegulatorInstancePackage package;
-
-        // PID
-
-        package.k = uar.getRegulatorPID().getK();
-        package.T_i = uar.getRegulatorPID().getT_i();
-        package.T_d = uar.getRegulatorPID().getT_d();
-
-        // GEN
-
-        package.amplitude = choosen_generator->getAmplitude();
-        package.bias = choosen_generator->getBias();
-        package.samples_per_cycle = choosen_generator->getSamplesPerCycle();
-        package.genType = (int)getGenerator();
-
-        // SIM
-
-        timer;
-    }
+    RegulatorInstancePackage getPIDConfig();
 
     void setARXCoefficients(std::vector<double> a, std::vector<double> b);
     const std::vector<double> getARXCoefficientsA();
@@ -139,6 +97,7 @@ public:
 
     //Pid i Gen serializacja
 
+    QByteArray serializePIDState(const RegulatorInstancePackage& data);
     QByteArray serializePIDOutput();
     Packet deserialize(const QByteArray& data);
 
@@ -214,8 +173,7 @@ private:
     State();
     ~State();
 
-signals:
-    void statusChanged(bool connected);
+
 };
 
 class SaveStateInterface
