@@ -89,12 +89,12 @@ public:
 
     void Connected() override
     {
-
+        // TODO tu masz sloty do sygnałów connected i disconnected i przyda ci się to do logiki lampek w gui to samow tcp client
     }
 
     void Disconnected() override
     {
-
+        // TODO
     }
 private:
     QTcpServer* _server;
