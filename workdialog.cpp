@@ -23,6 +23,10 @@ WorkDialog::WorkDialog(QWidget *parent)
     ui->spnBoxPort->setMinimumWidth(50);
     ui->spnBoxPort->setMinimum(0);
     ui->spnBoxPort->setMaximum(65535);
+    ui->SpnFirst->setMaximum(255);
+    ui->SpnSecond->setMaximum(255);
+    ui->SpnThird->setMaximum(255);
+    ui->SpnFourth->setMaximum(255);
     UpdateNetworkUI();
 }
 
