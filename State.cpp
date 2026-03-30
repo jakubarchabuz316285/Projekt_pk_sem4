@@ -21,6 +21,7 @@ State::State()
     timer->setIntervalMS(200);
     timer->setTimeout(std::bind(&State::tick, this));
     timer->setRunning(simmulation_running);
+     QObject::connect(&_networkManager, &NetworkManager::statusChanged, this, &State::statusChanged);
     // simmulation_timer = new QTimer();
     // simmulation_timer->setSingleShot(false);
     // simmulation_timer->setInterval(200);
@@ -198,6 +199,23 @@ RegulatorInstancePackage State::getPIDConfig(){
     // SIM
 
     package.interval = (uint8_t)timer->getIntervalMS();
+
+    return package;
+}
+
+ArxInstancePackage State::getArxConfig(){
+    ArxInstancePackage package;
+
+    //ARX
+    package.wsp_a = uar.getARX().getA();
+    package.wsp_b = uar.getARX().getB();
+    package.transport_delay = uar.getARX().getK();
+    package.noise = uar.getARX().getStandardDeviation();
+    package.is_limited = uar.getARX().getLimitsActive();
+    package.input_max = uar.getARX().getInputLimits().second;
+    package.input_min = uar.getARX().getInputLimits().first;
+    package.output_max = uar.getARX().getOutputLimits().second;
+    package.output_min = uar.getARX().getOutputLimits().first;
 
     return package;
 }

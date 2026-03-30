@@ -25,15 +25,24 @@ struct RegulatorInstancePackage{
 };
 
 struct ArxInstancePackage{
-    // TODO Parametry arx do przesłania
+    std::vector<double> wsp_a;
+    std::vector<double> wsp_b;
+    int transport_delay;
+    double noise;
+    int input_min;
+    int input_max;
+    int output_min;
+    int output_max;
+    bool is_limited;
 };
 
 /**
  * @brief Klasa warstwy usług
  *
  */
-class State
+class State : public QObject
 {
+    Q_OBJECT
 public:
 
     enum class TypGeneratora { Sinusoidalny = 0, Prostokatny = 1, SkokJednostkowy = 2 };
@@ -69,6 +78,7 @@ public:
     void resetPIDIntegration();
     void resetPIDDerrivative();
     RegulatorInstancePackage getPIDConfig();
+    ArxInstancePackage getArxConfig();
 
     void setARXCoefficients(std::vector<double> a, std::vector<double> b);
     const std::vector<double> getARXCoefficientsA();
@@ -172,6 +182,9 @@ private:
     State &operator=(const State &) = delete;
     State();
     ~State();
+
+signals:
+    void statusChanged(bool connected);
 
 
 };
