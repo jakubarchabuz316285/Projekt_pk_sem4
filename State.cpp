@@ -21,7 +21,7 @@ State::State()
     timer->setIntervalMS(200);
     timer->setTimeout(std::bind(&State::tick, this));
     timer->setRunning(simmulation_running);
-    QObject::connect(&_networkManager, &NetworkManager::statusChanged, this, &State::statusChanged);    // simmulation_timer = new QTimer();
+    // simmulation_timer = new QTimer();
     // simmulation_timer->setSingleShot(false);
     // simmulation_timer->setInterval(200);
     // simmulation_timer->connect(simmulation_timer, &QTimer::timeout, this, &State::tick);
@@ -111,10 +111,12 @@ void State::setGeneneratorAmplitude(const double& amplitude)
 {
     this->gen_pros.setAmplitude(amplitude);
     this->gen_sin.setAmplitude(amplitude);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 void State::setGeneneratorDutyCycle(const double& duty_cycle) // ustawia kiedy sygnal jest w gorze
 {
     this->gen_pros.setDutyCycle(duty_cycle);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 void State::setGeneratorSkladowaStala(double skladowa_stala)
 {
@@ -128,6 +130,8 @@ void State::setGeneneratorPeriodMS(uint32_t period)
     //sample -= (sample & 1);
     this->gen_pros.setSamplesPerCycle(sample);
     this->gen_sin.setSamplesPerCycle(sample);
+
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 uint8_t State::getGeneneratorPeriodJumpMS()
 {
@@ -136,6 +140,7 @@ uint8_t State::getGeneneratorPeriodJumpMS()
 void State::setGeneratorUnitJumpTimeMS(uint32_t time)
 {
     this->gen_skok.setActivationTime(time / getSimmulationIntervalMS());
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 void State::resetGenerator()
 {
@@ -147,18 +152,22 @@ void State::resetGenerator()
 void State::setPIDProportional(double k)
 {
     this->uar.getRegulatorPID().setK(k);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 void State::setPIDIntegration(double T_i)
 {
     this->uar.getRegulatorPID().setT_i(T_i);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 void State::setPIDDerrivative(double T_d)
 {
     this->uar.getRegulatorPID().setT_d(T_d);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 void State::setPIDIntegrationType(IntegType integration_type)
 {
     this->uar.getRegulatorPID().setIntegrationType(integration_type);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 void State::resetPIDIntegration()
 {
@@ -167,6 +176,30 @@ void State::resetPIDIntegration()
 void State::resetPIDDerrivative()
 {
     this->uar.getRegulatorPID().resetDerrivativePart();
+}
+
+RegulatorInstancePackage State::getPIDConfig(){
+    RegulatorInstancePackage package;
+
+    // PID
+
+    package.k = uar.getRegulatorPID().getK();
+    package.T_i = uar.getRegulatorPID().getT_i();
+    package.T_d = uar.getRegulatorPID().getT_d();
+    package.integType = (uint8_t)uar.getRegulatorPID().getIntegrationType();
+
+    // GEN
+
+    package.amplitude = choosen_generator->getAmplitude();
+    package.bias = choosen_generator->getBias();
+    package.samples_per_cycle = choosen_generator->getSamplesPerCycle();
+    package.genType = (uint8_t)getGenerator();
+
+    // SIM
+
+    package.interval = (uint8_t)timer->getIntervalMS();
+
+    return package;
 }
 
 
@@ -275,13 +308,34 @@ QByteArray State::serializeY(double y)
     return data;
 }
 
+QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
+{
+    QByteArray byteArray;
+    QDataStream stream(&byteArray, QIODevice::WriteOnly);
+
+    stream.setVersion(QDataStream::Qt_6_0); // opcjonalnie (dopasuj do wersji Qt)
+
+    stream << (quint8)TypPakietu::PidConfig
+           << data.k
+           << data.T_i
+           << data.T_d
+           << data.integType
+           << data.amplitude
+           << data.samples_per_cycle
+           << data.bias
+           << data.genType
+           << data.interval;
+
+    return byteArray;
+}
+
 QByteArray State::serializeState(State& state)
 {
     QByteArray data;
     QDataStream out(&data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_0);
 
-    out << (quint8)TypPakietu::FullConfig;
+    //out << (quint8)TypPakietu::FullConfig;
     out << state.getSimmulationRunning();
     out << (quint32)state.getSimmulationIntervalMS();
     out << (qint32)state.getGenerator();
