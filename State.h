@@ -88,7 +88,28 @@ public:
     // ONLINE
 
     void setMode(const NetworkManager::Mode& mode){
+        QString modeString;
+        if(_networkManager.GetMode() == NetworkManager::Mode::ARX){
+            modeString = "ARX";
+        }
+        if(_networkManager.GetMode() == NetworkManager::Mode::PID){
+            modeString = "PID";
+        }
+        if(_networkManager.GetMode() == NetworkManager::Mode::Local){
+            modeString = "Local";
+        }
+        qDebug() << "old modee: " << modeString;
         _networkManager.SetMode(mode);
+        if(_networkManager.GetMode() == NetworkManager::Mode::ARX){
+            modeString = "ARX";
+        }
+        if(_networkManager.GetMode() == NetworkManager::Mode::PID){
+            modeString = "PID";
+        }
+        if(_networkManager.GetMode() == NetworkManager::Mode::Local){
+            modeString = "Local";
+        }
+        qDebug() << "Mode: " << modeString;
     }
 
     void connect(const QString& ip, int port){
@@ -100,7 +121,9 @@ public:
     }
 
     void startListening(int port){
+        qDebug() << "Starting to listen : (state)";
         _networkManager.StartListening(port);
+        qDebug() << "Starting to listen : (state po funkcji)";
     }
 
     void stopListening(){

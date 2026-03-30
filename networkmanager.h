@@ -68,13 +68,18 @@ public:
     // SERVER
     void StartListening(int port)
     {
-        if (_mode != PID)
+        if (_mode != PID){
+            qDebug() << "Not pid mode";
             throw std::runtime_error("Not in server mode");
+        }
 
-        if (!_server)
+        if (!_server){
+            qDebug() << "server not initialized";
             throw std::runtime_error("Server not initialized");
-
+        }
+        qDebug() << "Network manager nasluchiwanie";
         _server->StartListening(port);
+        qDebug() << "Network manager nasluchiwanie po";
     }
 
     void StopListening()

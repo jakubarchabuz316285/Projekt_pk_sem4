@@ -45,8 +45,12 @@ public:
 
     void StartListening(int p)
     {
-        if (!_server->listen(QHostAddress::Any, p))
-            throw std::runtime_error("Cannot start server");
+        qDebug() << "nasluchiwanie server";
+        _server->listen(QHostAddress::Any, p);
+        qDebug() << "nasluchiwanie server po";
+        // if (!_server->listen(QHostAddress::Any, p)){
+        //     throw std::runtime_error("Cannot start server");
+        // }
 
         _port = p;
     }

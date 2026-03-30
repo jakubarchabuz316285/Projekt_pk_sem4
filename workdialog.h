@@ -37,6 +37,8 @@ private slots:
 
     void on_BtnDisconnect_clicked();
 
+    void on_RdioNet_toggled(bool checked);
+
 private:
     static bool LocalSimulation;
 
