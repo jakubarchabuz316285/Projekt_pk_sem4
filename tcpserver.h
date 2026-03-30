@@ -14,9 +14,6 @@ public:
         _socket = nullptr;
 
         QObject::connect(_server, &QTcpServer::newConnection, this, &TcpServer::Connected);
-        QObject::connect(_socket, &QTcpSocket::readyRead, this, &TcpServer::ReadMsg);
-        QObject::connect(_socket, &QTcpSocket::disconnected, this, &TcpServer::Disconnected);
-
     }
 
     ~TcpServer()
