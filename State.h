@@ -9,7 +9,23 @@
 class SaveStateInterface;
 class TimerStateInterface;
 
+struct RegulatorInstancePackage{
+    // PID
+    double k;
+    double T_i;
+    double T_d;
+    // GEN
+    double amplitude;
+    uint16_t samples_per_cycle;
+    double bias;
+    uint8_t genType; // 0 - sin, 1 - pros, 2 - skok
+    // SIM
+    uint8_t interval;
+};
 
+struct ArxInstancePackage{
+    // TODO Parametry arx do przesłania
+};
 
 /**
  * @brief Klasa warstwy usług
@@ -19,7 +35,7 @@ class State
 {
 public:
 
-    enum class TypGeneratora { Sinusoidalny, Prostokatny, SkokJednostkowy };
+    enum class TypGeneratora { Sinusoidalny = 0, Prostokatny = 1, SkokJednostkowy = 2 };
     enum class TypPakietu : quint8 { USample = 1, YSample = 2, FullConfig = 3, PIDSample = 4, GENSample = 5};
     struct Packet
     {
@@ -51,6 +67,26 @@ public:
     void setPIDIntegrationType(IntegType integration_type);
     void resetPIDIntegration();
     void resetPIDDerrivative();
+    RegulatorInstancePackage getPIDConfig(){
+        RegulatorInstancePackage package;
+
+        // PID
+
+        package.k = uar.getRegulatorPID().getK();
+        package.T_i = uar.getRegulatorPID().getT_i();
+        package.T_d = uar.getRegulatorPID().getT_d();
+
+        // GEN
+
+        package.amplitude = choosen_generator->getAmplitude();
+        package.bias = choosen_generator->getBias();
+        package.samples_per_cycle = choosen_generator->getSamplesPerCycle();
+        package.genType = (int)getGenerator();
+
+        // SIM
+
+        timer;
+    }
 
     void setARXCoefficients(std::vector<double> a, std::vector<double> b);
     const std::vector<double> getARXCoefficientsA();
@@ -98,7 +134,7 @@ public:
         if(_networkManager.GetMode() == NetworkManager::Mode::Local){
             modeString = "Local";
         }
-        qDebug() << "old modee: " << modeString;
+        qDebug() << "old mode: " << modeString;
         _networkManager.SetMode(mode);
         if(_networkManager.GetMode() == NetworkManager::Mode::ARX){
             modeString = "ARX";
