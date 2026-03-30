@@ -108,7 +108,9 @@ public:
     //Pid i Gen serializacja
 
     QByteArray serializePIDState(const RegulatorInstancePackage& data);
+    QByteArray serializeARXState(const ArxInstancePackage& data);
     QByteArray serializePIDOutput();
+
     Packet deserialize(const QByteArray& data);
 
     void receivePacket(const QByteArray& packet);

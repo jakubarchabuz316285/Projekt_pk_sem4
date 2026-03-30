@@ -224,6 +224,7 @@ ArxInstancePackage State::getArxConfig(){
 void State::setARXCoefficients(std::vector<double> a, std::vector<double> b)
 {
     this->uar.getARX().setAB(a, b);
+    if(_networkManager.GetMode() == NetworkManager::Mode::ARX) _networkManager.SendMsg(serializeARXState(getArxConfig()));
 }
 const std::vector<double> State::getARXCoefficientsA()
 {
@@ -236,14 +237,17 @@ const std::vector<double> State::getARXCoefficientsB()
 void State::setARXTransportDelay(uint16_t k)
 {
     this->uar.getARX().setK(k);
+    if(_networkManager.GetMode() == NetworkManager::Mode::ARX) _networkManager.SendMsg(serializeARXState(getArxConfig()));
 }
 uint16_t State::getARXTransportDelay()
 {
     return this->uar.getARX().getK();
+    if(_networkManager.GetMode() == NetworkManager::Mode::ARX) _networkManager.SendMsg(serializeARXState(getArxConfig()));
 }
 void State::setARXInputLimits(double low, double high)
 {
     this->uar.getARX().setInputLimits(low, high);
+    if(_networkManager.GetMode() == NetworkManager::Mode::ARX) _networkManager.SendMsg(serializeARXState(getArxConfig()));
 }
 const std::pair<double, double>& State::getARXInputLimits()
 {
@@ -252,6 +256,7 @@ const std::pair<double, double>& State::getARXInputLimits()
 void State::setARXOutputLimits(double low, double high)
 {
     this->uar.getARX().setOutputLimits(low, high);
+    if(_networkManager.GetMode() == NetworkManager::Mode::ARX) _networkManager.SendMsg(serializeARXState(getArxConfig()));
 }
 const std::pair<double, double>& State::getARXOutputLimits()
 {
@@ -260,6 +265,7 @@ const std::pair<double, double>& State::getARXOutputLimits()
 void State::setARXNoiseStandardDeviation(double standard_deviation)
 {
     this->uar.getARX().setStandardDeviation(standard_deviation);
+    if(_networkManager.GetMode() == NetworkManager::Mode::ARX) _networkManager.SendMsg(serializeARXState(getArxConfig()));
 }
 double State::getARXNoiseStandardDeviation()
 {
@@ -271,6 +277,7 @@ void State::setARXLimitsEnabled(bool enabled)
         this->uar.getARX().enableLimits();
     else
         this->uar.getARX().disableLimits();
+    if(_networkManager.GetMode() == NetworkManager::Mode::ARX) _networkManager.SendMsg(serializeARXState(getArxConfig()));
 }
 void State::resetARX()
 {
@@ -343,6 +350,40 @@ QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
            << data.bias
            << data.genType
            << data.interval;
+
+    return byteArray;
+}
+
+QByteArray State::serializeARXState(const ArxInstancePackage& data){
+    QByteArray byteArray;
+    QDataStream stream(&byteArray, QIODevice::WriteOnly);
+
+    stream.setVersion(QDataStream::Qt_6_0); // opcjonalnie (dopasuj do wersji Qt)
+
+    QByteArray wsp_aData;
+    QDataStream wsp_aStream(&wsp_aData, QIODevice::WriteOnly);
+
+    for(double vecData : data.wsp_a){
+        wsp_aStream << vecData;
+    }
+
+    QByteArray wsp_bData;
+    QDataStream wsp_bStream(&wsp_aData, QIODevice::WriteOnly);
+
+    for(double vecData : data.wsp_a){
+        wsp_aStream << vecData;
+    }
+
+    stream << (quint8)TypPakietu::ArxConfig
+           << wsp_aData
+           << wsp_bData
+           << data.transport_delay
+           << data.noise
+           << data.is_limited
+           << data.input_max
+           << data.input_min
+           << data.output_max
+           << data.output_min;
 
     return byteArray;
 }
