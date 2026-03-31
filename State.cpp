@@ -32,9 +32,6 @@ State::State()
     //     simmulation_timer->stop();
 
     // ONLINE
-
-
-
 }
 
 void State::console_print_state()
@@ -481,14 +478,15 @@ void State::deserializeAndApply(const QByteArray& byteArray)
     {
         QByteArray wsp_aData;
         QByteArray wsp_bData;
-
+        int vec_size;
         double transport_delay;
         double noise;
         bool is_limited;
         double input_max, input_min;
         double output_max, output_min;
 
-        stream >> wsp_aData
+        stream >>vec_size
+            >> wsp_aData
             >> wsp_bData
             >> transport_delay
             >> noise
@@ -504,7 +502,8 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         wsp_aStream.setVersion(QDataStream::Qt_6_0);
 
         double val;
-        while (!wsp_aStream.atEnd()) {
+        for(int i = 0; i < vec_size/2; i++)
+        {
             wsp_aStream >> val;
             wsp_a.push_back(val);
         }
@@ -514,9 +513,10 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         QDataStream wsp_bStream(wsp_bData);
         wsp_bStream.setVersion(QDataStream::Qt_6_0);
 
-        while (!wsp_bStream.atEnd()) {
-            wsp_bStream >> val;
-            wsp_b.push_back(val);
+        for(int i = vec_size/2; i < vec_size; i++)
+        {
+            wsp_aStream >> val;
+            wsp_a.push_back(val);
         }
 
         // 🔧 SETTERY
