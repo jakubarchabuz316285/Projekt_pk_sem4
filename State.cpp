@@ -372,7 +372,7 @@ QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
     QDataStream stream(&byteArray, QIODevice::WriteOnly);
 
     stream.setVersion(QDataStream::Qt_6_0); // opcjonalnie (dopasuj do wersji Qt)
-
+    qDebug() << "samples z serializacji:" << data.samples_per_cycle;
     stream << (quint8)TypPakietu::PidConfig
            << data.k
            << data.T_i
@@ -468,6 +468,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         setPIDDerrivative(T_d);
         setPIDIntegrationType(IntegType(integType));
         setGenerator(TypGeneratora(genType));
+        qDebug() << "samples per cycle: " << samples_per_cycle;
         this->choosen_generator->setSamplesPerCycle(samples_per_cycle);
         this->choosen_generator->setBias(bias);
         this->choosen_generator->setAmplitude(amplitude);
