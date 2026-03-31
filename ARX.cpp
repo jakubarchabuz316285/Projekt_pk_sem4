@@ -96,6 +96,7 @@ const std::vector<double> ARX::getB() const
 }
 void ARX::setAB(std::vector<double> a, std::vector<double> b)
 {
+    qDebug() << "a: " << a.size() << ", b: " << b.size();
     assert(a.size() == b.size());
     //Rozmiary wektorów wspołaczynników a i b są różne
     this->a = a;

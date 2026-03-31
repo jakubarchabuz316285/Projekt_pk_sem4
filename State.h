@@ -25,6 +25,7 @@ struct RegulatorInstancePackage{
 };
 
 struct ArxInstancePackage{
+    int vec_size;
     std::vector<double> wsp_a;
     std::vector<double> wsp_b;
     int transport_delay;

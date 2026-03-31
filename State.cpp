@@ -241,6 +241,7 @@ ArxInstancePackage State::getArxConfig(){
     //ARX
     package.wsp_a = uar.getARX().getA();
     package.wsp_b = uar.getARX().getB();
+    package.vec_size = uar.getARX().getA().size();
     package.transport_delay = uar.getARX().getK();
     package.noise = uar.getARX().getStandardDeviation();
     package.is_limited = uar.getARX().getLimitsActive();
@@ -407,6 +408,7 @@ QByteArray State::serializeARXState(const ArxInstancePackage& data){
     }
 
     stream << (quint8)TypPakietu::ArxConfig
+           << data.vec_size
            << wsp_aData
            << wsp_bData
            << data.transport_delay
