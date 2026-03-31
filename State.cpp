@@ -387,28 +387,17 @@ QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
 QByteArray State::serializeARXState(const ArxInstancePackage& data){
     QByteArray byteArray;
     QDataStream stream(&byteArray, QIODevice::WriteOnly);
+    stream.setVersion(QDataStream::Qt_6_0);
 
-    stream.setVersion(QDataStream::Qt_6_0); // opcjonalnie (dopasuj do wersji Qt)
+    stream << (quint8)TypPakietu::ArxConfig;
 
-    QByteArray wsp_aData;
-    QDataStream wsp_aStream(&wsp_aData, QIODevice::WriteOnly);
+    stream << (qint32)data.wsp_a.size();
+    for(double v : data.wsp_a) stream << v;
 
-    for(double vecData : data.wsp_a){
-        wsp_aStream << vecData;
-    }
+    stream << (qint32)data.wsp_b.size();
+    for(double v : data.wsp_b) stream << v;
 
-    QByteArray wsp_bData;
-    QDataStream wsp_bStream(&wsp_bData, QIODevice::WriteOnly);
-
-    for(double vecData : data.wsp_b){
-        wsp_bStream << vecData;
-    }
-
-    stream << (quint8)TypPakietu::ArxConfig
-           << data.vec_size
-           << wsp_aData
-           << wsp_bData
-           << data.transport_delay
+    stream << data.transport_delay
            << data.noise
            << data.is_limited
            << data.input_max
@@ -476,56 +465,28 @@ void State::deserializeAndApply(const QByteArray& byteArray)
 
     case TypPakietu::ArxConfig:
     {
-        QByteArray wsp_aData;
-        QByteArray wsp_bData;
-        int vec_size;
-        double transport_delay;
-        double noise;
+        qint32 sizeA, sizeB;
+        double transport_delay, noise;
         bool is_limited;
-        double input_max, input_min;
-        double output_max, output_min;
+        double inMax, inMin, outMax, outMin;
 
-        stream >>vec_size
-            >> wsp_aData
-            >> wsp_bData
-            >> transport_delay
-            >> noise
-            >> is_limited
-            >> input_max
-            >> input_min
-            >> output_max
-            >> output_min;
+        stream >> sizeA;
+        std::vector<double> wsp_a(sizeA);
+        for(int i = 0; i < sizeA; ++i) stream >> wsp_a[i];
 
-        // 🔧 DESERIALIZACJA wsp_a
-        std::vector<double> wsp_a;
-        QDataStream wsp_aStream(wsp_aData);
-        wsp_aStream.setVersion(QDataStream::Qt_6_0);
+        stream >> sizeB;
+        std::vector<double> wsp_b(sizeB);
+        for(int i = 0; i < sizeB; ++i) stream >> wsp_b[i];
 
-        double val;
-        for(int i = 0; i < vec_size/2; i++)
-        {
-            wsp_aStream >> val;
-            wsp_a.push_back(val);
-        }
+        stream >> transport_delay >> noise >> is_limited
+            >> inMax >> inMin >> outMax >> outMin;
 
-        // 🔧 DESERIALIZACJA wsp_b
-        std::vector<double> wsp_b;
-        QDataStream wsp_bStream(wsp_bData);
-        wsp_bStream.setVersion(QDataStream::Qt_6_0);
-
-        for(int i = 0; i < vec_size/2; i++)
-        {
-            wsp_bStream >> val;
-            wsp_b.push_back(val);
-        }
-
-        // 🔧 SETTERY
         setARXCoefficients(wsp_a, wsp_b);
         setARXTransportDelay(transport_delay);
         setARXNoiseStandardDeviation(noise);
         setARXLimitsEnabled(is_limited);
-        setARXInputLimits(input_min, input_max);
-        setARXOutputLimits(output_min, output_max);
+        setARXInputLimits(inMin, inMax);
+        setARXOutputLimits(outMin, outMax);
 
         break;
     }
