@@ -396,10 +396,6 @@ QByteArray State::serializePIDOutput(){
     return data;
 }
 
-void State::receivePacket(const QByteArray& msg){
-
-}
-
 void State::deserializeAndApply(const QByteArray& byteArray)
 {
     QDataStream stream(byteArray);
@@ -564,6 +560,10 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         qWarning() << "Nieznany typ pakietu:" << typRaw;
         break;
     }
+}
+
+void State::receivePacket(const QByteArray& packet){
+    deserializeAndApply(packet);
 }
 
 
