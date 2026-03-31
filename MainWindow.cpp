@@ -269,8 +269,7 @@ void MainWindow::addToPlots(TickData tick_data)
     if (lista_uchyb->getList()->count() > liczba_probek) {
         lista_wartosc_zadana->deleteFirstValue();
         lista_wartosc_regulowana->deleteFirstValue();
-        if(((double)rand() / RAND_MAX > (xs * 5.0)))
-            lista_uchyb->deleteFirstValue();
+        lista_uchyb->deleteFirstValue();
         lista_sterowanie->deleteFirstValue();
         lista_sterowanie_P->deleteFirstValue();
         lista_sterowanie_I->deleteFirstValue();
@@ -279,8 +278,7 @@ void MainWindow::addToPlots(TickData tick_data)
         if (lista_uchyb->getList()->count() > liczba_probek) {
             lista_wartosc_zadana->deleteFirstValue();
             lista_wartosc_regulowana->deleteFirstValue();
-            if(((double)rand() / RAND_MAX > (xs * 5.0)))
-                lista_uchyb->deleteFirstValue();
+            lista_uchyb->deleteFirstValue();
             lista_sterowanie->deleteFirstValue();
             lista_sterowanie_P->deleteFirstValue();
             lista_sterowanie_I->deleteFirstValue();
