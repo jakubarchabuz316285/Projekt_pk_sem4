@@ -14,12 +14,12 @@ struct RegulatorInstancePackage{
     double k;
     double T_i;
     double T_d;
-    uint8_t integType;
+    int integType;
     // GEN
     double amplitude;
     uint16_t samples_per_cycle;
     double bias;
-    uint8_t genType; // 0 - sin, 1 - pros, 2 - skok
+    int genType; // 0 - sin, 1 - pros, 2 - skok
     // SIM
     uint8_t interval;
 };

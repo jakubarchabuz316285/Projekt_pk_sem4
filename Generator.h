@@ -14,9 +14,7 @@ protected:
     uint16_t samples_per_cycle; /**< ile impulsów zegarywch an jeden okres */
     double bias; /**< offset sygnału */
 
-    // ERROR - kamil
-
-    // uint16_t internal_clock; /**< wartośc wewnętrzna. nie ruszać */
+    //  BŁĄD char internal_clock; /**< wartośc wewnętrzna. nie ruszać */
     uint16_t internal_clock; /**< wartośc wewnętrzna. nie ruszać */
 
     /**

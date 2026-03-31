@@ -444,7 +444,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         double k, T_i, T_d;
         int integType;
         double amplitude;
-        int samples_per_cycle;
+        uint16_t samples_per_cycle;
         double bias;
         int genType;
         int interval;
