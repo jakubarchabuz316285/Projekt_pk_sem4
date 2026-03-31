@@ -513,7 +513,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         QDataStream wsp_bStream(wsp_bData);
         wsp_bStream.setVersion(QDataStream::Qt_6_0);
 
-        for(int i = vec_size/2; i < vec_size; i++)
+        for(int i = 0; i < vec_size/2; i++)
         {
             wsp_aStream >> val;
             wsp_a.push_back(val);
