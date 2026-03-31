@@ -515,8 +515,8 @@ void State::deserializeAndApply(const QByteArray& byteArray)
 
         for(int i = 0; i < vec_size/2; i++)
         {
-            wsp_aStream >> val;
-            wsp_a.push_back(val);
+            wsp_bStream >> val;
+            wsp_b.push_back(val);
         }
 
         // 🔧 SETTERY
