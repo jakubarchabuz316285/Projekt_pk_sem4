@@ -400,8 +400,8 @@ QByteArray State::serializeARXState(const ArxInstancePackage& data){
     QByteArray wsp_bData;
     QDataStream wsp_bStream(&wsp_bData, QIODevice::WriteOnly);
 
-    for(double vecData : data.wsp_a){
-        wsp_aStream << vecData;
+    for(double vecData : data.wsp_b){
+        wsp_bStream << vecData;
     }
 
     stream << (quint8)TypPakietu::ArxConfig
