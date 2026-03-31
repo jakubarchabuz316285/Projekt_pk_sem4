@@ -368,7 +368,7 @@ QByteArray State::serializeARXState(const ArxInstancePackage& data){
     }
 
     QByteArray wsp_bData;
-    QDataStream wsp_bStream(&wsp_aData, QIODevice::WriteOnly);
+    QDataStream wsp_bStream(&wsp_bData, QIODevice::WriteOnly);
 
     for(double vecData : data.wsp_a){
         wsp_aStream << vecData;
@@ -388,39 +388,6 @@ QByteArray State::serializeARXState(const ArxInstancePackage& data){
     return byteArray;
 }
 
-QByteArray State::serializeState(State& state)
-{
-    QByteArray data;
-    QDataStream out(&data, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_6_0);
-
-    //out << (quint8)TypPakietu::FullConfig;
-    out << state.getSimmulationRunning();
-    out << (quint32)state.getSimmulationIntervalMS();
-    out << (qint32)state.getGenerator();
-
-    std::vector<double> a = state.getARXCoefficientsA();
-    std::vector<double> b = state.getARXCoefficientsB();
-    out << QList<double>(a.begin(), a.end());
-    out << QList<double>(b.begin(), b.end());
-
-    out << (quint16)state.getARXTransportDelay();
-    out << state.getARXNoiseStandardDeviation();
-
-    out << state.getARXInputLimits().first << state.getARXInputLimits().second;
-    out << state.getARXOutputLimits().first << state.getARXOutputLimits().second;
-
-    out << uar.getRegulatorPID().getK();
-    out << uar.getRegulatorPID().getT_d();
-    out << uar.getRegulatorPID().getT_i();
-    out << uar.getRegulatorPID().getIntegrationType();
-
-    out << choosen_generator->getAmplitude();
-    out << choosen_generator->getBias();
-    out << choosen_generator->getSamplesPerCycle();
-    return data;
-}
-
 QByteArray State::serializePIDOutput(){
     double output = this->uar.getRegulatorPID().getLastOutput();
     QByteArray data;
@@ -433,32 +400,171 @@ void State::receivePacket(const QByteArray& msg){
 
 }
 
-State::Packet State::deserialize(const QByteArray& data){
-    Packet packet;
-    packet.valid = false;
+void State::deserializeAndApply(const QByteArray& byteArray)
+{
+    QDataStream stream(byteArray);
+    stream.setVersion(QDataStream::Qt_6_0);
 
-    QDataStream in(data);
+    quint8 typRaw;
+    stream >> typRaw;
 
-    quint8 typeRaw;
-    double value;
+    TypPakietu typ = static_cast<TypPakietu>(typRaw);
 
-    // sprawdzenie czy da się czytać
-    if (data.size() < sizeof(quint8) + sizeof(double))
-        return packet;
+    switch (typ)
+    {
+    case TypPakietu::PidConfig:
+    {
+        double k, T_i, T_d;
+        int integType;
+        double amplitude;
+        int samples_per_cycle;
+        double bias;
+        int genType;
+        int interval;
 
-    in >> typeRaw >> value;
+        stream >> k
+            >> T_i
+            >> T_d
+            >> integType
+            >> amplitude
+            >> samples_per_cycle
+            >> bias
+            >> genType
+            >> interval;
 
-    // sprawdzenie statusu streama
-    if (in.status() != QDataStream::Ok)
-        return packet;
+        // 🔧 SETTERY
+        setPIDProportional(k);
+        setPIDIntegration(T_i);
+        setPIDDerrivative(T_d);
+        setPIDIntegrationType(IntegType(integType));
+        setGenerator(TypGeneratora(genType));
+        this->choosen_generator->setSamplesPerCycle(samples_per_cycle);
+        this->choosen_generator->setBias(bias);
+        this->choosen_generator->setAmplitude(amplitude);
+        timer->setIntervalMS(interval);
 
-    packet.type = static_cast<TypPakietu>(typeRaw);
-    packet.value = value;
-    packet.valid = true;
+        break;
+    }
 
-    return packet;
+    case TypPakietu::ArxConfig:
+    {
+        QByteArray wsp_aData;
+        QByteArray wsp_bData;
+
+        double transport_delay;
+        double noise;
+        bool is_limited;
+        double input_max, input_min;
+        double output_max, output_min;
+
+        stream >> wsp_aData
+            >> wsp_bData
+            >> transport_delay
+            >> noise
+            >> is_limited
+            >> input_max
+            >> input_min
+            >> output_max
+            >> output_min;
+
+        // 🔧 DESERIALIZACJA wsp_a
+        std::vector<double> wsp_a;
+        QDataStream wsp_aStream(wsp_aData);
+        wsp_aStream.setVersion(QDataStream::Qt_6_0);
+
+        double val;
+        while (!wsp_aStream.atEnd()) {
+            wsp_aStream >> val;
+            wsp_a.push_back(val);
+        }
+
+        // 🔧 DESERIALIZACJA wsp_b
+        std::vector<double> wsp_b;
+        QDataStream wsp_bStream(wsp_bData);
+        wsp_bStream.setVersion(QDataStream::Qt_6_0);
+
+        while (!wsp_bStream.atEnd()) {
+            wsp_bStream >> val;
+            wsp_b.push_back(val);
+        }
+
+        // 🔧 SETTERY
+        setARXCoefficients(wsp_a, wsp_b);
+        setARXTransportDelay(transport_delay);
+        setARXNoiseStandardDeviation(noise);
+        setARXLimitsEnabled(is_limited);
+        setARXInputLimits(input_min, input_max);
+        setARXOutputLimits(output_min, output_max);
+
+        break;
+    }
+
+    case TypPakietu::USample:
+    {
+        double u;
+        stream >> u;
+        // TODO Logika
+        break;
+    }
+
+    case TypPakietu::YSample:
+    {
+        double y;
+        stream >> y;
+        // TODO Logika
+        break;
+    }
+
+    case TypPakietu::PIDSample:
+    {
+        double val;
+        stream >> val;
+        // TODO Logika
+        break;
+    }
+
+    case TypPakietu::GENSample:
+    {
+        double val;
+        stream >> val;
+        // TODO Logika
+        break;
+    }
+
+    case TypPakietu::ResetGen:
+    {
+        resetGenerator();
+        break;
+    }
+
+    case TypPakietu::ResetPidIntegration:
+    {
+        resetPIDIntegration();
+        break;
+    }
+    case TypPakietu::ResetPidDerrivative:
+    {
+        resetPIDDerrivative();
+        break;
+    }
+    case TypPakietu::SimStart:
+    {
+        timer->setRunning(true);
+    }
+    case TypPakietu::SimStop:
+    {
+        timer->setRunning(true);
+    }
+    case TypPakietu::SimReset:
+    {
+        resetSimmulation();
+    }
+
+    default:
+        qWarning() << "Nieznany typ pakietu:" << typRaw;
+        break;
+    }
 }
-
 
 
 StateGlobalAccess State;

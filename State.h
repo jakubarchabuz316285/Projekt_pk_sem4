@@ -46,13 +46,9 @@ class State : public QObject
 public:
 
     enum class TypGeneratora { Sinusoidalny = 0, Prostokatny = 1, SkokJednostkowy = 2 };
-    enum class TypPakietu : quint8 { USample = 1, YSample = 2, PidConfig = 3, ArxConfig = 4, PIDSample = 5, GENSample = 6, ResetGen = 7, ResetPid = 8};
-    struct Packet
-    {
-        TypPakietu type;
-        double value;
-        bool valid;
-    };
+    enum class TypPakietu : quint8 { USample = 1, YSample = 2, PidConfig = 3, ArxConfig = 4, PIDSample = 5,
+                                     GENSample = 6, ResetGen = 7, ResetPidIntegration = 8, ResetPidDerrivative = 9,
+                                     SimStart = 10, SimStop = 11, SimReset = 12};
     static State &getInstance();
     void setSimmulationRunning(bool simmulation_running);
     bool getSimmulationRunning();
@@ -111,7 +107,7 @@ public:
     QByteArray serializeARXState(const ArxInstancePackage& data);
     QByteArray serializePIDOutput();
 
-    Packet deserialize(const QByteArray& data);
+    void deserializeAndApply(const QByteArray& data);
 
     void receivePacket(const QByteArray& packet);
     void sendPacket();
