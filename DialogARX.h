@@ -29,6 +29,7 @@ private slots:
     void on_buttonBox_accepted();
 
 private:
+    void setReadOnly(bool readOnly);
     void ustaw_wykres();
     void aktualizuj_widok(double odchylenie);
     static constexpr const int MAX_WSPOLCZYNNIKOW = 10;

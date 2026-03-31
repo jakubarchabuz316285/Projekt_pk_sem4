@@ -28,12 +28,12 @@ struct ArxInstancePackage{
     int vec_size;
     std::vector<double> wsp_a;
     std::vector<double> wsp_b;
-    int transport_delay;
+    uint16_t transport_delay;
     double noise;
-    int input_min;
-    int input_max;
-    int output_min;
-    int output_max;
+    double input_min;
+    double input_max;
+    double output_min;
+    double output_max;
     bool is_limited;
 };
 

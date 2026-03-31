@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "BUILD_DEFINE.h"
+#include "networkmanager.h"
 
 #ifdef DEBUG
     #include "DialogDebug.hpp"
@@ -73,12 +74,13 @@ private slots:
     void on_horizontalSlider_generator_bias_sliderReleased();
     void on_horizontalSlider_generator_bias_valueChanged(int value);
     void on_doubleSpinBox_generator_czas_skoku_editingFinished();
-
+    void updateUiMode(NetworkManager::Mode mode, bool isLocal);
     void on_doubleSpinBox_generator_okres_valueChanged(double arg1);
 
     void on_BtnTrybPracy_clicked();
 
 private:
+    bool m_arxParamsEnabled = true;
     static constexpr const double SLIDER_TO_SPINBOX_RATIO = 100.0;
     void updateUiFromState();
     void recalculate_generator_period();

@@ -4,6 +4,7 @@
 #include "ui_workdialog.h"
 #include <QWidget>
 #include "State.h"
+#include "networkmanager.h"
 
 namespace Ui {
 class WorkDialog;
@@ -16,7 +17,7 @@ class WorkDialog : public QWidget
 public:
     explicit WorkDialog(QWidget *parent = nullptr);
     ~WorkDialog();
-
+    void emitCurrentSettings();
 private slots:
     void on_ChkLocalSimulation_checkStateChanged(const Qt::CheckState &arg1);
 
@@ -40,6 +41,7 @@ private slots:
     void on_RdioNet_toggled(bool checked);
 
 private:
+
     static bool LocalSimulation;
     void updateLedStatus(bool connected);
     QString composeIPAddres()
@@ -67,6 +69,9 @@ private:
     }
     Ui::WorkDialog *ui;
     NetworkManager* manager;
+signals:
+    void modeSelected(NetworkManager::Mode mode);
+    void settingsChanged(NetworkManager::Mode mode, bool isLocal);
 };
 
 #endif // WORKDIALOG_H

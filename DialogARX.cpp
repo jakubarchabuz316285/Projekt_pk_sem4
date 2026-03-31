@@ -29,7 +29,11 @@ DialogArx::~DialogArx()
 {
     delete ui;
 }
+void DialogArx::setReadOnly(bool readOnly) {
+    ui->groupBox_2->setEnabled(!readOnly);
+    ui->groupBox_3->setEnabled(!readOnly);
 
+}
 void DialogArx::zaczytaj_dane()
 {
     //Załaduj współczynniki

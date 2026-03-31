@@ -390,20 +390,19 @@ QByteArray State::serializeARXState(const ArxInstancePackage& data){
     stream.setVersion(QDataStream::Qt_6_0);
 
     stream << (quint8)TypPakietu::ArxConfig;
-
     stream << (qint32)data.wsp_a.size();
     for(double v : data.wsp_a) stream << v;
 
     stream << (qint32)data.wsp_b.size();
     for(double v : data.wsp_b) stream << v;
 
-    stream << data.transport_delay
-           << data.noise
-           << data.is_limited
-           << data.input_max
-           << data.input_min
-           << data.output_max
-           << data.output_min;
+    stream << (quint16)data.transport_delay;
+    stream << (double)data.noise;
+    stream << (bool)data.is_limited;
+    stream << (double)data.input_max;
+    stream << (double)data.input_min;
+    stream << (double)data.output_max;
+    stream << (double)data.output_min;
 
     return byteArray;
 }
@@ -466,7 +465,8 @@ void State::deserializeAndApply(const QByteArray& byteArray)
     case TypPakietu::ArxConfig:
     {
         qint32 sizeA, sizeB;
-        double transport_delay, noise;
+        uint16_t transport_delay;
+        double noise;
         bool is_limited;
         double inMax, inMin, outMax, outMin;
 

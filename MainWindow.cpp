@@ -226,9 +226,9 @@ void MainWindow::updateCharts()
         .at(0)
         ->setRange(min_skladowych_sterowania - range_width_skladowych_sterowania, max_skladowych_sterowania + range_width_skladowych_sterowania);
 #ifdef DEBUG
-    qDebug() << "P: " << lista_sterowanie_P->max()
-        << "I: " << lista_sterowanie_I->max()
-        << "D: " << lista_sterowanie_D->max();
+    // qDebug() << "P: " << lista_sterowanie_P->max()
+    //     << "I: " << lista_sterowanie_I->max()
+    //     << "D: " << lista_sterowanie_D->max();
 #endif
 }
 
@@ -379,6 +379,11 @@ void MainWindow::on_horizontalSlider_symulacja_interwal_sliderReleased()
 void MainWindow::on_pushButton_dostosuj_parametry_clicked()
 {
     DialogArx arxDialog(this);
+
+    if (!m_arxParamsEnabled) {
+        arxDialog.setEnabled(false);
+        arxDialog.setWindowTitle("Ustawienia ARX (Tylko do odczytu)");
+    }
     arxDialog.exec();
 }
 
@@ -666,10 +671,30 @@ void MainWindow::on_doubleSpinBox_generator_czas_skoku_editingFinished()
     State().setGeneratorUnitJumpTimeMS(ui->doubleSpinBox_generator_czas_skoku->value() * 1000);
     ui->doubleSpinBox_generator_czas_skoku->setValue(0.0);
 }
-
-void MainWindow::on_BtnTrybPracy_clicked()
+void MainWindow::updateUiMode(NetworkManager::Mode mode, bool isLocal)
 {
-    WorkDialog *dialog = new WorkDialog();
+
+    bool isArxInNetwork = (!isLocal && mode == NetworkManager::Mode::ARX);
+    bool isPidInNetwork = (!isLocal && mode == NetworkManager::Mode::PID);
+
+    m_arxParamsEnabled = !isPidInNetwork;
+
+    ui->groupBox_2->setEnabled(!isArxInNetwork);
+    ui->groupBox_3->setEnabled(!isArxInNetwork);
+    ui->groupBox_4->setEnabled(!isArxInNetwork);
+    ui->actionzapisz_ustawienia->setEnabled(!isArxInNetwork);
+
+    qDebug() << "Update UI - Mode:" << (int)mode << "IsLocal:" << isLocal << "ShouldDisable:" << isArxInNetwork;
+}
+void MainWindow::on_BtnTrybPracy_clicked() {
+    WorkDialog *dialog = new WorkDialog(this);
+    dialog->setWindowFlags(Qt::Window);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+
+    connect(dialog, &WorkDialog::settingsChanged, this, &MainWindow::updateUiMode);
+
+    dialog->emitCurrentSettings();
+
     dialog->show();
 }
 
