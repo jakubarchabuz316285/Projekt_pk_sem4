@@ -202,4 +202,6 @@ void DialogArx::on_buttonBox_accepted()
     State().setARXInputLimits(ui->ograniczenie_wej_min->value(), ui->ograniczenie_wej_max->value());
     State().setARXOutputLimits(ui->ograniczenie_wyj_min->value(), ui->ograniczenie_wyj_max->value());
     State().setARXNoiseStandardDeviation(ui->zaklocenie_wartosc->value());
+
+    State().console_print_state();
 }

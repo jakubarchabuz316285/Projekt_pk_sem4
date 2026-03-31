@@ -111,7 +111,7 @@ public:
 
     void receivePacket(const QByteArray& packet);
     void sendPacket();
-
+    void console_print_state();
     // ONLINE
 
     void setMode(const NetworkManager::Mode& mode){

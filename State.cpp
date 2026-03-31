@@ -36,6 +36,34 @@ State::State()
 
 
 }
+
+void State::console_print_state()
+{
+    qDebug() << "ARX";
+    qDebug() << "Vec a: " << this->getARXCoefficientsA();
+    qDebug() << "Vec b: " <<this->getARXCoefficientsB();
+    qDebug() << "Transport: " <<this->getARXTransportDelay();
+    qDebug() << "Out max: " <<this->getARXOutputLimits().first;
+    qDebug() << "Out min: " <<this->getARXOutputLimits().second;
+    qDebug() << "In max: " <<this->getARXInputLimits().first;
+    qDebug() << "In min: " <<this->getARXInputLimits().second;
+    qDebug() << "Noise: " <<this->getARXNoiseStandardDeviation();
+
+    qDebug() << "PID";
+    qDebug() << "TD: " << this->getPIDConfig().T_d;
+    qDebug() << "Ti: " << this->getPIDConfig().T_i;
+    qDebug() << "k: " << this->getPIDConfig().k;
+    qDebug() << "typ: " << this->getPIDConfig().integType;
+
+    qDebug() << "GEN";
+    qDebug() << "Amp" << this->choosen_generator->getAmplitude();
+    qDebug() << "Bias" << this->choosen_generator->getBias();
+    qDebug() << "Amp" << this->choosen_generator->getSamplesPerCycle();
+    qDebug() << "Amp" << (int)this->getGenerator();
+
+    qDebug() << "Sim";
+    qDebug() << "Amp" << this->timer->getIntervalMS();
+}
 State::~State()
 {
     // delete simmulation_timer;
@@ -154,21 +182,25 @@ void State::setPIDProportional(double k)
 {
     this->uar.getRegulatorPID().setK(k);
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
+    console_print_state();
 }
 void State::setPIDIntegration(double T_i)
 {
     this->uar.getRegulatorPID().setT_i(T_i);
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
+    console_print_state();
 }
 void State::setPIDDerrivative(double T_d)
 {
     this->uar.getRegulatorPID().setT_d(T_d);
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
+    console_print_state();
 }
 void State::setPIDIntegrationType(IntegType integration_type)
 {
     this->uar.getRegulatorPID().setIntegrationType(integration_type);
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
+    console_print_state();
 }
 void State::resetPIDIntegration()
 {
@@ -560,6 +592,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         qWarning() << "Nieznany typ pakietu:" << typRaw;
         break;
     }
+    console_print_state();
 }
 
 void State::receivePacket(const QByteArray& packet){
