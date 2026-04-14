@@ -121,6 +121,7 @@ void WorkDialog::on_rdio_reg_toggled(bool checked)
 }
 void WorkDialog::emitCurrentSettings() {
     NetworkManager::Mode mode = ui->rdio_arx->isChecked() ? NetworkManager::Mode::ARX : NetworkManager::Mode::PID;
+    State::getInstance().setMode(mode);
     bool isLocal = ui->RdioLocal->isChecked();
     emit settingsChanged(mode, isLocal);
 }

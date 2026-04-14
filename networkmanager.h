@@ -44,6 +44,7 @@ public:
         default:
             break;
         }
+        qDebug() << _mode;
     }
 
     void SetCallback(Tcp::Callback cb)
