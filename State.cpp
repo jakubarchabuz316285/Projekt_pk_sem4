@@ -7,6 +7,7 @@
 #include <QIODevice>
 
 
+
 State::State()
     : uar(UAR(ARX({-0.4}, {0.6}), RegulatorPID(0.5, 5.0, 0.2)))
     , gen_sin{}
@@ -460,6 +461,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         timer->setIntervalMS(interval);
 
         break;
+        emit requestUiUpdate();
     }
 
     case TypPakietu::ArxConfig:
@@ -561,6 +563,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
 
 void State::receivePacket(const QByteArray& packet){
     deserializeAndApply(packet);
+
 }
 
 

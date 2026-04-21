@@ -184,6 +184,7 @@ private:
 
 signals:
     void statusChanged(bool connected);
+    void requestUiUpdate();
 
 
 };

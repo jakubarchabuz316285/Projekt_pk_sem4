@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->ui->centralwidget->setLayout(ui->horizontalLayout_13);
     this->setWindowTitle("SymulatorUAR");
-
+    connect(&State::getInstance(), &State::requestUiUpdate, this, &MainWindow::updateUiFromState);
 
     chart_sterowanie = new QChart();
     chart_uchyb = new QChart();
@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     chart_skladowe_sterowania = new QChart();
 
 
-
+    updateUiFromState();
     {
         auto seria = new QLineSeries();
         seria->setName("Sterowanie");
