@@ -461,7 +461,6 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         timer->setIntervalMS(interval);
 
         break;
-        emit requestUiUpdate();
     }
 
     case TypPakietu::ArxConfig:
@@ -558,6 +557,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         qWarning() << "Nieznany typ pakietu:" << typRaw;
         break;
     }
+    emit requestUiUpdate();
     console_print_state();
 }
 
