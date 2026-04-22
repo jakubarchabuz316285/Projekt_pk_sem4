@@ -448,7 +448,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
             >> genType
             >> interval;
 
-        // 🔧 SETTERY
+        // SETTERY
         setPIDProportional(k);
         setPIDIntegration(T_i);
         setPIDDerrivative(T_d);
