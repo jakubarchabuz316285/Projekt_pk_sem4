@@ -98,7 +98,8 @@ public:
     const std::tuple<const ARX*, const RegulatorPID*, const TypGeneratora,  const GeneratorSinusoida*, const GeneratorProstokatny*> getAppState();
     void tick();
 
-    QByteArray serializeSample(double value, TypPakietu typ);
+    QByteArray serializeArxSample(double value);
+    QByteArray serializePidSample(double gen, PIDTickData pid);
 
     //Pid i Gen serializacja
 

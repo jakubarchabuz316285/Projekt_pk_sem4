@@ -346,7 +346,7 @@ void State::tick()
         if(!readyForNextTick) return;
         current_tick_data = uar.TickPid(choosen_generator->tick());
         // TickPid zwraca pakiet TickData ale bez wypełnionego pola wartość regulowana
-        _networkManager.SendMsg(serializeSample(static_cast<double>(current_tick_data.sterowanie), TypPakietu::PIDSample));
+        _networkManager.SendMsg(serializePidSample(current_tick_data.wartosc_zadana, current_tick_data.sterowanie));
         readyForNextTick = false;
     }
 }
@@ -365,11 +365,18 @@ class State& StateGlobalAccess::operator()()
  * Use this method to serialize either pid output or arx output since it can only serialize double
  *
  */
-QByteArray State::serializeSample(double value, TypPakietu typ)
+QByteArray State::serializeArxSample(double value)
 {
     QByteArray data;
     QDataStream out(&data, QIODevice::WriteOnly);
-    out<<(quint8)typ << value;
+    out<<(quint8)TypPakietu::ARXSample << value;
+    return data;
+}
+QByteArray State::serializePidSample(double gen, PIDTickData pid)
+{
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out<<(quint8)TypPakietu::PIDSample << gen << pid.Proportional << pid.Integral << pid.Derrivative;
     return data;
 }
 
@@ -434,12 +441,15 @@ void State::deserializeAndApply(const QByteArray& byteArray)
     {
     case TypPakietu::PIDSample:
     {
-        double val;
-        stream >> val;
         TickData tick_data;
-        double yi = uar.getARX().tick(val);
-        tick_data.wartosc_regulowana = yi;
-        _networkManager.SendMsg(serializeSample(yi, TypPakietu::ARXSample));
+
+        stream >> tick_data.wartosc_zadana
+               >> tick_data.sterowanie.Proportional
+               >> tick_data.sterowanie.Integral
+               >> tick_data.sterowanie.Derrivative;
+
+        tick_data.wartosc_regulowana= uar.getARX().tick(static_cast<double>(tick_data.sterowanie));
+        _networkManager.SendMsg(serializeArxSample(tick_data.wartosc_regulowana));
         tick_callback(tick_data);
         break;
     }
@@ -449,6 +459,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         double val;
         stream >> val;
         current_tick_data.wartosc_regulowana = val;
+        uar.setPreviousYi(current_tick_data.wartosc_regulowana);
         tick_callback(current_tick_data);
         readyForNextTick = true;
         break;
@@ -483,6 +494,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         this->choosen_generator->setBias(bias);
         this->choosen_generator->setAmplitude(amplitude);
         timer->setIntervalMS(interval);
+
         emit requestUiUpdate();
         break;
     }
@@ -512,6 +524,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         setARXLimitsEnabled(is_limited);
         setARXInputLimits(inMin, inMax);
         setARXOutputLimits(outMin, outMax);
+
         emit requestUiUpdate();
         break;
     }
