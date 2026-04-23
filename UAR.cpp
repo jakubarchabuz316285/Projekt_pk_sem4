@@ -37,6 +37,7 @@ TickData UAR::TickPid(double input){
 void UAR::setPreviousYi(double yi){
     previous_y_i = yi;
 }
+
 void UAR::resetAll()
 {
     arx.reset();

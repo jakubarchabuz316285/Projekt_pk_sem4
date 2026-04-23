@@ -347,7 +347,7 @@ void State::tick()
         current_tick_data = uar.TickPid(choosen_generator->tick());
         // TickPid zwraca pakiet TickData ale bez wypełnionego pola wartość regulowana
         _networkManager.SendMsg(serializeSample(static_cast<double>(current_tick_data.sterowanie), TypPakietu::PIDSample));
-        readyForNextTick = false;readyForNextTick = false;
+        readyForNextTick = false;
     }
 }
 
@@ -535,14 +535,17 @@ void State::deserializeAndApply(const QByteArray& byteArray)
     case TypPakietu::SimStart:
     {
         timer->setRunning(true);
+        break;
     }
     case TypPakietu::SimStop:
     {
-        timer->setRunning(true);
+        timer->setRunning(false);
+        break;
     }
     case TypPakietu::SimReset:
     {
         resetSimmulation();
+        break;
     }
 
     default:
