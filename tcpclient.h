@@ -7,62 +7,21 @@
 class TcpClient : public Tcp
 {
 public:
-    TcpClient()
-    {
-        _socket = new QTcpSocket();
+    TcpClient();
 
-        QObject::connect(_socket, &QTcpSocket::readyRead, this, &TcpClient::ReadMsg);
-        QObject::connect(_socket, &QTcpSocket::connected, this, &TcpClient::Connected);
-        QObject::connect(_socket, &QTcpSocket::disconnected, this, &TcpClient::Disconnected);
-    }
+    ~TcpClient();
 
-    ~TcpClient()
-    {
-        Disconnect();
-        delete _socket;
-    }
+    void Connect(const QString& ip, int p);
 
-    void Connect(const QString& ip, int p)
-    {
-        _socket->connectToHost(ip, p);
+    void Disconnect();
 
-        if (!_socket->waitForConnected())
-            throw std::runtime_error("Connection failed");
+    void SendMsg(const QByteArray& msg) override;
 
-        _port = p;
-        _address = ip;
-    }
+    void ReadMsg() override;
 
-    void Disconnect()
-    {
-        _socket->disconnectFromHost();
-        _port = -1;
-    }
+    void Connected() override;
 
-    void SendMsg(const QByteArray& msg) override
-    {
-        if (_socket->state() != QAbstractSocket::ConnectedState)
-            throw std::runtime_error("Not connected");
-
-        _socket->write(msg);
-    }
-
-    void ReadMsg() override
-    {
-        QByteArray msg = _socket->readAll();
-        if (_callback)
-            _callback(msg);
-    }
-
-    void Connected() override {
-        qDebug() << "Polaczono (client)";
-        emit statusChanged(true); // Emitujemy prawdę
-    }
-
-    void Disconnected() override {
-        qDebug() << "Rozlaczono (client)";
-        emit statusChanged(false); // Emitujemy fałsz
-    }
+    void Disconnected() override;
 
 private:
     QTcpSocket* _socket;

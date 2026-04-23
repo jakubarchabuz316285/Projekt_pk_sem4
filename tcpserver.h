@@ -8,87 +8,25 @@
 class TcpServer : public Tcp
 {
 public:
-    TcpServer()
-    {
-        _server = new QTcpServer();
-        _socket = nullptr;
+    TcpServer();
 
-        QObject::connect(_server, &QTcpServer::newConnection, this, &TcpServer::Connected);
-    }
+    ~TcpServer();
 
-    ~TcpServer()
-    {
-        StopListening();
-        delete _server;
-    }
+    void StartListening(int p);
 
-    void StartListening(int p)
-    {
-        qDebug() << "nasluchiwanie server";
-        _server->listen(QHostAddress::Any, p);
-        qDebug() << "nasluchiwanie server po";
-        // if (!_server->listen(QHostAddress::Any, p)){
-        //     throw std::runtime_error("Cannot start server");
-        // }
+    void StopListening();
 
-        _port = p;
-    }
+    void DisconnectClient();
 
-    void StopListening()
-    {
-        if (_socket)
-        {
-            _socket->disconnectFromHost();
-            _socket = nullptr;
-        }
+    void SendMsg(const QByteArray& msg) override;
 
-        _server->close();
-        _port = -1;
-    }
+    void ReadMsg() override;
 
-    void DisconnectClient()
-    {
-        if (!_socket) return;
-        _socket->disconnectFromHost();
-    }
+    bool IsListening();
 
-    void SendMsg(const QByteArray& msg) override
-    {
-        if (!_socket)
-            throw std::runtime_error("No client connected");
+    void Connected() override;
 
-        _socket->write(msg);
-    }
-
-    void ReadMsg() override
-    {
-        const QByteArray& msg = _socket->readAll();
-        if (_callback)
-            _callback(msg);
-    }
-
-    bool IsListening(){
-        return _server->isListening();
-    }
-
-    void Connected() override {
-        _socket = _server->nextPendingConnection();
-
-        connect(_socket, &QTcpSocket::readyRead, this, &TcpServer::ReadMsg);
-        connect(_socket, &QTcpSocket::disconnected, this, &TcpServer::Disconnected);
-
-        qDebug() << "Klient polaczony z serwerem";
-        emit statusChanged(true);
-    }
-
-    void Disconnected() override {
-        qDebug() << "Klient rozlaczony od serwera";
-        if (_socket) {
-            _socket->deleteLater();
-            _socket = nullptr;
-        }
-        emit statusChanged(false);
-    }
+    void Disconnected() override;
 private:
     QTcpServer* _server;
     QTcpSocket* _socket;

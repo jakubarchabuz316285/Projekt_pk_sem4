@@ -6,7 +6,12 @@
 #include "tcpserver.h"
 #include <stdexcept>
 #include <memory>
-
+/**
+    * @brief class networkmanager
+    * class containing and encapsulating logic of server and client class.
+    * methods lets you set app mode and use methods to connect and sent packets through internet via tcp
+    * class is secured with throws. Please use catch runtime error.
+    */
 class NetworkManager: public QObject
 {
     Q_OBJECT
@@ -14,142 +19,85 @@ public:
     enum Mode { Local, PID, ARX };
 
     NetworkManager() = default;
-    NetworkManager(std::function<void(QByteArray)> fun){
-        SetCallback(fun);
-    }
-    ~NetworkManager() = default;
+    NetworkManager(std::function<void(QByteArray)> fun);
+    ~NetworkManager();
 
-    void SetMode(const Mode& newMode)
-    {
-        // cleanup starego trybu
-        Cleanup();
-
-        _mode = newMode;
-
-        switch (_mode)
-        {
-        case PID:
-            _server = std::make_unique<TcpServer>();
-            _server->SetCallback(_callback);
-            connect(_server.get(), &Tcp::statusChanged, this, &NetworkManager::statusChanged);
-            break;
-
-        case ARX:
-            _client = std::make_unique<TcpClient>();
-            _client->SetCallback(_callback);
-            connect(_client.get(), &Tcp::statusChanged, this, &NetworkManager::statusChanged);
-            break;
-
-        case Local:
-        default:
-            break;
-        }
-        qDebug() << _mode;
-    }
-
-    void SetCallback(Tcp::Callback cb)
-    {
-        _callback = cb;
-
-        if (_server) _server->SetCallback(cb);
-        else if (_client) _client->SetCallback(cb);
-    }
+    /**
+    * @brief method setMode
+    * Sets app mode
+    *
+    */
+    void SetMode(const Mode& newMode);
+    /**
+    * @brief method setCallback
+    * Used once in a constructor, i think it should be private but im too sleepy to check
+    *
+    */
+    void SetCallback(Tcp::Callback cb);
 
     // SEND
-    void SendMsg(const QByteArray& msg)
-    {
-        if (_mode == Local)
-            throw std::runtime_error("Local mode - no network");
-
-        if (_server)
-            _server->SendMsg(msg);
-        else if (_client)
-            _client->SendMsg(msg);
-        else
-            throw std::runtime_error("No active connection");
-    }
+    /**
+    * @brief method sendMsg
+    * Sends QByteArray through internet. Must be ARX or PID mode
+    *
+    */
+    void SendMsg(const QByteArray& msg);
 
     // SERVER
-    void StartListening(int port)
-    {
-        if (_mode != PID){
-            qDebug() << "Not pid mode";
-            throw std::runtime_error("Not in server mode");
-        }
-
-        if (!_server){
-            qDebug() << "server not initialized";
-            throw std::runtime_error("Server not initialized");
-        }
-        qDebug() << "Network manager nasluchiwanie";
-        _server->StartListening(port);
-        qDebug() << "Network manager nasluchiwanie po";
-    }
-
-    void StopListening()
-    {
-        if (_mode != PID)
-            throw std::runtime_error("Not in server mode");
-
-        if (_server)
-            _server->StopListening();
-    }
-
-    void DisconnectClient()
-    {
-        if (_mode != PID)
-            throw std::runtime_error("Not in server mode");
-
-        if (!_server)
-            throw std::runtime_error("Server not initialized");
-
-        // rozłącza aktualnego klienta (serwer dalej nasłuchuje)
-        _server->DisconnectClient();
-    }
+    /**
+    * @brief method startListening
+    * Starts listening. Must be server
+    *
+    */
+    void StartListening(int port);
+    /**
+    * @brief method stopListening
+    * Stops listening. Must be server
+    *
+    */
+    void StopListening();
+    /**
+    * @brief method disconnectClient
+    * Disconnects current client. Client can be null. Must be server
+    *
+    */
+    void DisconnectClient();
 
     // CLIENT
-    void Connect(const QString& ip, int port)
-    {
-        if (_mode != ARX)
-            throw std::runtime_error("Not in client mode");
+    /**
+    * @brief method Connect
+    * Connects to server. Must be client
+    * @param ip @param port
+    *
+    */
+    void Connect(const QString& ip, int port);
 
-        if (!_client)
-            throw std::runtime_error("Client not initialized");
-
-        _client->Connect(ip, port);
-    }
-
-    void Disconnect()
-    {
-        if (_mode != ARX)
-            throw std::runtime_error("Not in client mode");
-
-        if (_client)
-            _client->Disconnect();
-    }
-
-    Mode GetMode() const { return _mode; }
-
-    void Cleanup()
-    {
-        if (_server)
-        {
-            _server->StopListening();
-            _server.reset();
-        }
-
-        if (_client)
-        {
-            _client->Disconnect();
-            _client.reset();
-        }
-    }
-
-    bool IsListening()
-    {
-        if(_server == nullptr) return false;
-        return _server->IsListening();
-    }
+    /**
+    * @brief method Disconnect
+    * Disconnects from server. Must be client
+    *
+    *
+    */
+    void Disconnect();
+    /**
+    * @brief method GetMode
+    * Returns current mode
+    *
+    */
+    Mode GetMode() const;
+    /**
+    * @brief method Cleanup
+    * Resets everything. Stops listening and disconnects client
+    *
+    */
+    void Cleanup();
+    /**
+    * @brief method isListening
+    * returns true if server is listeing
+    * @return isListening
+    *
+    */
+    bool IsListening();
 signals:
     void statusChanged(bool connected);
 private:

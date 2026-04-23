@@ -367,28 +367,32 @@ class State& StateGlobalAccess::operator()()
  */
 QByteArray State::serializeArxSample(double value)
 {
-    QByteArray data;
-    QDataStream out(&data, QIODevice::WriteOnly);
-    out<<(quint8)TypPakietu::ARXSample << value;
-    return data;
+    QByteArray payload;
+    QDataStream out(&payload, QIODevice::WriteOnly);
+    out << value;
+
+    return wrapPacket(TypPakietu::ARXSample, payload);
 }
+
 QByteArray State::serializePidSample(double gen, PIDTickData pid)
 {
-    QByteArray data;
-    QDataStream out(&data, QIODevice::WriteOnly);
-    out<<(quint8)TypPakietu::PIDSample << gen << pid.Proportional << pid.Integral << pid.Derrivative;
-    return data;
+    QByteArray payload;
+    QDataStream out(&payload, QIODevice::WriteOnly);
+    out << gen
+        << pid.Proportional
+        << pid.Integral
+        << pid.Derrivative;
+
+    return wrapPacket(TypPakietu::PIDSample, payload);
 }
 
 QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
 {
-    QByteArray byteArray;
-    QDataStream stream(&byteArray, QIODevice::WriteOnly);
+    QByteArray payload;
+    QDataStream stream(&payload, QIODevice::WriteOnly);
+    stream.setVersion(QDataStream::Qt_6_0);
 
-    stream.setVersion(QDataStream::Qt_6_0); // opcjonalnie (dopasuj do wersji Qt)
-    qDebug() << "samples z serializacji:" << data.samples_per_cycle;
-    stream << (quint8)TypPakietu::PidConfig
-           << data.k
+    stream << data.k
            << data.T_i
            << data.T_d
            << data.integType
@@ -398,181 +402,265 @@ QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
            << data.genType
            << data.interval;
 
-    return byteArray;
+    return wrapPacket(TypPakietu::PidConfig, payload);
 }
 
-QByteArray State::serializeARXState(const ArxInstancePackage& data){
-    QByteArray byteArray;
-    QDataStream stream(&byteArray, QIODevice::WriteOnly);
+QByteArray State::serializeARXState(const ArxInstancePackage& data)
+{
+    QByteArray payload;
+    QDataStream stream(&payload, QIODevice::WriteOnly);
     stream.setVersion(QDataStream::Qt_6_0);
 
-    stream << (quint8)TypPakietu::ArxConfig;
     stream << (qint32)data.wsp_a.size();
     for(double v : data.wsp_a) stream << v;
 
     stream << (qint32)data.wsp_b.size();
     for(double v : data.wsp_b) stream << v;
 
-    stream << (quint16)data.transport_delay;
-    stream << (double)data.noise;
-    stream << (bool)data.is_limited;
-    stream << (double)data.input_max;
-    stream << (double)data.input_min;
-    stream << (double)data.output_max;
-    stream << (double)data.output_min;
+    stream << (quint16)data.transport_delay
+           << (double)data.noise
+           << (bool)data.is_limited
+           << (double)data.input_max
+           << (double)data.input_min
+           << (double)data.output_max
+           << (double)data.output_min;
 
-    return byteArray;
+    return wrapPacket(TypPakietu::ArxConfig, payload);
 }
-/**
- * @brief Method deserializeAndApply
- * Method deserialized every packet type in enum TypPakietu. Distinguishes the packet type and uses correct logic with switch case.
- */
-void State::deserializeAndApply(const QByteArray& byteArray)
+
+QByteArray State::wrapPacket(TypPakietu typ, const QByteArray& payload)
+{
+    QByteArray data;
+    QDataStream out(&data, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_0);
+
+    out << (quint8)typ;
+    out << (quint32)payload.size();  // rozmiar payloadu
+    data.append(payload);
+
+    return data;
+}
+
+
+void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArray)
 {
     QDataStream stream(byteArray);
     stream.setVersion(QDataStream::Qt_6_0);
 
-    quint8 typRaw;
-    stream >> typRaw;
-
-    TypPakietu typ = static_cast<TypPakietu>(typRaw);
-
     switch (typ)
     {
-    case TypPakietu::PIDSample:
-    {
-        TickData tick_data;
+        case TypPakietu::PIDSample:
+        {
+            TickData tick_data;
 
-        stream >> tick_data.wartosc_zadana
-               >> tick_data.sterowanie.Proportional
-               >> tick_data.sterowanie.Integral
-               >> tick_data.sterowanie.Derrivative;
+            stream >> tick_data.wartosc_zadana
+                   >> tick_data.sterowanie.Proportional
+                   >> tick_data.sterowanie.Integral
+                   >> tick_data.sterowanie.Derrivative;
 
-        tick_data.wartosc_regulowana= uar.getARX().tick(static_cast<double>(tick_data.sterowanie));
-        _networkManager.SendMsg(serializeArxSample(tick_data.wartosc_regulowana));
-        tick_callback(tick_data);
-        break;
-    }
+            tick_data.wartosc_regulowana = uar.getARX().tick(static_cast<double>(tick_data.sterowanie));
 
-    case TypPakietu::ARXSample:
-    {
-        double val;
-        stream >> val;
-        current_tick_data.wartosc_regulowana = val;
-        uar.setPreviousYi(current_tick_data.wartosc_regulowana);
-        tick_callback(current_tick_data);
-        readyForNextTick = true;
-        break;
-    }
-    case TypPakietu::PidConfig:
-    {
-        double k, T_i, T_d;
-        int integType;
-        double amplitude;
-        uint16_t samples_per_cycle;
-        double bias;
-        int genType;
-        int interval;
+            _networkManager.SendMsg(serializeArxSample(tick_data.wartosc_regulowana));
+            tick_callback(tick_data);
+            break;
+        }
 
-        stream >> k
-            >> T_i
-            >> T_d
-            >> integType
-            >> amplitude
-            >> samples_per_cycle
-            >> bias
-            >> genType
-            >> interval;
+        case TypPakietu::ARXSample:
+        {
+            double val;
+            stream >> val;
 
-        setPIDProportional(k);
-        setPIDIntegration(T_i);
-        setPIDDerrivative(T_d);
-        setPIDIntegrationType(IntegType(integType));
-        setGenerator(TypGeneratora(genType));
-        qDebug() << "samples per cycle: " << samples_per_cycle;
-        this->choosen_generator->setSamplesPerCycle(samples_per_cycle);
-        this->choosen_generator->setBias(bias);
-        this->choosen_generator->setAmplitude(amplitude);
-        timer->setIntervalMS(interval);
+            current_tick_data.wartosc_regulowana = val;
+            uar.setPreviousYi(val);
 
-        emit requestUiUpdate();
-        break;
-    }
+            tick_callback(current_tick_data);
+            readyForNextTick = true;
+            break;
+        }
 
-    case TypPakietu::ArxConfig:
-    {
-        qint32 sizeA, sizeB;
-        uint16_t transport_delay;
-        double noise;
-        bool is_limited;
-        double inMax, inMin, outMax, outMin;
+        case TypPakietu::PidConfig:
+        {
+            double k, T_i, T_d;
+            int integType;
+            double amplitude;
+            uint16_t samples_per_cycle;
+            double bias;
+            int genType;
+            int interval;
 
-        stream >> sizeA;
-        std::vector<double> wsp_a(sizeA);
-        for(int i = 0; i < sizeA; ++i) stream >> wsp_a[i];
+            stream >> k
+                   >> T_i
+                   >> T_d
+                   >> integType
+                   >> amplitude
+                   >> samples_per_cycle
+                   >> bias
+                   >> genType
+                   >> interval;
 
-        stream >> sizeB;
-        std::vector<double> wsp_b(sizeB);
-        for(int i = 0; i < sizeB; ++i) stream >> wsp_b[i];
+            setPIDProportional(k);
+            setPIDIntegration(T_i);
+            setPIDDerrivative(T_d);
+            setPIDIntegrationType(IntegType(integType));
+            setGenerator(TypGeneratora(genType));
+            qDebug() << "samples per cycle: " << samples_per_cycle;
+            this->choosen_generator->setSamplesPerCycle(samples_per_cycle);
+            this->choosen_generator->setBias(bias);
+            this->choosen_generator->setAmplitude(amplitude);
+            timer->setIntervalMS(interval);
 
-        stream >> transport_delay >> noise >> is_limited
-            >> inMax >> inMin >> outMax >> outMin;
+            emit requestUiUpdate();
+            break;
+        }
 
-        setARXCoefficients(wsp_a, wsp_b);
-        setARXTransportDelay(transport_delay);
-        setARXNoiseStandardDeviation(noise);
-        setARXLimitsEnabled(is_limited);
-        setARXInputLimits(inMin, inMax);
-        setARXOutputLimits(outMin, outMax);
+        case TypPakietu::ArxConfig:
+        {
+            qint32 sizeA, sizeB;
+            uint16_t transport_delay;
+            double noise;
+            bool is_limited;
+            double inMax, inMin, outMax, outMin;
 
-        emit requestUiUpdate();
-        break;
-    }
+            stream >> sizeA;
+            std::vector<double> wsp_a(sizeA);
+            for(int i = 0; i < sizeA; ++i) stream >> wsp_a[i];
 
-    case TypPakietu::ResetGen:
-    {
-        resetGenerator();
-        break;
-    }
+            stream >> sizeB;
+            std::vector<double> wsp_b(sizeB);
+            for(int i = 0; i < sizeB; ++i) stream >> wsp_b[i];
 
-    case TypPakietu::ResetPidIntegration:
-    {
-        resetPIDIntegration();
-        break;
-    }
-    case TypPakietu::ResetPidDerrivative:
-    {
-        resetPIDDerrivative();
-        break;
-    }
-    case TypPakietu::SimStart:
-    {
-        timer->setRunning(true);
-        break;
-    }
-    case TypPakietu::SimStop:
-    {
-        timer->setRunning(false);
-        break;
-    }
-    case TypPakietu::SimReset:
-    {
-        resetSimmulation();
-        break;
-    }
+            stream >> transport_delay >> noise >> is_limited
+                >> inMax >> inMin >> outMax >> outMin;
 
-    default:
-        qWarning() << "Nieznany typ pakietu:" << typRaw;
-        break;
+            setARXCoefficients(wsp_a, wsp_b);
+            setARXTransportDelay(transport_delay);
+            setARXNoiseStandardDeviation(noise);
+            setARXLimitsEnabled(is_limited);
+            setARXInputLimits(inMin, inMax);
+            setARXOutputLimits(outMin, outMax);
+
+            emit requestUiUpdate();
+            break;
+        }
+
+        case TypPakietu::ResetGen:
+        {
+            resetGenerator();
+            break;
+        }
+
+        case TypPakietu::ResetPidIntegration:
+        {
+            resetPIDIntegration();
+            break;
+        }
+
+        case TypPakietu::ResetPidDerrivative:
+        {
+            resetPIDDerrivative();
+            break;
+        }
+
+        case TypPakietu::SimStart:
+        {
+            timer->setRunning(true);
+            break;
+        }
+
+        case TypPakietu::SimStop:
+        {
+            timer->setRunning(false);
+            break;
+        }
+
+        case TypPakietu::SimReset:
+        {
+            resetSimmulation();
+            break;
+        }
+
+        default:
+            qWarning() << "Nieznany typ pakietu:" << (int)typ;
+            break;
     }
     //console_print_state();
 }
 
-void State::receivePacket(const QByteArray& packet){
-    deserializeAndApply(packet);
+void State::receivePacket(const QByteArray& packet)
+{
+    incomingBuffer.append(packet);
 
+    constexpr int HEADER_SIZE = sizeof(quint8) + sizeof(quint32);
+    const quint32 MAX_PACKET_SIZE = 10 * 1024 * 1024;
+
+    while (true)
+    {
+        if (incomingBuffer.size() < HEADER_SIZE)
+            return;
+
+        QDataStream stream(&incomingBuffer, QIODevice::ReadOnly);
+        stream.setVersion(QDataStream::Qt_6_0);
+
+        quint8 typRaw;
+        quint32 size;
+
+        stream >> typRaw >> size;
+
+        if (size > MAX_PACKET_SIZE)
+        {
+            qWarning() << "Za duzy pakiet, drop";
+            incomingBuffer.clear();
+            return;
+        }
+
+        int totalSize = HEADER_SIZE + size;
+
+        if (incomingBuffer.size() < totalSize)
+            return;
+
+        QByteArray payload = incomingBuffer.mid(HEADER_SIZE, size);
+
+        incomingBuffer.remove(0, totalSize);
+
+        deserializeAndApplyPayload(static_cast<TypPakietu>(typRaw), payload);
+    }
 }
 
+bool State::isReadyForNextTick() const
+{
+    return readyForNextTick;
+}
+
+void State::setMode(const NetworkManager::Mode& mode)
+{
+    _networkManager.SetMode(mode);
+}
+NetworkManager::Mode State::getMode() const
+{
+    return _networkManager.GetMode();
+}
+
+void State::connect(const QString& ip, int port){
+    _networkManager.Connect(ip, port);
+}
+
+void State::disconnect(){
+    _networkManager.Disconnect();
+}
+
+void State::startListening(int port){
+    qDebug() << "Starting to listen : (state)";
+    _networkManager.StartListening(port);
+    qDebug() << "Starting to listen : (state po funkcji)";
+}
+
+void State::stopListening(){
+    _networkManager.StopListening();
+}
+
+bool State::isListening(){
+    return _networkManager.IsListening();
+}
 
 StateGlobalAccess State;
 

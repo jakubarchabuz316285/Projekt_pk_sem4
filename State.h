@@ -105,49 +105,35 @@ public:
 
     QByteArray serializePIDState(const RegulatorInstancePackage& data);
     QByteArray serializeARXState(const ArxInstancePackage& data);
-
-    void deserializeAndApply(const QByteArray& data);
-
+    /**
+    * @brief Method wrapPacket
+    * Method adds informations such as type and size of packet to the payload
+    * @param TypPakietu @param payload
+    * @return QByteArray (wrapped packet ready to send)
+    */
+    QByteArray wrapPacket(TypPakietu typ, const QByteArray& payload);
+    /**
+    * @brief Method deserializeAndApply
+    * Method deserialized every packet type in enum TypPakietu. Distinguishes the packet type and uses correct logic with switch case.
+    */
+    void deserializeAndApplyPayload(TypPakietu typ, const QByteArray& data);
+    /**
+    * @brief Method receivePacket
+    * Method receives network packet and manages it. Algorithm can handle multiple packets.
+    */
     void receivePacket(const QByteArray& packet);
     void sendPacket();
     void console_print_state();
     // ONLINE
 
-    bool isReadyForNextTick() const
-    {
-        return readyForNextTick;
-    }
-
-    void setMode(const NetworkManager::Mode& mode)
-    {
-        _networkManager.SetMode(mode);
-    }
-    NetworkManager::Mode getMode() const
-    {
-        return _networkManager.GetMode();
-    }
-
-    void connect(const QString& ip, int port){
-        _networkManager.Connect(ip, port);
-    }
-
-    void disconnect(){
-        _networkManager.Disconnect();
-    }
-
-    void startListening(int port){
-        qDebug() << "Starting to listen : (state)";
-        _networkManager.StartListening(port);
-        qDebug() << "Starting to listen : (state po funkcji)";
-    }
-
-    void stopListening(){
-        _networkManager.StopListening();
-    }
-
-    bool isListening(){
-        return _networkManager.IsListening();
-    }
+    bool isReadyForNextTick() const;
+    void setMode(const NetworkManager::Mode& mode);
+    NetworkManager::Mode getMode() const;
+    void connect(const QString& ip, int port);
+    void disconnect();
+    void startListening(int port);
+    void stopListening();
+    bool isListening();
 
 private:
     UAR uar;
@@ -161,6 +147,7 @@ private:
     TimerStateInterface* timer;
     TickData current_tick_data;
     bool readyForNextTick;
+    QByteArray incomingBuffer;
 
     // Online
 
