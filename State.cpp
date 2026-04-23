@@ -108,6 +108,7 @@ void State::setOutputCallback(const std::function<void(TickData)> callback)
 void State::resetSimmulation()
 {
     resetGenerator();
+    readyForNextTick = true;
     this->uar.resetAll();
 }
 
@@ -332,10 +333,22 @@ void State::readFromFile(std::string path)
     this->save->readFromFile(path, &uar, &simmulation_running, &typ_generatora, &gen_pros, &gen_sin);
     setGenerator(typ_generatora);
 }
-
+/**
+ * @brief Method tick
+ * tick for network simulation fills in struct TickData skipping wartosc_regulowana part which is
+ * filled later on in deserializeAndApply method
+ *
+ */
 void State::tick()
 {
-    this->tick_callback(uar.tickMoreInfo(choosen_generator->tick()));
+    if (getMode() == NetworkManager::Mode::Local) this->tick_callback(uar.tickMoreInfo(choosen_generator->tick()));
+    else {
+        if(!readyForNextTick) return;
+        current_tick_data = uar.TickPid(choosen_generator->tick());
+        // TickPid zwraca pakiet TickData ale bez wypełnionego pola wartość regulowana
+        _networkManager.SendMsg(serializeSample(static_cast<double>(current_tick_data.sterowanie), TypPakietu::PIDSample));
+        readyForNextTick = false;readyForNextTick = false;
+    }
 }
 
 const std::tuple<const ARX*, const RegulatorPID*, const State::TypGeneratora, const GeneratorSinusoida*, const GeneratorProstokatny*> State::getAppState()
@@ -347,20 +360,16 @@ class State& StateGlobalAccess::operator()()
 {
     return State::getInstance();
 }
-
-QByteArray State::serializeU(double u)
+/**
+ * @brief Method serializeSample
+ * Use this method to serialize either pid output or arx output since it can only serialize double
+ *
+ */
+QByteArray State::serializeSample(double value, TypPakietu typ)
 {
     QByteArray data;
     QDataStream out(&data, QIODevice::WriteOnly);
-    out<<(quint8)TypPakietu::USample << u;
-    return data;
-}
-
-QByteArray State::serializeY(double y)
-{
-    QByteArray data;
-    QDataStream out(&data, QIODevice::WriteOnly);
-    out<<(quint8)TypPakietu::YSample << y;
+    out<<(quint8)typ << value;
     return data;
 }
 
@@ -407,15 +416,10 @@ QByteArray State::serializeARXState(const ArxInstancePackage& data){
 
     return byteArray;
 }
-
-QByteArray State::serializePIDOutput(){
-    double output = this->uar.getRegulatorPID().getLastOutput();
-    QByteArray data;
-    QDataStream out(&data, QIODevice::WriteOnly);
-    out<<(quint8)TypPakietu::PIDSample << output;
-    return data;
-}
-
+/**
+ * @brief Method deserializeAndApply
+ * Method deserialized every packet type in enum TypPakietu. Distinguishes the packet type and uses correct logic with switch case.
+ */
 void State::deserializeAndApply(const QByteArray& byteArray)
 {
     QDataStream stream(byteArray);
@@ -428,6 +432,27 @@ void State::deserializeAndApply(const QByteArray& byteArray)
 
     switch (typ)
     {
+    case TypPakietu::PIDSample:
+    {
+        double val;
+        stream >> val;
+        TickData tick_data;
+        double yi = uar.getARX().tick(val);
+        tick_data.wartosc_regulowana = yi;
+        _networkManager.SendMsg(serializeSample(yi, TypPakietu::ARXSample));
+        tick_callback(tick_data);
+        break;
+    }
+
+    case TypPakietu::ARXSample:
+    {
+        double val;
+        stream >> val;
+        current_tick_data.wartosc_regulowana = val;
+        tick_callback(current_tick_data);
+        readyForNextTick = true;
+        break;
+    }
     case TypPakietu::PidConfig:
     {
         double k, T_i, T_d;
@@ -448,7 +473,6 @@ void State::deserializeAndApply(const QByteArray& byteArray)
             >> genType
             >> interval;
 
-        // SETTERY
         setPIDProportional(k);
         setPIDIntegration(T_i);
         setPIDDerrivative(T_d);
@@ -459,7 +483,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         this->choosen_generator->setBias(bias);
         this->choosen_generator->setAmplitude(amplitude);
         timer->setIntervalMS(interval);
-
+        emit requestUiUpdate();
         break;
     }
 
@@ -488,39 +512,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         setARXLimitsEnabled(is_limited);
         setARXInputLimits(inMin, inMax);
         setARXOutputLimits(outMin, outMax);
-
-        break;
-    }
-
-    case TypPakietu::USample:
-    {
-        double u;
-        stream >> u;
-        // TODO Logika
-        break;
-    }
-
-    case TypPakietu::YSample:
-    {
-        double y;
-        stream >> y;
-        // TODO Logika
-        break;
-    }
-
-    case TypPakietu::PIDSample:
-    {
-        double val;
-        stream >> val;
-        // TODO Logika
-        break;
-    }
-
-    case TypPakietu::GENSample:
-    {
-        double val;
-        stream >> val;
-        // TODO Logika
+        emit requestUiUpdate();
         break;
     }
 
@@ -557,8 +549,7 @@ void State::deserializeAndApply(const QByteArray& byteArray)
         qWarning() << "Nieznany typ pakietu:" << typRaw;
         break;
     }
-    emit requestUiUpdate();
-    console_print_state();
+    //console_print_state();
 }
 
 void State::receivePacket(const QByteArray& packet){

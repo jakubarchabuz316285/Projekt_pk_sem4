@@ -26,6 +26,17 @@ TickData UAR::tickMoreInfo(double input)
     previous_y_i = tick_data.wartosc_regulowana;
     return tick_data;
 }
+TickData UAR::TickPid(double input){
+    TickData tick_data;
+
+    tick_data.wartosc_zadana = input;
+    tick_data.uchyb = tick_data.wartosc_zadana - previous_y_i;
+    tick_data.sterowanie = this->pid.tickMoreData(tick_data.uchyb);
+    return tick_data;
+}
+void UAR::setPreviousYi(double yi){
+    previous_y_i = yi;
+}
 void UAR::resetAll()
 {
     arx.reset();

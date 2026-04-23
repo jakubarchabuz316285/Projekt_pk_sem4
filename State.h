@@ -47,9 +47,9 @@ class State : public QObject
 public:
 
     enum class TypGeneratora { Sinusoidalny = 0, Prostokatny = 1, SkokJednostkowy = 2 };
-    enum class TypPakietu : quint8 { USample = 1, YSample = 2, PidConfig = 3, ArxConfig = 4, PIDSample = 5,
-                                     GENSample = 6, ResetGen = 7, ResetPidIntegration = 8, ResetPidDerrivative = 9,
-                                     SimStart = 10, SimStop = 11, SimReset = 12};
+    enum class TypPakietu : quint8 { PidConfig = 1, ArxConfig = 2, PIDSample = 3,
+                                     ARXSample = 4, ResetGen = 5, ResetPidIntegration = 6, ResetPidDerrivative = 7,
+                                     SimStart = 8, SimStop = 9, SimReset = 10};
     static State &getInstance();
     void setSimmulationRunning(bool simmulation_running);
     bool getSimmulationRunning();
@@ -98,15 +98,12 @@ public:
     const std::tuple<const ARX*, const RegulatorPID*, const TypGeneratora,  const GeneratorSinusoida*, const GeneratorProstokatny*> getAppState();
     void tick();
 
-    QByteArray serializeU(double u);
-    QByteArray serializeY(double y);
-    QByteArray serializeState(State& state);
+    QByteArray serializeSample(double value, TypPakietu typ);
 
     //Pid i Gen serializacja
 
     QByteArray serializePIDState(const RegulatorInstancePackage& data);
     QByteArray serializeARXState(const ArxInstancePackage& data);
-    QByteArray serializePIDOutput();
 
     void deserializeAndApply(const QByteArray& data);
 
@@ -115,29 +112,18 @@ public:
     void console_print_state();
     // ONLINE
 
-    void setMode(const NetworkManager::Mode& mode){
-        QString modeString;
-        if(_networkManager.GetMode() == NetworkManager::Mode::ARX){
-            modeString = "ARX";
-        }
-        if(_networkManager.GetMode() == NetworkManager::Mode::PID){
-            modeString = "PID";
-        }
-        if(_networkManager.GetMode() == NetworkManager::Mode::Local){
-            modeString = "Local";
-        }
-        qDebug() << "old mode: " << modeString;
+    bool isReadyForNextTick() const
+    {
+        return readyForNextTick;
+    }
+
+    void setMode(const NetworkManager::Mode& mode)
+    {
         _networkManager.SetMode(mode);
-        if(_networkManager.GetMode() == NetworkManager::Mode::ARX){
-            modeString = "ARX";
-        }
-        if(_networkManager.GetMode() == NetworkManager::Mode::PID){
-            modeString = "PID";
-        }
-        if(_networkManager.GetMode() == NetworkManager::Mode::Local){
-            modeString = "Local";
-        }
-        qDebug() << "Mode: " << modeString;
+    }
+    NetworkManager::Mode getMode() const
+    {
+        return _networkManager.GetMode();
     }
 
     void connect(const QString& ip, int port){
@@ -172,6 +158,8 @@ private:
     std::function<void(TickData)> tick_callback;
     SaveStateInterface* save;
     TimerStateInterface* timer;
+    TickData current_tick_data;
+    bool readyForNextTick;
 
     // Online
 

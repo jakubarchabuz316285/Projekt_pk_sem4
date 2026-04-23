@@ -27,6 +27,8 @@ public:
     UAR(ARX &arx, RegulatorPID &pid);
     double tick(double input);
     TickData tickMoreInfo(double input);
+    TickData TickPid(double input);
+    void setPreviousYi(double yi);
     void resetAll();
     ARX &getARX();
     RegulatorPID &getRegulatorPID();
