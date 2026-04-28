@@ -29,6 +29,7 @@ public:
     TickData tickMoreInfo(double input);
     TickData TickPid(double input);
     void setPreviousYi(double yi);
+    double getPreviousYi() const;
     void resetAll();
     ARX &getARX();
     RegulatorPID &getRegulatorPID();

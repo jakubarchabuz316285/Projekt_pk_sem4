@@ -346,7 +346,7 @@ void State::tick()
         if(!readyForNextTick) return;
         current_tick_data = uar.TickPid(choosen_generator->tick());
         // TickPid zwraca pakiet TickData ale bez wypełnionego pola wartość regulowana
-        _networkManager.SendMsg(serializePidSample(current_tick_data.wartosc_zadana, current_tick_data.sterowanie));
+        _networkManager.SendMsg(serializePidSample(current_tick_data.wartosc_zadana, current_tick_data.sterowanie, current_tick_data.uchyb));
         readyForNextTick = false;
     }
 }
@@ -374,14 +374,15 @@ QByteArray State::serializeArxSample(double value)
     return wrapPacket(TypPakietu::ARXSample, payload);
 }
 
-QByteArray State::serializePidSample(double gen, PIDTickData pid)
+QByteArray State::serializePidSample(double gen, PIDTickData pid, double uchyb)
 {
     QByteArray payload;
     QDataStream out(&payload, QIODevice::WriteOnly);
     out << gen
         << pid.Proportional
         << pid.Integral
-        << pid.Derrivative;
+        << pid.Derrivative
+        << uchyb;
 
     return wrapPacket(TypPakietu::PIDSample, payload);
 }
@@ -456,9 +457,17 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
             stream >> tick_data.wartosc_zadana
                    >> tick_data.sterowanie.Proportional
                    >> tick_data.sterowanie.Integral
-                   >> tick_data.sterowanie.Derrivative;
+                   >> tick_data.sterowanie.Derrivative
+                   >> tick_data.uchyb;
 
             tick_data.wartosc_regulowana = uar.getARX().tick(static_cast<double>(tick_data.sterowanie));
+
+            qDebug() << "data:\n gen: " << tick_data.wartosc_zadana <<
+                "regulowana: " << tick_data.wartosc_regulowana <<
+                "pid p: " << tick_data.sterowanie.Proportional <<
+                "pid i: " << tick_data.sterowanie.Integral <<
+                "pid d: " << tick_data.sterowanie.Derrivative <<
+                "uchyb: " << tick_data.uchyb;
 
             _networkManager.SendMsg(serializeArxSample(tick_data.wartosc_regulowana));
             tick_callback(tick_data);
@@ -472,7 +481,12 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
 
             current_tick_data.wartosc_regulowana = val;
             uar.setPreviousYi(val);
-
+            qDebug() << "data:\n gen: " << current_tick_data.wartosc_zadana <<
+                "regulowana: " << current_tick_data.wartosc_regulowana <<
+                "pid p: " << current_tick_data.sterowanie.Proportional <<
+                "pid i: " << current_tick_data.sterowanie.Integral <<
+                "pid d: " << current_tick_data.sterowanie.Derrivative <<
+                "uchyb: " << current_tick_data.uchyb;
             tick_callback(current_tick_data);
             readyForNextTick = true;
             break;

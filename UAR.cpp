@@ -34,9 +34,9 @@ TickData UAR::TickPid(double input){
     tick_data.sterowanie = this->pid.tickMoreData(tick_data.uchyb);
     return tick_data;
 }
-void UAR::setPreviousYi(double yi){
-    previous_y_i = yi;
-}
+void UAR::setPreviousYi(double yi) { previous_y_i = yi; }
+
+double UAR::getPreviousYi() const { return previous_y_i; }
 
 void UAR::resetAll()
 {

@@ -99,7 +99,7 @@ public:
     void tick();
 
     QByteArray serializeArxSample(double value);
-    QByteArray serializePidSample(double gen, PIDTickData pid);
+    QByteArray serializePidSample(double gen, PIDTickData pid, double uchyb);
 
     //Pid i Gen serializacja
 
