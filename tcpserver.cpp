@@ -49,6 +49,7 @@ void TcpServer::SendMsg(const QByteArray& msg)
     if (!_socket)
         throw std::runtime_error("No client connected");
 
+    qDebug() << "Wysyłanie wiadomości (serwer)";
     _socket->write(msg);
 }
 

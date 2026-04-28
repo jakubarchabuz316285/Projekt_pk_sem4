@@ -44,13 +44,18 @@ void NetworkManager::SetCallback(Tcp::Callback cb)
 // SEND
 void NetworkManager::SendMsg(const QByteArray& msg)
 {
+    qDebug() << "Wysyłanie wiadomości (network manager)";
     if (_mode == Local)
         throw std::runtime_error("Local mode - no network");
 
-    if (_server)
+    if (_server){
+        qDebug() << "Wysyłanie wiadomości (network manager - serwer)";
         _server->SendMsg(msg);
-    else if (_client)
+    }
+    else if (_client){
+        qDebug() << "Wysyłanie wiadomości (network manager - serwer)";
         _client->SendMsg(msg);
+    }
     else
         throw std::runtime_error("No active connection");
 }

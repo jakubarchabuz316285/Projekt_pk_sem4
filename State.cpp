@@ -346,6 +346,7 @@ void State::tick()
         if(!readyForNextTick) return;
         current_tick_data = uar.TickPid(choosen_generator->tick());
         // TickPid zwraca pakiet TickData ale bez wypełnionego pola wartość regulowana
+        qDebug() << "Wysyłanie wiadomości (state)";
         _networkManager.SendMsg(serializePidSample(current_tick_data.wartosc_zadana, current_tick_data.sterowanie, current_tick_data.uchyb));
         readyForNextTick = false;
     }
