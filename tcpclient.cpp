@@ -37,6 +37,7 @@ void TcpClient::SendMsg(const QByteArray& msg)
     if (_socket->state() != QAbstractSocket::ConnectedState)
         throw std::runtime_error("Not connected");
 
+    qDebug() << "Wysyłanie wiadomości (klient)";
     _socket->write(msg);
 }
 
