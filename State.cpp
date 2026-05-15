@@ -133,6 +133,7 @@ void State::setGenerator(TypGeneratora type)
         choosen_generator = &gen_skok;
         break;
     }
+    qDebug() << "Wysyłam zmianę w generatorze: Gen mode";
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 
@@ -145,6 +146,7 @@ State::TypGeneratora State::getGenerator()
 
 void State::setGeneneratorAmplitude(const double& amplitude)
 {
+    qDebug() << "Wysyłam zmianę w generatorze: Amplitude";
     this->gen_pros.setAmplitude(amplitude);
     this->gen_sin.setAmplitude(amplitude);
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
@@ -152,12 +154,14 @@ void State::setGeneneratorAmplitude(const double& amplitude)
 
 void State::setGeneneratorDutyCycle(const double& duty_cycle)
 {
+    qDebug() << "Wysyłam zmianę w generatorze: dutycycle";
     this->gen_pros.setDutyCycle(duty_cycle);
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 
 void State::setGeneratorSkladowaStala(double skladowa_stala)
 {
+    qDebug() << "Wysyłam zmianę w generatorze: bias";
     this->gen_pros.setBias(skladowa_stala);
     this->gen_sin.setBias(skladowa_stala);
     this->gen_skok.setBias(skladowa_stala);
@@ -166,6 +170,7 @@ void State::setGeneratorSkladowaStala(double skladowa_stala)
 
 void State::setGeneneratorPeriodMS(uint32_t period)
 {
+    qDebug() << "Wysyłam zmianę w generatorze: GeneratorPeriodMS";
     uint32_t sample = period / getSimmulationIntervalMS();
     this->gen_pros.setSamplesPerCycle(sample);
     this->gen_sin.setSamplesPerCycle(sample);
@@ -179,6 +184,7 @@ uint8_t State::getGeneneratorPeriodJumpMS()
 
 void State::setGeneratorUnitJumpTimeMS(uint32_t time)
 {
+    qDebug() << "Wysyłam zmianę w generatorze: UnitTimeMS";
     this->gen_skok.setActivationTime(time / getSimmulationIntervalMS());
     if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
