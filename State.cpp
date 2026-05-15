@@ -111,7 +111,6 @@ void State::resetSimmulation()
 {
     resetGenerator();
     uar.resetAll();
-    timer->setRunning(false);
     readyForNextTick = true;
     this->uar.resetAll();
     if (getMode() != NetworkManager::Mode::Local) {
