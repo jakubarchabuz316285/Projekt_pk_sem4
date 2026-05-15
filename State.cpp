@@ -1,6 +1,7 @@
 #include "State.h"
 #include "QSaveState.hpp"
 #include "QTimerState.hpp"
+#include "qelapsedtimer.h"
 #include <cassert>
 #include <stdexcept>
 #include <QIODevice>
@@ -357,19 +358,20 @@ void State::tick()
         this->tick_callback(uar.tickMoreInfo(choosen_generator->tick()));
     }
     else if (getMode() == NetworkManager::Mode::PID) {
-        static int network_timeout_counter = 0;
 
         if(!readyForNextTick) {
-            network_timeout_counter++;
-            if(network_timeout_counter > 10) {
-                qDebug() << "Network Timeout";
+            // Sprawdzenie awaryjne: jeśli sieć naprawdę wisi od dłuższego czasu
+            static QElapsedTimer timeoutTimer;
+            if (!timeoutTimer.isValid()) timeoutTimer.start();
+
+            if(timeoutTimer.elapsed() > 1000) { // Realny timeout: 1 sekunda braku odpowiedzi
+                qDebug() << "Krytyczny Timeout Sieciowy - Brak odpowiedzi od obiektu ARX";
                 readyForNextTick = true;
-                network_timeout_counter = 0;
+                timeoutTimer.restart();
             }
             return;
         }
 
-        network_timeout_counter = 0;
         current_tick_data = uar.TickPid(choosen_generator->tick());
 
         _networkManager.SendMsg(serializePidSample(
@@ -414,9 +416,19 @@ QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
     QDataStream stream(&payload, QIODevice::WriteOnly);
     stream.setVersion(QDataStream::Qt_6_0);
 
+    double dutyCycle = 0.0;
+
+    Generator* gen = this->choosen_generator;
+
+    // Standardowe rzutowanie dynamiczne w C++
+    GeneratorProstokatny* prostokatny = dynamic_cast<GeneratorProstokatny*>(this->choosen_generator);
+
+    if (prostokatny != nullptr) dutyCycle = prostokatny->getDutyCycle();
+
+
     stream << data.k << data.T_i << data.T_d << data.integType
            << data.amplitude << data.samples_per_cycle
-           << data.bias << data.genType << data.interval;
+           << data.bias << data.genType << data.interval << dutyCycle;
 
     return wrapPacket(TypPakietu::PidConfig, payload);
 }
@@ -507,9 +519,15 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         double bias;
         int genType;
         int interval;
+        double dutyCycle;
 
         stream >> k >> T_i >> T_d >> integType >> amplitude
             >> samples_per_cycle >> bias >> genType >> interval;
+
+        Generator* gen = this->choosen_generator;
+
+        // Standardowe rzutowanie dynamiczne w C++
+        GeneratorProstokatny* prostokatny = dynamic_cast<GeneratorProstokatny*>(this->choosen_generator);
 
         setPIDProportional(k);
         setPIDIntegration(T_i);
@@ -519,7 +537,12 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         this->choosen_generator->setSamplesPerCycle(samples_per_cycle);
         this->choosen_generator->setBias(bias);
         this->choosen_generator->setAmplitude(amplitude);
+        if (prostokatny != nullptr) {
+            stream >> dutyCycle;
+            prostokatny->setDutyCycle(dutyCycle);
+        }
         timer->setIntervalMS(interval);
+
 
         emit requestUiUpdate();
         break;
