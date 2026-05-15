@@ -521,7 +521,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         double dutyCycle;
 
         stream >> k >> T_i >> T_d >> integType >> amplitude
-            >> samples_per_cycle >> bias >> genType >> interval;
+            >> samples_per_cycle >> bias >> genType >> interval >> dutyCycle;
 
         Generator* gen = this->choosen_generator;
 
@@ -536,10 +536,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         this->choosen_generator->setSamplesPerCycle(samples_per_cycle);
         this->choosen_generator->setBias(bias);
         this->choosen_generator->setAmplitude(amplitude);
-        if (prostokatny != nullptr) {
-            stream >> dutyCycle;
-            prostokatny->setDutyCycle(dutyCycle);
-        }
+        if (prostokatny != nullptr) prostokatny->setDutyCycle(dutyCycle);
         timer->setIntervalMS(interval);
 
 
