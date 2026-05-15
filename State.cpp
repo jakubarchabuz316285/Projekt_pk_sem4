@@ -443,7 +443,8 @@ QByteArray State::wrapPacket(TypPakietu typ, const QByteArray& payload)
 
     out << (quint8)typ;
     out << (quint32)payload.size();
-    data.append(payload);
+
+    out.writeRawData(payload.constData(), payload.size());
 
     return data;
 }
@@ -501,8 +502,6 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         stream >> k >> T_i >> T_d >> integType >> amplitude
             >> samples_per_cycle >> bias >> genType >> interval;
 
-        if (stream.status() != QDataStream::Ok) return;
-
         setPIDProportional(k);
         setPIDIntegration(T_i);
         setPIDDerrivative(T_d);
@@ -526,12 +525,10 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         double inMax, inMin, outMax, outMin;
 
         stream >> sizeA;
-        if (stream.status() != QDataStream::Ok) return;
         std::vector<double> wsp_a(sizeA);
         for(int i = 0; i < sizeA; ++i) stream >> wsp_a[i];
 
         stream >> sizeB;
-        if (stream.status() != QDataStream::Ok) return;
         std::vector<double> wsp_b(sizeB);
         for(int i = 0; i < sizeB; ++i) stream >> wsp_b[i];
 
