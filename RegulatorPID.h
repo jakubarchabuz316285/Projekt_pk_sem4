@@ -20,7 +20,7 @@ struct PIDTickData
     double Proportional;
     double Integral;
     double Derrivative;
-    explicit operator double()
+    explicit operator double() const
     {
         return Proportional + Integral + Derrivative;
     }

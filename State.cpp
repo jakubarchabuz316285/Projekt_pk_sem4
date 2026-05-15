@@ -364,7 +364,7 @@ void State::tick()
             static QElapsedTimer timeoutTimer;
             if (!timeoutTimer.isValid()) timeoutTimer.start();
 
-            if(timeoutTimer.elapsed() > 1000) { // Realny timeout: 1 sekunda braku odpowiedzi
+            if(timeoutTimer.elapsed() > 1000) {
                 qDebug() << "Krytyczny Timeout Sieciowy - Brak odpowiedzi od obiektu ARX";
                 readyForNextTick = true;
                 timeoutTimer.restart();
@@ -398,6 +398,7 @@ QByteArray State::serializeArxSample(double value)
 {
     QByteArray payload;
     QDataStream out(&payload, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_0);
     out << value;
     return wrapPacket(TypPakietu::ARXSample, payload);
 }
@@ -406,6 +407,7 @@ QByteArray State::serializePidSample(double gen, PIDTickData pid, double uchyb)
 {
     QByteArray payload;
     QDataStream out(&payload, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_0);
     out << gen << pid.Proportional << pid.Integral << pid.Derrivative << uchyb;
     return wrapPacket(TypPakietu::PIDSample, payload);
 }
@@ -418,9 +420,6 @@ QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
 
     double dutyCycle = 0.0;
 
-    Generator* gen = this->choosen_generator;
-
-    // Standardowe rzutowanie dynamiczne w C++
     GeneratorProstokatny* prostokatny = dynamic_cast<GeneratorProstokatny*>(this->choosen_generator);
 
     if (prostokatny != nullptr) dutyCycle = prostokatny->getDutyCycle();
