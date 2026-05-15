@@ -12,9 +12,9 @@ State::State()
     , gen_sin{}
     , gen_pros{}
     , gen_skok{}
+    , readyForNextTick(true)
+    , _networkManager(std::bind(&State::receivePacket, this, std::placeholders::_1)) // Gotowy na pierwszą próbkę
     , simmulation_running(false)
-    , readyForNextTick(true) // Gotowy na pierwszą próbkę
-    , _networkManager(std::bind(&State::receivePacket, this, std::placeholders::_1))
 {
     choosen_generator = &gen_sin;
     save = new QSaveState();
@@ -89,6 +89,7 @@ void State::setSimmulationRunning(bool simmulation_running)
 void State::setSimmulationIntervalMS(uint32_t interwal)
 {
     timer->setIntervalMS(interwal);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 
 bool State::getSimmulationRunning()
@@ -132,6 +133,7 @@ void State::setGenerator(TypGeneratora type)
         choosen_generator = &gen_skok;
         break;
     }
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 
 State::TypGeneratora State::getGenerator()
@@ -159,6 +161,7 @@ void State::setGeneratorSkladowaStala(double skladowa_stala)
     this->gen_pros.setBias(skladowa_stala);
     this->gen_sin.setBias(skladowa_stala);
     this->gen_skok.setBias(skladowa_stala);
+    if(_networkManager.GetMode() == NetworkManager::Mode::PID) _networkManager.SendMsg(serializePIDState(getPIDConfig()));
 }
 
 void State::setGeneneratorPeriodMS(uint32_t period)
