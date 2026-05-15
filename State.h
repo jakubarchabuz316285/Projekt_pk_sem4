@@ -141,7 +141,6 @@ private:
     GeneratorProstokatny gen_pros;
     GeneratorSkokJednostkowy gen_skok;
     Generator* choosen_generator;
-    bool simmulation_running;
     std::function<void(TickData)> tick_callback;
     SaveStateInterface* save;
     TimerStateInterface* timer;
@@ -152,6 +151,7 @@ private:
     // Online
 
     NetworkManager _networkManager;
+    bool simmulation_running;
 
     State(const State &) = delete;
     State &operator=(const State &) = delete;
@@ -161,6 +161,7 @@ private:
 signals:
     void statusChanged(bool connected);
     void requestUiUpdate();
+    void requestChartsReset();
 
 
 };

@@ -78,6 +78,7 @@ private slots:
     void on_doubleSpinBox_generator_okres_valueChanged(double arg1);
 
     void on_BtnTrybPracy_clicked();
+    void clearCharts();
 
 private:
     bool m_arxParamsEnabled = true;

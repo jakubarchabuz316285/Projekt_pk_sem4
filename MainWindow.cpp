@@ -22,7 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->ui->centralwidget->setLayout(ui->horizontalLayout_13);
     this->setWindowTitle("SymulatorUAR");
+
+    //callbacki do symulacji sieciowej
     connect(&State::getInstance(), &State::requestUiUpdate, this, &MainWindow::updateUiFromState);
+    connect(&State::getInstance(), &::State::requestChartsReset, this, &MainWindow::updateCharts);
 
     chart_sterowanie = new QChart();
     chart_uchyb = new QChart();
@@ -696,5 +699,11 @@ void MainWindow::on_BtnTrybPracy_clicked() {
     dialog->emitCurrentSettings();
 
     dialog->show();
+}
+
+void MainWindow::clearCharts() {
+    qDebug() << "Odrzymano sygnał: Resetowanie wykresów...";
+
+    on_pushButton_symulacja_reset_clicked();
 }
 

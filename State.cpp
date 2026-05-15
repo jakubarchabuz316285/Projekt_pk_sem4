@@ -110,6 +110,8 @@ void State::setOutputCallback(const std::function<void(TickData)> callback)
 void State::resetSimmulation()
 {
     resetGenerator();
+    uar.resetAll();
+    timer->setRunning(false);
     readyForNextTick = true;
     this->uar.resetAll();
     if (getMode() != NetworkManager::Mode::Local) {
@@ -570,6 +572,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
 
     case TypPakietu::SimReset:
         resetSimmulation();
+        emit requestChartsReset();
         break;
 
     default:

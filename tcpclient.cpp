@@ -50,6 +50,7 @@ void TcpClient::ReadMsg()
 
 void TcpClient::Connected()  {
     qDebug() << "Polaczono (client)";
+    _socket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
     emit statusChanged(true); // Emitujemy prawdę
 }
 

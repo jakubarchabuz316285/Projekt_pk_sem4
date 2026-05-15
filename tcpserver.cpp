@@ -70,6 +70,7 @@ void TcpServer::Connected()  {
     connect(_socket, &QTcpSocket::readyRead, this, &TcpServer::ReadMsg);
     connect(_socket, &QTcpSocket::disconnected, this, &TcpServer::Disconnected);
 
+    _socket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
     qDebug() << "Klient polaczony z serwerem";
     emit statusChanged(true);
 }
