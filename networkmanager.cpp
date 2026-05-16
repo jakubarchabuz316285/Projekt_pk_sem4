@@ -153,6 +153,9 @@ void NetworkManager::setPublicServer(bool publiczny, int tcpPort)
 
     if (publiczny && _mode == Mode::PID) {
         if (!_broadcastTimer->isActive()) {
+            _udpSocket->close();
+            _udpSocket->bind(0, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
+
             _broadcastTimer->start();
             sendBroadcast(true);
         }
@@ -160,6 +163,7 @@ void NetworkManager::setPublicServer(bool publiczny, int tcpPort)
         if (_broadcastTimer->isActive()) {
             _broadcastTimer->stop();
             sendBroadcast(false);
+            _udpSocket->close();
         }
     }
 }
@@ -192,7 +196,8 @@ void NetworkManager::sendBroadcast(bool alive)
 
     out << QString("UAR_DISCOVER") << (bool)alive << (quint16)_activeTcpPort;
 
-    _udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
+    _udpSocket->writeDatagram(datagram, QHostAddress("255.255.255.255"), 45454);
+
     qDebug() << "[UDP BROADCAST SENT] Alive:" << alive << "TCP Port:" << _activeTcpPort;
 }
 

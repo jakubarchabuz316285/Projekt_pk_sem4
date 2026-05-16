@@ -17,7 +17,7 @@ State::State()
     , _networkManager(std::bind(&State::receivePacket, this, std::placeholders::_1))
     , simmulation_running(false)
 {
-    // Inicjalizacja liczników synchronizacji próbek sieciowych
+    // Liczniki
     current_sample_id = 0;
     last_processed_pid_id = 0;
     last_processed_arx_id = 0;
@@ -31,7 +31,6 @@ State::State()
 
     QObject::connect(&_networkManager, &NetworkManager::statusChanged, this, [this](bool connected){
         if(connected) {
-            qDebug() << "Połączono! Synchronizacja konfiguracji...";
             if(getMode() == NetworkManager::Mode::PID) {
                 _networkManager.SendMsg(serializePIDState(getPIDConfig()));
                 readyForNextTick = true;
@@ -42,9 +41,7 @@ State::State()
         emit statusChanged(connected);
     });
 
-    // BROADCAST
-
-    NetworkManager::connect(&_networkManager, &NetworkManager::serverDiscovered, this, &State::serverDiscovered);
+    QObject::connect(&_networkManager, &NetworkManager::serverDiscovered, this, &State::serverDiscovered);
 }
 
 void State::console_print_state()
@@ -77,13 +74,17 @@ void State::console_print_state()
 
 State::~State()
 {
+    _networkManager.setPublicServer(false, 0);
+    _networkManager.stopListeningForServers();
+    _networkManager.Cleanup();
+
     delete save;
     delete timer;
 }
 
 class State &State::getInstance()
 {
-    static State instance = State();
+    static State instance;
     return instance;
 }
 
