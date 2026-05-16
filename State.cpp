@@ -523,16 +523,12 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         stream >> k >> T_i >> T_d >> integType >> amplitude
             >> samples_per_cycle >> bias >> genType >> interval >> dutyCycle;
 
-        Generator* gen = this->choosen_generator;
-
-        // Standardowe rzutowanie dynamiczne w C++
-        GeneratorProstokatny* prostokatny = dynamic_cast<GeneratorProstokatny*>(this->choosen_generator);
-
         setPIDProportional(k);
         setPIDIntegration(T_i);
         setPIDDerrivative(T_d);
         setPIDIntegrationType(IntegType(integType));
         setGenerator(TypGeneratora(genType));
+        GeneratorProstokatny* prostokatny = dynamic_cast<GeneratorProstokatny*>(this->choosen_generator);
         this->choosen_generator->setSamplesPerCycle(samples_per_cycle);
         this->choosen_generator->setBias(bias);
         this->choosen_generator->setAmplitude(amplitude);

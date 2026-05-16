@@ -60,11 +60,13 @@ void TcpServer::ReadMsg()
         _callback(msg);
 }
 
-bool TcpServer::IsListening(){
+bool TcpServer::IsListening()
+{
     return _server->isListening();
 }
 
-void TcpServer::Connected()  {
+void TcpServer::Connected()
+{
     _socket = _server->nextPendingConnection();
 
     connect(_socket, &QTcpSocket::readyRead, this, &TcpServer::ReadMsg);
@@ -75,7 +77,8 @@ void TcpServer::Connected()  {
     emit statusChanged(true);
 }
 
-void TcpServer::Disconnected()  {
+void TcpServer::Disconnected()
+{
     qDebug() << "Klient rozlaczony od serwera";
     if (_socket) {
         _socket->deleteLater();
