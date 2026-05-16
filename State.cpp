@@ -14,9 +14,14 @@ State::State()
     , gen_pros{}
     , gen_skok{}
     , readyForNextTick(true)
-    , _networkManager(std::bind(&State::receivePacket, this, std::placeholders::_1)) // Gotowy na pierwszą próbkę
+    , _networkManager(std::bind(&State::receivePacket, this, std::placeholders::_1))
     , simmulation_running(false)
 {
+    // Inicjalizacja liczników synchronizacji próbek sieciowych
+    current_sample_id = 0;
+    last_processed_pid_id = 0;
+    last_processed_arx_id = 0;
+
     choosen_generator = &gen_sin;
     save = new QSaveState();
     timer = new QTimerState();
@@ -114,7 +119,12 @@ void State::resetSimmulation()
     resetGenerator();
     uar.resetAll();
     readyForNextTick = true;
-    this->uar.resetAll();
+
+    // Reset liczników próbek przy restarcie symulacji
+    current_sample_id = 0;
+    last_processed_pid_id = 0;
+    last_processed_arx_id = 0;
+
     if (getMode() != NetworkManager::Mode::Local) {
         _networkManager.SendMsg(wrapPacket(TypPakietu::SimReset, QByteArray()));
     }
@@ -359,9 +369,35 @@ void State::tick()
     }
     else if (getMode() == NetworkManager::Mode::PID) {
 
+        // LOGIKA AWARYJNA (WYKRYCIE LAGA SIECIOWEGO)
+        if (!readyForNextTick) {
+            qDebug() << "[LAG] ARX spóźnia się z ID:" << current_sample_id << "- Odpalam model cieniowy!";
+
+            // Pobieramy sumaryczne sterowanie u(k-1) z poprzedniego kroku
+            double u_k_prev = current_tick_data.sterowanie.Proportional
+                              + current_tick_data.sterowanie.Integral
+                              + current_tick_data.sterowanie.Derrivative;
+
+            // Liczymy krok na lokalnej instancji ARX, aby zachować płynność wykresu
+            double predicted_y = uar.getARX().tick(u_k_prev);
+
+            current_tick_data.wartosc_regulowana = predicted_y;
+            uar.setPreviousYi(predicted_y);
+
+            if(tick_callback) tick_callback(current_tick_data);
+
+            // Wymuszamy odblokowanie pętli, aby przejść do kolejnej próbki czasu
+            readyForNextTick = true;
+        }
+
+        // Zwiększamy identyfikator dla całkowicie nowej próbki
+        current_sample_id++;
+
         current_tick_data = uar.TickPid(choosen_generator->tick());
 
+        // Wysyłamy żądanie obliczeniowe do ARX wraz z aktualnym unikalnym ID próbki
         _networkManager.SendMsg(serializePidSample(
+            current_sample_id,
             current_tick_data.wartosc_zadana,
             current_tick_data.sterowanie,
             current_tick_data.uchyb
@@ -381,21 +417,21 @@ class State& StateGlobalAccess::operator()()
     return State::getInstance();
 }
 
-QByteArray State::serializeArxSample(double value)
+QByteArray State::serializeArxSample(quint32 sampleId, double value)
 {
     QByteArray payload;
     QDataStream out(&payload, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_0);
-    out << value;
+    out << sampleId << value; // Pakujemy ID zwrotne
     return wrapPacket(TypPakietu::ARXSample, payload);
 }
 
-QByteArray State::serializePidSample(double gen, PIDTickData pid, double uchyb)
+QByteArray State::serializePidSample(quint32 sampleId, double gen, PIDTickData pid, double uchyb)
 {
     QByteArray payload;
     QDataStream out(&payload, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_0);
-    out << gen << pid.Proportional << pid.Integral << pid.Derrivative << uchyb;
+    out << sampleId << gen << pid.Proportional << pid.Integral << pid.Derrivative << uchyb; // Pakujemy ID nadawcze
     return wrapPacket(TypPakietu::PIDSample, payload);
 }
 
@@ -406,11 +442,8 @@ QByteArray State::serializePIDState(const RegulatorInstancePackage& data)
     stream.setVersion(QDataStream::Qt_6_0);
 
     double dutyCycle = 0.0;
-
     GeneratorProstokatny* prostokatny = dynamic_cast<GeneratorProstokatny*>(this->choosen_generator);
-
     if (prostokatny != nullptr) dutyCycle = prostokatny->getDutyCycle();
-
 
     stream << data.k << data.T_i << data.T_d << data.integType
            << data.amplitude << data.samples_per_cycle
@@ -464,10 +497,19 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
     switch (typ)
     {
     case TypPakietu::ARXSample: {
+        quint32 response_id;
         double val;
-        stream >> val;
+        stream >> response_id >> val;
 
         if (stream.status() != QDataStream::Ok) return;
+
+        // FILTROWANIE SPÓŹNIONYCH PAKIETÓW NA KOMPUTERZE PID:
+        // Jeśli otrzymaliśmy ID mniejsze lub równe temu, co już przetworzyliśmy (lub przewidzieliśmy lokalnie) -> DROP
+        if (response_id <= last_processed_arx_id) {
+            qDebug() << "[PID DROP] Odrzucam spóźniony pakiet ARX. ID:" << response_id << "Ostatnie dobre ID:" << last_processed_arx_id;
+            return;
+        }
+        last_processed_arx_id = response_id;
 
         current_tick_data.wartosc_regulowana = val;
         uar.setPreviousYi(val);
@@ -480,8 +522,10 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
 
     case TypPakietu::PIDSample: {
         TickData tick_data;
+        quint32 received_id;
 
-        stream >> tick_data.wartosc_zadana
+        stream >> received_id
+            >> tick_data.wartosc_zadana
             >> tick_data.sterowanie.Proportional
             >> tick_data.sterowanie.Integral
             >> tick_data.sterowanie.Derrivative
@@ -489,8 +533,20 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
 
         if (stream.status() != QDataStream::Ok) return;
 
-        tick_data.wartosc_regulowana = uar.getARX().tick(static_cast<double>(tick_data.sterowanie));
-        _networkManager.SendMsg(serializeArxSample(tick_data.wartosc_regulowana));
+        // OCHRONA HISTORII ARX NA KOMPUTERZE ARX:
+        // Jeśli z sieci przyszedł pakiet starszy lub równy od już przetworzonego – odrzucamy chronologiczny śmieć.
+        if (received_id <= last_processed_pid_id) {
+            qDebug() << "[ARX DROP] Ignoruję przeterminowany pakiet PID. ID:" << received_id;
+            return;
+        }
+        last_processed_pid_id = received_id;
+
+        // Obliczenie realnego kroku ARX
+        double u_k = tick_data.sterowanie.Proportional + tick_data.sterowanie.Integral + tick_data.sterowanie.Derrivative;
+        tick_data.wartosc_regulowana = uar.getARX().tick(u_k);
+
+        // Odsyłamy wynik z zachowaniem sparowanego ID paczki
+        _networkManager.SendMsg(serializeArxSample(received_id, tick_data.wartosc_regulowana));
 
         if(tick_callback) tick_callback(tick_data);
         break;
@@ -504,7 +560,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         uint16_t samples_per_cycle;
         double bias;
         int genType;
-        unsigned int interval;
+        uint8_t interval; // POPRAWKA SYNC STRUMIENIA: zmiana typu z unsigned int na uint8_t, aby pasował do struktury!
         double dutyCycle;
 
         stream >> k >> T_i >> T_d >> integType >> amplitude
@@ -521,7 +577,6 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         this->choosen_generator->setAmplitude(amplitude);
         if (prostokatny != nullptr) prostokatny->setDutyCycle(dutyCycle);
         timer->setIntervalMS(interval);
-
 
         emit requestUiUpdate();
         break;

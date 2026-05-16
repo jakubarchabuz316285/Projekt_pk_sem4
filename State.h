@@ -98,8 +98,8 @@ public:
     const std::tuple<const ARX*, const RegulatorPID*, const TypGeneratora,  const GeneratorSinusoida*, const GeneratorProstokatny*> getAppState();
     void tick();
 
-    QByteArray serializeArxSample(double value);
-    QByteArray serializePidSample(double gen, PIDTickData pid, double uchyb);
+    QByteArray serializeArxSample(quint32 sampleId, double value);
+    QByteArray serializePidSample(quint32 sampleId, double gen, PIDTickData pid, double uchyb);
 
     //Pid i Gen serializacja
 
@@ -150,6 +150,9 @@ private:
 
     // Online
 
+    quint32 current_sample_id = 0;
+    quint32 last_processed_pid_id = 0;
+    quint32 last_processed_arx_id = 0;
     NetworkManager _networkManager;
     bool simmulation_running;
 
