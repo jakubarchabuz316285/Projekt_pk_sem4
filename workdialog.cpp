@@ -90,8 +90,10 @@ void WorkDialog::on_RdioLocal_clicked(){
 
 void WorkDialog::UpdateNetworkUI()
 {
-    bool isArx = ui->rdio_arx->isChecked();
-    bool isPid = ui->rdio_reg->isChecked();
+    // Sprawdzamy, czy w ogóle jesteśmy w trybie sieciowym
+    bool isNet = ui->RdioNet->isChecked();
+    bool isArx = ui->rdio_arx->isChecked() && isNet;
+    bool isPid = ui->rdio_reg->isChecked() && isNet;
 
     ui->IPContainter->setVisible(isArx);
     ui->BtnConnect->setVisible(isArx);
@@ -100,12 +102,21 @@ void WorkDialog::UpdateNetworkUI()
     ui->BtnListen->setVisible(isPid);
     ui->chckboxPublicznySerwer->setVisible(isPid);
 
-    ui->LblPort->setVisible(true);
-    ui->spnBoxPort->setVisible(true);
-    ui->BtnDisconnect->setVisible(true);
+    ui->LblPort->setVisible(isNet);
+    ui->spnBoxPort->setVisible(isNet);
+    ui->BtnDisconnect->setVisible(isNet);
+
+    if (isArx) {
+        State::getInstance().startServerDiscovery();
+    } else {
+        State::getInstance().stopServerDiscovery();
+        ui->listWidgetSerwery->clear();
+    }
 
     if (!isPid) {
-        ui->chckboxPublicznySerwer->setChecked(false);
+        if (ui->chckboxPublicznySerwer->isChecked()) {
+            ui->chckboxPublicznySerwer->setChecked(false);
+        }
     }
 
     this->adjustSize();
@@ -119,6 +130,7 @@ void WorkDialog::on_rdio_reg_toggled(bool checked)
     {
         if(checked){
            if(checked) emitCurrentSettings();
+           UpdateNetworkUI();
         }
     }
     catch (std::runtime_error e)
@@ -144,9 +156,7 @@ void WorkDialog::on_rdio_arx_toggled(bool checked)
     {
         if(checked) {
             emitCurrentSettings();
-            if(State::getInstance().getMode() == NetworkManager::Mode::ARX) {
-                State::getInstance().startServerDiscovery();
-            }
+            UpdateNetworkUI();
         }
     }
     catch (std::runtime_error e)
@@ -165,21 +175,23 @@ void WorkDialog::on_BtnListen_clicked()
     {
         if(!State::getInstance().isListening()){
             qDebug() << "nasluchiwanie (workdialog)";
-            State::getInstance().startListening(ui->spnBoxPort->value());
-            qDebug() << "nasluchiwanie (workdialog po funkcji)";
+            int port = ui->spnBoxPort->value();
+            State::getInstance().startListening(port);
             ui->BtnListen->setText("Przestań nasłuchiwać");
+
+            if (ui->chckboxPublicznySerwer->isChecked()) {
+                State::getInstance().setPublicServer(true, port);
+            }
         } else {
+            State::getInstance().setPublicServer(false, 0);
+
             State::getInstance().stopListening();
             ui->BtnListen->setText("Nasłuchuj");
         }
     }
-    catch (std::runtime_error e)
-    {
-        //TODO Okiekno errora // błąd e
-    }
     catch (...)
     {
-        //TODO Okienko errora // inny błąd
+
     }
 }
 
@@ -233,9 +245,7 @@ void WorkDialog::on_RdioNet_toggled(bool checked)
         {
             if(checked) {
                 emitCurrentSettings();
-                if(State::getInstance().getMode() == NetworkManager::Mode::ARX) {
-                    State::getInstance().startServerDiscovery();
-                }
+                UpdateNetworkUI();
             }
         }
         catch (std::runtime_error e)
