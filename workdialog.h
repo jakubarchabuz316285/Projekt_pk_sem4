@@ -48,6 +48,8 @@ private slots:
 
     void onServerDiscovered(const QString& ip, int port, bool alive);
 
+    void onServerDoubleClicked(QListWidgetItem *item);
+
 private:
 
     static bool LocalSimulation;

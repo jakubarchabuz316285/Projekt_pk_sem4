@@ -45,6 +45,7 @@ WorkDialog::WorkDialog(QWidget *parent)
     ui->LblStatusText->setText("Brak połączenia");
 
     connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::onServerDiscovered);
+    connect(ui->listWidgetSerwery, &QListWidget::itemDoubleClicked, this, &WorkDialog::onServerDoubleClicked);
 }
 
 WorkDialog::~WorkDialog()
@@ -295,10 +296,52 @@ void WorkDialog::onServerDiscovered(const QString& ip, int port, bool alive)
 
 void WorkDialog::closeEvent(QCloseEvent *event)
 {
-    State::getInstance().setPublicServer(false, 0);
-
-    State::getInstance().stopListening();
-    State::getInstance().stopServerDiscovery();
+    if (State::getInstance().getMode() == NetworkManager::Mode::PID)
+    {
+        // Bezpieczne gaszenie serwera
+        State::getInstance().setPublicServer(false, 0);
+        State::getInstance().stopListening();
+        State::getInstance().stopServerDiscovery();
+    }
+    else if (State::getInstance().getMode() == NetworkManager::Mode::ARX)
+    {
+        // Klient MUSI przestać słuchać UDP zanim okno zostanie usunięte z pamięci!
+        State::getInstance().stopServerDiscovery();
+        State::getInstance().disconnect(); // Czyste zerwanie TCP, jeśli było połączone
+    }
 
     event->accept();
+}
+
+void WorkDialog::onServerDoubleClicked(QListWidgetItem *item)
+{
+    if (!item) return;
+
+    QString rawText = item->text(); // Pobieramy tekst np. "26.124.116.142:123"
+    QStringList parts = rawText.split(':');
+
+    if (parts.size() == 2) {
+        QString ipAddress = parts.at(0); // "26.124.116.142"
+        QString portStr = parts.at(1);   // "123"
+
+        // 1. UZUPEŁNIENIE PORTU
+        ui->spnBoxPort->setValue(portStr.toInt());
+
+        // 2. ROZBICIE IP NA OSOBNE OKTETY (SEGMENTY)
+        QStringList octets = ipAddress.split('.');
+
+        if (octets.size() == 4) {
+            // Zamieniamy każdy segment tekstu na liczbę i ładujemy do spinboxów
+            ui->SpnFirst->setValue(octets.at(0).toInt());
+            ui->SpnSecond->setValue(octets.at(1).toInt());
+            ui->SpnThird->setValue(octets.at(2).toInt());
+            ui->SpnFourth->setValue(octets.at(3).toInt());
+
+            qDebug() << "[GUI] Rozbito IP na segmenty ->"
+                     << octets.at(0) << octets.at(1) << octets.at(2) << octets.at(3)
+                     << "Port:" << portStr;
+        } else {
+            qWarning() << "[GUI BŁĄD] Niepoprawny format adresu IP w obiekcie:" << ipAddress;
+        }
+    }
 }
