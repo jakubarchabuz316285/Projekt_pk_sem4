@@ -1,5 +1,6 @@
 #include "workdialog.h"
 #include "qbuttongroup.h"
+#include "qmessagebox.h"
 #include "qsettings.h"
 #include "ui_workdialog.h"
 bool WorkDialog::LocalSimulation = true;
@@ -23,10 +24,10 @@ WorkDialog::WorkDialog(QWidget *parent)
     ui->spnBoxPort->setMinimumWidth(50);
     ui->spnBoxPort->setMinimum(0);
     ui->spnBoxPort->setMaximum(65535);
-    ui->SpnFirst->setMaximum(255);
-    ui->SpnSecond->setMaximum(255);
-    ui->SpnThird->setMaximum(255);
-    ui->SpnFourth->setMaximum(255);
+    ui->SpnFirst->setRange(0, 255);
+    ui->SpnSecond->setRange(0, 255);
+    ui->SpnThird->setRange(0, 255);
+    ui->SpnFourth->setRange(0, 255);
     UpdateNetworkUI();
     connect(&State::getInstance(), &State::statusChanged, this, [this](bool connected){
         if(connected) {
@@ -178,11 +179,11 @@ void WorkDialog::on_BtnConnect_clicked()
     }
     catch (std::runtime_error e)
     {
-        //TODO Okiekno errora // błąd e
+        QMessageBox::critical(this, "Błąd połączenia", e.what());
     }
     catch (...)
     {
-        //TODO Okienko errora // inny błąd
+        QMessageBox::critical(this, "Błąd", "Wystąpił nieznany błąd aplikacji.");
     }
 }
 

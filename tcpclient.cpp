@@ -19,7 +19,7 @@ void TcpClient::Connect(const QString& ip, int p)
 {
     _socket->connectToHost(ip, p);
 
-    if (!_socket->waitForConnected())
+    if (!_socket->waitForConnected(2000))
         throw std::runtime_error("Connection failed");
 
     _port = p;
