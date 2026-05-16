@@ -5,6 +5,7 @@
 #include <QWidget>
 #include "State.h"
 #include "networkmanager.h"
+#include <QCloseEvent>
 
 namespace Ui {
 class WorkDialog;
@@ -13,6 +14,9 @@ class WorkDialog;
 class WorkDialog : public QWidget
 {
     Q_OBJECT
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 public:
     explicit WorkDialog(QWidget *parent = nullptr);

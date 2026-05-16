@@ -44,7 +44,7 @@ WorkDialog::WorkDialog(QWidget *parent)
 
     // BROADCAST
 
-    connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::serverDiscovered);
+    connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::onServerDiscovered);
 }
 
 WorkDialog::~WorkDialog()
@@ -131,6 +131,7 @@ void WorkDialog::on_rdio_reg_toggled(bool checked)
         if(checked){
            if(checked) emitCurrentSettings();
            UpdateNetworkUI();
+           ui->spnBoxPort->setValue(123);
         }
     }
     catch (std::runtime_error e)
@@ -284,4 +285,14 @@ void WorkDialog::onServerDiscovered(const QString& ip, int port, bool alive)
             delete ui->listWidgetSerwery->takeItem(ui->listWidgetSerwery->row(item));
         }
     }
+}
+
+void WorkDialog::closeEvent(QCloseEvent *event)
+{
+    State::getInstance().setPublicServer(false, 0);
+
+    State::getInstance().stopListening();
+    State::getInstance().stopServerDiscovery();
+
+    event->accept();
 }
