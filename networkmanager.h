@@ -4,7 +4,6 @@
 #pragma once
 #include "tcpclient.h"
 #include "tcpserver.h"
-#include <stdexcept>
 #include <QUdpSocket>
 #include <memory>
 /**
@@ -19,7 +18,6 @@ class NetworkManager: public QObject
 public:
     enum Mode { Local, PID, ARX };
 
-    NetworkManager() = default;
     NetworkManager(std::function<void(QByteArray)> fun);
     ~NetworkManager();
 
@@ -107,6 +105,7 @@ public:
     void setPublicServer(bool publiczny, int tcpPort);
     void startListeningForServers();
     void stopListeningForServers();
+    void initUdp();
 signals:
     void statusChanged(bool connected);
 

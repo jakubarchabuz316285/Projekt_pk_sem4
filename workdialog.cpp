@@ -264,7 +264,10 @@ void WorkDialog::on_RdioNet_toggled(bool checked)
 void WorkDialog::on_chckboxPublicznySerwer_toggled(bool checked)
 {
     int port = ui->spnBoxPort->value();
-    State::getInstance().setPublicServer(checked, port);
+    if(State::getInstance().isListening())
+    {
+        State::getInstance().setPublicServer(checked, port);
+    }
 }
 
 void WorkDialog::onServerDiscovered(const QString& ip, int port, bool alive)
