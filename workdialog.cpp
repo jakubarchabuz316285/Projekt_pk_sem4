@@ -45,11 +45,6 @@ WorkDialog::WorkDialog(QWidget *parent)
     // BROADCAST
 
     connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::serverDiscovered);
-
-    // Jeżeli to klient (ARX), zacznij słuchać sieci UDP od razu przy uruchomieniu okna
-    if(State::getInstance().getMode() == NetworkManager::Mode::ARX) {
-        State::getInstance().startServerDiscovery();
-    }
 }
 
 WorkDialog::~WorkDialog()
@@ -147,7 +142,12 @@ void WorkDialog::on_rdio_arx_toggled(bool checked)
     UpdateNetworkUI();
     try
     {
-        if(checked) emitCurrentSettings();
+        if(checked) {
+            emitCurrentSettings();
+            if(State::getInstance().getMode() == NetworkManager::Mode::ARX) {
+                State::getInstance().startServerDiscovery();
+            }
+        }
     }
     catch (std::runtime_error e)
     {
@@ -231,8 +231,12 @@ void WorkDialog::on_RdioNet_toggled(bool checked)
     if(checked){
         try
         {
-            if(checked) emitCurrentSettings();
-
+            if(checked) {
+                emitCurrentSettings();
+                if(State::getInstance().getMode() == NetworkManager::Mode::ARX) {
+                    State::getInstance().startServerDiscovery();
+                }
+            }
         }
         catch (std::runtime_error e)
         {
