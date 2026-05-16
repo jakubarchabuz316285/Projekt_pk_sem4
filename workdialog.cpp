@@ -44,29 +44,6 @@ WorkDialog::WorkDialog(QWidget *parent)
     ui->LblStatusLed->setStyleSheet("background-color: #95a5a6; border-radius: 8px;");
     ui->LblStatusText->setText("Brak połączenia");
 
-    // BROADCAST
-
-    _udpCleanupTimer = new QTimer(this);
-    connect(_udpCleanupTimer, &QTimer::timeout, this, [this]() {
-        QDateTime now = QDateTime::currentDateTime();
-        auto it = _discoveredServersTime.begin();
-        while (it != _discoveredServersTime.end()) {
-            // Jeśli serwer nie dał znaku życia przez ponad 3 sekundy -> usuń go
-            if (it.value().secsTo(now) > 3) {
-                QString serverText = it.key();
-                auto items = ui->listWidgetSerwery->findItems(serverText, Qt::MatchExactly);
-                for (auto* item : items) {
-                    delete ui->listWidgetSerwery->takeItem(ui->listWidgetSerwery->row(item));
-                }
-                it = _discoveredServersTime.erase(it);
-                qDebug() << "[UDP TIMEOUT] Usunięto martwy serwer z listy:" << serverText;
-            } else {
-                ++it;
-            }
-        }
-    });
-    _udpCleanupTimer->start(1000); // Sprawdzaj co sekundę
-
     connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::onServerDiscovered);
 }
 
@@ -297,19 +274,22 @@ void WorkDialog::on_chckboxPublicznySerwer_toggled(bool checked)
 void WorkDialog::onServerDiscovered(const QString& ip, int port, bool alive)
 {
     QString serverText = QString("%1:%2").arg(ip).arg(port);
-    auto items = ui->listWidgetSerwery->findItems(serverText, Qt::MatchExactly);
 
     if (alive) {
-        _discoveredServersTime[serverText] = QDateTime::currentDateTime();
-
+        // Serwer żyje - szukamy dokładnego dopasowania IP:Port
+        auto items = ui->listWidgetSerwery->findItems(serverText, Qt::MatchExactly);
         if (items.isEmpty()) {
             ui->listWidgetSerwery->addItem(serverText);
         }
     } else {
-        _discoveredServersTime.remove(serverText);
+        // Serwer umiera (port przyszedł jako 0, więc szukamy po samym IP)
+        // MatchStartsWith dopasuje "26.124.116.142:123" na podstawie samego "26.124.116.142"
+        auto items = ui->listWidgetSerwery->findItems(ip, Qt::MatchStartsWith);
+
         for (auto* item : items) {
             delete ui->listWidgetSerwery->takeItem(ui->listWidgetSerwery->row(item));
         }
+        qDebug() << "[GUI] Serwer zamknął się czysto. Usunięto z listy IP:" << ip;
     }
 }
 
