@@ -77,6 +77,9 @@ private:
     }
     Ui::WorkDialog *ui;
     NetworkManager* manager;
+
+    QMap<QString, QDateTime> _discoveredServersTime;
+    QTimer* _udpCleanupTimer = nullptr;
 signals:
     void modeSelected(NetworkManager::Mode mode);
     void settingsChanged(NetworkManager::Mode mode, bool isLocal);

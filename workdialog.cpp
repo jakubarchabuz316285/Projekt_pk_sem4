@@ -1,7 +1,9 @@
 #include "workdialog.h"
 #include "qbuttongroup.h"
+#include "qdatetime.h"
 #include "qmessagebox.h"
 #include "qsettings.h"
+#include "qtimer.h"
 #include "ui_workdialog.h"
 bool WorkDialog::LocalSimulation = true;
 
@@ -43,6 +45,27 @@ WorkDialog::WorkDialog(QWidget *parent)
     ui->LblStatusText->setText("Brak połączenia");
 
     // BROADCAST
+
+    _udpCleanupTimer = new QTimer(this);
+    connect(_udpCleanupTimer, &QTimer::timeout, this, [this]() {
+        QDateTime now = QDateTime::currentDateTime();
+        auto it = _discoveredServersTime.begin();
+        while (it != _discoveredServersTime.end()) {
+            // Jeśli serwer nie dał znaku życia przez ponad 3 sekundy -> usuń go
+            if (it.value().secsTo(now) > 3) {
+                QString serverText = it.key();
+                auto items = ui->listWidgetSerwery->findItems(serverText, Qt::MatchExactly);
+                for (auto* item : items) {
+                    delete ui->listWidgetSerwery->takeItem(ui->listWidgetSerwery->row(item));
+                }
+                it = _discoveredServersTime.erase(it);
+                qDebug() << "[UDP TIMEOUT] Usunięto martwy serwer z listy:" << serverText;
+            } else {
+                ++it;
+            }
+        }
+    });
+    _udpCleanupTimer->start(1000); // Sprawdzaj co sekundę
 
     connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::onServerDiscovered);
 }
@@ -277,10 +300,13 @@ void WorkDialog::onServerDiscovered(const QString& ip, int port, bool alive)
     auto items = ui->listWidgetSerwery->findItems(serverText, Qt::MatchExactly);
 
     if (alive) {
+        _discoveredServersTime[serverText] = QDateTime::currentDateTime();
+
         if (items.isEmpty()) {
             ui->listWidgetSerwery->addItem(serverText);
         }
     } else {
+        _discoveredServersTime.remove(serverText);
         for (auto* item : items) {
             delete ui->listWidgetSerwery->takeItem(ui->listWidgetSerwery->row(item));
         }
