@@ -241,7 +241,7 @@ RegulatorInstancePackage State::getPIDConfig(){
     package.bias = choosen_generator->getBias();
     package.samples_per_cycle = choosen_generator->getSamplesPerCycle();
     package.genType = (uint8_t)getGenerator();
-    package.interval = (uint8_t)timer->getIntervalMS();
+    package.interval = timer->getIntervalMS();
     return package;
 }
 
@@ -358,19 +358,6 @@ void State::tick()
         this->tick_callback(uar.tickMoreInfo(choosen_generator->tick()));
     }
     else if (getMode() == NetworkManager::Mode::PID) {
-
-        if(!readyForNextTick) {
-            // Sprawdzenie awaryjne: jeśli sieć naprawdę wisi od dłuższego czasu
-            static QElapsedTimer timeoutTimer;
-            if (!timeoutTimer.isValid()) timeoutTimer.start();
-
-            if(timeoutTimer.elapsed() > 1000) {
-                qDebug() << "Krytyczny Timeout Sieciowy - Brak odpowiedzi od obiektu ARX";
-                readyForNextTick = true;
-                timeoutTimer.restart();
-            }
-            return;
-        }
 
         current_tick_data = uar.TickPid(choosen_generator->tick());
 
@@ -517,7 +504,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         uint16_t samples_per_cycle;
         double bias;
         int genType;
-        int interval;
+        unsigned int interval;
         double dutyCycle;
 
         stream >> k >> T_i >> T_d >> integType >> amplitude

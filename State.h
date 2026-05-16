@@ -21,7 +21,7 @@ struct RegulatorInstancePackage{
     double bias;
     int genType; // 0 - sin, 1 - pros, 2 - skok
     // SIM
-    int interval;
+    unsigned int interval;
 };
 
 struct ArxInstancePackage{
