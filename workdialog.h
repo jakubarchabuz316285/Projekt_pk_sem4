@@ -40,6 +40,10 @@ private slots:
 
     void on_RdioNet_toggled(bool checked);
 
+    void on_chckboxPublicznySerwer_toggled(bool checked);
+
+    void onServerDiscovered(const QString& ip, int port, bool alive);
+
 private:
 
     static bool LocalSimulation;
@@ -72,6 +76,7 @@ private:
 signals:
     void modeSelected(NetworkManager::Mode mode);
     void settingsChanged(NetworkManager::Mode mode, bool isLocal);
+    void serverDiscovered(const QString& ip, int port, bool alive);
 };
 
 #endif // WORKDIALOG_H

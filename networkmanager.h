@@ -5,6 +5,7 @@
 #include "tcpclient.h"
 #include "tcpserver.h"
 #include <stdexcept>
+#include <QUdpSocket>
 #include <memory>
 /**
     * @brief class networkmanager
@@ -97,9 +98,21 @@ public:
     * @return isListening
     *
     */
-    bool IsListening();
+    bool IsListening() const;
+
+    bool isConnected() const;
+
+    // BROADCAST
+
+    void setPublicServer(bool publiczny, int tcpPort);
+    void startListeningForServers();
+    void stopListeningForServers();
 signals:
     void statusChanged(bool connected);
+
+    // BROADCAST
+
+    void serverDiscovered(const QString& ip, int port, bool alive);
 private:
     Mode _mode = Local;
 
@@ -107,5 +120,13 @@ private:
     std::unique_ptr<TcpClient> _client;
 
     Tcp::Callback _callback;
+
+    // BROADCAST
+
+    QUdpSocket* _udpSocket = nullptr;
+    QTimer* _broadcastTimer = nullptr;
+    int _activeTcpPort = 0;
+    void sendBroadcast(bool alive);
+    void readIncomingBroadcasts();
 };
 #endif // NETWORKMANAGER_H

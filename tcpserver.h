@@ -27,6 +27,8 @@ public:
     void Connected() override;
 
     void Disconnected() override;
+
+    bool hasConnectedClients() const;
 private:
     QTcpServer* _server;
     QTcpSocket* _socket;

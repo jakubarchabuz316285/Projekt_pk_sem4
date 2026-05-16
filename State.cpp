@@ -41,6 +41,10 @@ State::State()
         }
         emit statusChanged(connected);
     });
+
+    // BROADCAST
+
+    NetworkManager::connect(&_networkManager, &NetworkManager::serverDiscovered, this, &State::serverDiscovered);
 }
 
 void State::console_print_state()
@@ -710,9 +714,28 @@ void State::stopListening()
     _networkManager.StopListening();
 }
 
-bool State::isListening()
+bool State::isListening() const
 {
     return _networkManager.IsListening();
+}
+
+bool State::isConnected() const
+{
+    return _networkManager.isConnected();
+}
+
+// BROADCAST
+
+void State::setPublicServer(bool publiczny, int tcpPort) {
+    _networkManager.setPublicServer(publiczny, tcpPort);
+}
+
+void State::startServerDiscovery() {
+    _networkManager.startListeningForServers();
+}
+
+void State::stopServerDiscovery() {
+    _networkManager.stopListeningForServers();
 }
 
 StateGlobalAccess State;

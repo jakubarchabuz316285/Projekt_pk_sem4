@@ -86,3 +86,8 @@ void TcpServer::Disconnected()
     }
     emit statusChanged(false);
 }
+
+bool TcpServer::hasConnectedClients() const
+{
+    return _socket && (_socket->state() == QAbstractSocket::ConnectedState);
+}

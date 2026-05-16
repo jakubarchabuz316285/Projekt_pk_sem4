@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>475</width>
-    <height>341</height>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -150,6 +150,13 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
+              <widget class="QCheckBox" name="chckboxPublicznySerwer">
+               <property name="text">
+                <string>Publiczny serwer</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <spacer name="horizontalSpacer_3">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -197,6 +204,9 @@
               </spacer>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QListWidget" name="listWidgetSerwery"/>
            </item>
           </layout>
          </widget>

@@ -1,13 +1,23 @@
 #include "networkmanager.h"
+#include "qtimer.h"
 
 NetworkManager::NetworkManager(std::function<void(QByteArray)> fun){
     SetCallback(fun);
+
+    _udpSocket = new QUdpSocket(this);
+    _broadcastTimer = new QTimer(this);
+    _broadcastTimer->setInterval(1000);
+
+    connect(_broadcastTimer, &QTimer::timeout, this, [this]() {
+        sendBroadcast(true);
+    });
+
+    connect(_udpSocket, &QUdpSocket::readyRead, this, &NetworkManager::readIncomingBroadcasts);
 }
 NetworkManager::~NetworkManager() = default;
 
 void NetworkManager::SetMode(const Mode& newMode)
 {
-    // cleanup starego trybu
     Cleanup();
 
     _mode = newMode;
@@ -136,8 +146,80 @@ void NetworkManager::Cleanup()
     }
 }
 
-bool NetworkManager::IsListening()
+bool NetworkManager::IsListening() const
 {
     if(_server == nullptr) return false;
     return _server->IsListening();
+}
+
+bool NetworkManager::isConnected() const
+{
+    if (_mode == Mode::Local) { return false; }
+    if (_mode == Mode::ARX) { return _client && _client->isConnected(); }
+    if (_mode == Mode::PID) { return _server && _server->hasConnectedClients(); }
+
+    return false;
+}
+
+// BROADCAST
+
+void NetworkManager::setPublicServer(bool publiczny, int tcpPort)
+{
+    _activeTcpPort = tcpPort;
+    if (publiczny && _mode == Mode::PID) {
+        _broadcastTimer->start();
+        sendBroadcast(true);
+    } else {
+        if (_broadcastTimer->isActive()) {
+            _broadcastTimer->stop();
+            sendBroadcast(false);
+        }
+    }
+}
+
+void NetworkManager::startListeningForServers()
+{
+
+    _udpSocket->bind(45454, QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint);
+}
+
+void NetworkManager::stopListeningForServers()
+{
+    _udpSocket->close();
+}
+
+void NetworkManager::sendBroadcast(bool alive)
+{
+    QByteArray datagram;
+    QDataStream out(&datagram, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_0);
+
+    out << QString("UAR_DISCOVER") << (bool)alive << (quint16)_activeTcpPort;
+
+    // Wysyłamy na port 45454 do wszystkich w sieci lokalnej
+    _udpSocket->writeDatagram(datagram, QHostAddress::Broadcast, 45454);
+}
+
+void NetworkManager::readIncomingBroadcasts()
+{
+    while (_udpSocket->hasPendingDatagrams()) {
+        QByteArray datagram;
+        datagram.resize(_udpSocket->pendingDatagramSize());
+        QHostAddress senderIp;
+
+        _udpSocket->readDatagram(datagram.data(), datagram.size(), &senderIp);
+
+        QDataStream in(&datagram, QIODevice::ReadOnly);
+        in.setVersion(QDataStream::Qt_6_0);
+
+        QString header;
+        bool alive;
+        quint16 tcpPort;
+        in >> header >> alive >> tcpPort;
+
+        if (header == "UAR_DISCOVER") {
+            QString ipStr = QHostAddress(senderIp.toIPv4Address()).toString();
+            emit serverDiscovered(ipStr, (int)tcpPort, alive);
+        }
+    }
 }

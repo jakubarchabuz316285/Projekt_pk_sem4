@@ -58,3 +58,8 @@ void TcpClient::Disconnected()  {
     qDebug() << "Rozlaczono (client)";
     emit statusChanged(false); // Emitujemy fałsz
 }
+
+bool TcpClient::isConnected() const
+{
+    return _socket && (_socket->state() == QAbstractSocket::ConnectedState);
+}

@@ -133,7 +133,14 @@ public:
     void disconnect();
     void startListening(int port);
     void stopListening();
-    bool isListening();
+    bool isListening() const;
+    bool isConnected() const;
+
+    // BROADCAST
+
+    void setPublicServer(bool publiczny, int tcpPort);
+    void startServerDiscovery();
+    void stopServerDiscovery();
 
 private:
     UAR uar;
@@ -166,7 +173,9 @@ signals:
     void requestUiUpdate();
     void requestChartsReset();
 
+    // BROADCAST
 
+    void serverDiscovered(const QString& ip, int port, bool alive);
 };
 
 class SaveStateInterface

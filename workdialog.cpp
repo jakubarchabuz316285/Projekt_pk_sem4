@@ -41,6 +41,15 @@ WorkDialog::WorkDialog(QWidget *parent)
 
     ui->LblStatusLed->setStyleSheet("background-color: #95a5a6; border-radius: 8px;");
     ui->LblStatusText->setText("Brak połączenia");
+
+    // BROADCAST
+
+    connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::serverDiscovered);
+
+    // Jeżeli to klient (ARX), zacznij słuchać sieci UDP od razu przy uruchomieniu okna
+    if(State::getInstance().getMode() == NetworkManager::Mode::ARX) {
+        State::getInstance().startServerDiscovery();
+    }
 }
 
 WorkDialog::~WorkDialog()
@@ -90,14 +99,20 @@ void WorkDialog::UpdateNetworkUI()
     bool isPid = ui->rdio_reg->isChecked();
 
     ui->IPContainter->setVisible(isArx);
-
     ui->BtnConnect->setVisible(isArx);
+    ui->listWidgetSerwery->setVisible(isArx);
 
     ui->BtnListen->setVisible(isPid);
+    ui->chckboxPublicznySerwer->setVisible(isPid);
 
     ui->LblPort->setVisible(true);
     ui->spnBoxPort->setVisible(true);
     ui->BtnDisconnect->setVisible(true);
+
+    if (!isPid) {
+        ui->chckboxPublicznySerwer->setChecked(false);
+    }
+
     this->adjustSize();
 }
 
@@ -173,6 +188,11 @@ void WorkDialog::on_BtnConnect_clicked()
 {
     try
     {
+        if(State::getInstance().isConnected())
+        {
+            QMessageBox::warning(this, "Ostrzeżenie", "Jesteś już połączony lub trwa próba nawiązywania połączenia!");
+            return;
+        }
         QString ip_address = composeIPAddres();
         int port = ui->spnBoxPort->value();
         State::getInstance().connect(ip_address, port);
@@ -225,3 +245,26 @@ void WorkDialog::on_RdioNet_toggled(bool checked)
     }
 }
 
+// BROADCAST
+
+void WorkDialog::on_chckboxPublicznySerwer_toggled(bool checked)
+{
+    int port = ui->spnBoxPort->value();
+    State::getInstance().setPublicServer(checked, port);
+}
+
+void WorkDialog::onServerDiscovered(const QString& ip, int port, bool alive)
+{
+    QString serverText = QString("%1:%2").arg(ip).arg(port);
+    auto items = ui->listWidgetSerwery->findItems(serverText, Qt::MatchExactly);
+
+    if (alive) {
+        if (items.isEmpty()) {
+            ui->listWidgetSerwery->addItem(serverText);
+        }
+    } else {
+        for (auto* item : items) {
+            delete ui->listWidgetSerwery->takeItem(ui->listWidgetSerwery->row(item));
+        }
+    }
+}

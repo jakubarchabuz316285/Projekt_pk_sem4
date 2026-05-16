@@ -23,6 +23,8 @@ public:
 
     void Disconnected() override;
 
+    bool isConnected() const;
+
 private:
     QTcpSocket* _socket;
     QString _address;
