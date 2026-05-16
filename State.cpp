@@ -369,33 +369,26 @@ void State::tick()
     }
     else if (getMode() == NetworkManager::Mode::PID) {
 
-        // LOGIKA AWARYJNA (WYKRYCIE LAGA SIECIOWEGO)
+        // 1. OBSŁUGA LAGA Z POPRZEDNIEGO KROKU
         if (!readyForNextTick) {
-            qDebug() << "[LAG] ARX spóźnia się z ID:" << current_sample_id << "- Odpalam model cieniowy!";
+            qDebug() << "[LAG] Sieć spóźnia się dla ID:" << current_sample_id << "- Wrzucam na wykres gotową symulację lokalną!";
 
-            // Pobieramy sumaryczne sterowanie u(k-1) z poprzedniego kroku
-            double u_k_prev = current_tick_data.sterowanie.Proportional
-                              + current_tick_data.sterowanie.Integral
-                              + current_tick_data.sterowanie.Derrivative;
+            // Sieć zawiodła na czas, więc wypychamy do GUI naszą kompletną, lokalną predykcję
+            if (tick_callback) {
+                tick_callback(current_tick_data);
+            }
 
-            // Liczymy krok na lokalnej instancji ARX, aby zachować płynność wykresu
-            double predicted_y = uar.getARX().tick(u_k_prev);
-
-            current_tick_data.wartosc_regulowana = predicted_y;
-            uar.setPreviousYi(predicted_y);
-
-            if(tick_callback) tick_callback(current_tick_data);
-
-            // Wymuszamy odblokowanie pętli, aby przejść do kolejnej próbki czasu
+            // Odblokowujemy pętlę – akceptujemy, że ten krok został uratowany przez lokalny ARX
             readyForNextTick = true;
         }
 
-        // Zwiększamy identyfikator dla całkowicie nowej próbki
+        // 2. OBLICZENIA DLA NOWEGO KROKU (Zawsze liczymy pełną predykcję na start)
         current_sample_id++;
 
-        current_tick_data = uar.TickPid(choosen_generator->tick());
+        // Twój pomysł: Wyliczamy CAŁOŚĆ lokalnie (generujemy pełną strukturę TickData)
+        current_tick_data = uar.tickMoreInfo(choosen_generator->tick());
 
-        // Wysyłamy żądanie obliczeniowe do ARX wraz z aktualnym unikalnym ID próbki
+        // Prosimy sieć o próbkę (wysyłamy tylko to, co potrzebne dla ARX)
         _networkManager.SendMsg(serializePidSample(
             current_sample_id,
             current_tick_data.wartosc_zadana,
