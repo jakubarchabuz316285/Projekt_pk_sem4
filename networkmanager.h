@@ -1,6 +1,7 @@
 #ifndef NETWORKMANAGER_H
 #define NETWORKMANAGER_H
 
+#include "qtimer.h"
 #pragma once
 #include "tcpclient.h"
 #include "tcpserver.h"
