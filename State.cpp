@@ -90,6 +90,9 @@ class State &State::getInstance()
 
 void State::setSimmulationRunning(bool simmulation_running)
 {
+    if (simmulation_running) {
+        readyForNextTick = true; // Zabezpieczenie przed falstartem
+    }
     this->simmulation_running = simmulation_running;
     timer->setRunning(simmulation_running);
     if (getMode() != NetworkManager::Mode::Local) {
@@ -504,7 +507,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         // FILTROWANIE SPÓŹNIONYCH PAKIETÓW NA KOMPUTERZE PID:
         // Jeśli otrzymaliśmy ID mniejsze lub równe temu, co już przetworzyliśmy (lub przewidzieliśmy lokalnie) -> DROP
         if (response_id <= last_processed_arx_id) {
-            qDebug() << "[PID DROP] Odrzucam spóźniony pakiet ARX. ID:" << response_id << "Ostatnie dobre ID:" << last_processed_arx_id;
+           qDebug() << "[PID DROP] Odrzucam spóźniony pakiet ARX. ID:" << response_id << "Ostatnie dobre ID:" << last_processed_arx_id;
             return;
         }
         last_processed_arx_id = response_id;
@@ -558,7 +561,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         uint16_t samples_per_cycle;
         double bias;
         int genType;
-        uint8_t interval; // POPRAWKA SYNC STRUMIENIA: zmiana typu z unsigned int na uint8_t, aby pasował do struktury!
+        uint32_t interval; // POPRAWKA SYNC STRUMIENIA: zmiana typu z unsigned int na uint8_t, aby pasował do struktury!
         double dutyCycle;
 
         stream >> k >> T_i >> T_d >> integType >> amplitude
