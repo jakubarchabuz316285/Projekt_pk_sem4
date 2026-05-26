@@ -62,19 +62,16 @@ void NetworkManager::SetCallback(Tcp::Callback cb)
 
 void NetworkManager::SendMsg(const QByteArray& msg)
 {
-    if (_mode == Local)
-        throw std::runtime_error("Local mode - no network");
-
-    if (_server){
+    if (_mode == Local) {
+        return;
+    }
+        if (_server && _server->hasConnectedClients()) {
         _server->SendMsg(msg);
     }
-    else if (_client){
+    else if (_client && _client->isConnected()) {
         _client->SendMsg(msg);
     }
-    else
-        throw std::runtime_error("No active connection");
 }
-
 void NetworkManager::StartListening(int port)
 {
     if (_mode != PID) throw std::runtime_error("Not in server mode");

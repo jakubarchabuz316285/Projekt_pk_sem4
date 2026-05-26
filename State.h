@@ -56,7 +56,7 @@ public:
     void setSimmulationIntervalMS(uint32_t interval);
     uint32_t getSimmulationIntervalMS();
     void setOutputCallback(const std::function<void(TickData)> callback);
-    void resetSimmulation();
+    void resetSimmulation(bool notifyNetwork = true);
 
     void setGenerator(TypGeneratora type);
     TypGeneratora getGenerator();
@@ -176,6 +176,7 @@ signals:
     // BROADCAST
 
     void serverDiscovered(const QString& ip, int port, bool alive);
+    void networkModeChanged(NetworkManager::Mode mode, bool isLocal);
 };
 
 class SaveStateInterface

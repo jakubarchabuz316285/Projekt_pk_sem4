@@ -12,17 +12,39 @@ WorkDialog::WorkDialog(QWidget *parent)
     , ui(new Ui::WorkDialog)
 {
     ui->setupUi(this);
-    ui->rdio_arx->setChecked(true);
-    updateLedStatus(false);
+
     if (this->layout()) {
         this->layout()->setSizeConstraint(QLayout::SetFixedSize);
     }
 
-    if(LocalSimulation) {
+    // --- 1. ODCZYT BIEŻĄCEGO STANU APLIKACJI ---
+    NetworkManager::Mode currentMode = State::getInstance().getMode();
+    bool isConnected = State::getInstance().isConnected();
+
+    // --- 2. BLOKOWANIE SYGNAŁÓW (Zapobiega resetowaniu stanu przez toggled!) ---
+    ui->RdioLocal->blockSignals(true);
+    ui->RdioNet->blockSignals(true);
+    ui->rdio_arx->blockSignals(true);
+    ui->rdio_reg->blockSignals(true);
+
+    // --- 3. USTAWIENIE ODPOWIEDNICH PRZYCISKÓW ---
+    if (currentMode == NetworkManager::Mode::Local) {
         ui->RdioLocal->setChecked(true);
     } else {
         ui->RdioNet->setChecked(true);
+        if (currentMode == NetworkManager::Mode::ARX) {
+            ui->rdio_arx->setChecked(true);
+        } else if (currentMode == NetworkManager::Mode::PID) {
+            ui->rdio_reg->setChecked(true);
+        }
     }
+
+    // --- 4. ODBLOKOWANIE SYGNAŁÓW ---
+    ui->RdioLocal->blockSignals(false);
+    ui->RdioNet->blockSignals(false);
+    ui->rdio_arx->blockSignals(false);
+    ui->rdio_reg->blockSignals(false);
+
     ui->spnBoxPort->setMinimumWidth(50);
     ui->spnBoxPort->setMinimum(0);
     ui->spnBoxPort->setMaximum(65535);
@@ -30,7 +52,18 @@ WorkDialog::WorkDialog(QWidget *parent)
     ui->SpnSecond->setRange(0, 255);
     ui->SpnThird->setRange(0, 255);
     ui->SpnFourth->setRange(0, 255);
+
+    // --- 5. ODCZYT DIODY I STATUSU POŁĄCZENIA ---
+    updateLedStatus(isConnected);
+    if(isConnected) {
+        ui->LblStatusText->setText("Połączono");
+    } else {
+        ui->LblStatusText->setText("Brak połączenia");
+    }
+
     UpdateNetworkUI();
+
+    // Połączenia zdarzeń
     connect(&State::getInstance(), &State::statusChanged, this, [this](bool connected){
         if(connected) {
             ui->LblStatusLed->setStyleSheet("background-color: #2ecc71; border-radius: 8px; border: 1px solid #27ae60;");
@@ -40,9 +73,6 @@ WorkDialog::WorkDialog(QWidget *parent)
             ui->LblStatusText->setText("Rozłączono");
         }
     });
-
-    ui->LblStatusLed->setStyleSheet("background-color: #95a5a6; border-radius: 8px;");
-    ui->LblStatusText->setText("Brak połączenia");
 
     connect(&State::getInstance(), &State::serverDiscovered, this, &::WorkDialog::onServerDiscovered);
     connect(ui->listWidgetSerwery, &QListWidget::itemDoubleClicked, this, &WorkDialog::onServerDoubleClicked);
@@ -68,18 +98,6 @@ void WorkDialog::on_RdioLocal_toggled(bool checked)
     LocalSimulation = checked;
     ui->GBoxNetwork->setEnabled(!checked);
     emitCurrentSettings();
-    try
-    {
-        State::getInstance().setMode(NetworkManager::Mode::Local);
-    }
-    catch (std::runtime_error e)
-    {
-        //TODO Okiekno errora // błąd e
-    }
-    catch (...)
-    {
-        //TODO Okienko errora // inny błąd
-    }
 }
 void WorkDialog::on_ChkLocalSimulation_checkStateChanged(const Qt::CheckState &arg1){
     return;
@@ -126,48 +144,37 @@ void WorkDialog::UpdateNetworkUI()
 
 void WorkDialog::on_rdio_reg_toggled(bool checked)
 {
-    UpdateNetworkUI();
-    try
-    {
-        if(checked){
-           if(checked) emitCurrentSettings();
-           UpdateNetworkUI();
-           ui->spnBoxPort->setValue(123);
-        }
-    }
-    catch (std::runtime_error e)
-    {
-        //TODO Okiekno errora // błąd e
-    }
-    catch (...)
-    {
-        //TODO Okienko errora // inny błąd
+    if(checked) {
+        emitCurrentSettings();
+        UpdateNetworkUI();
+        ui->spnBoxPort->setValue(123);
     }
 }
 void WorkDialog::emitCurrentSettings() {
-    NetworkManager::Mode mode = ui->rdio_arx->isChecked() ? NetworkManager::Mode::ARX : NetworkManager::Mode::PID;
-    State::getInstance().setMode(mode);
     bool isLocal = ui->RdioLocal->isChecked();
-    emit settingsChanged(mode, isLocal);
+    NetworkManager::Mode mode;
+
+    // Decyzja o głównym trybie pracy na podstawie kontrolek
+    if (isLocal) {
+        mode = NetworkManager::Mode::Local;
+    } else {
+        mode = ui->rdio_arx->isChecked() ? NetworkManager::Mode::ARX : NetworkManager::Mode::PID;
+    }
+
+    // Bezpieczne ustawienie trybu w klasie State
+    State::getInstance().setMode(mode);
+
+    // Zawsze wysyłamy do GUI tryb ARX lub PID (nawet jak jest Local),
+    // by MainWindow wiedziało, które panele odblokować po przejściu w Sieć.
+    NetworkManager::Mode guiMode = ui->rdio_arx->isChecked() ? NetworkManager::Mode::ARX : NetworkManager::Mode::PID;
+    emit settingsChanged(guiMode, isLocal);
 }
 
 void WorkDialog::on_rdio_arx_toggled(bool checked)
 {
-    UpdateNetworkUI();
-    try
-    {
-        if(checked) {
-            emitCurrentSettings();
-            UpdateNetworkUI();
-        }
-    }
-    catch (std::runtime_error e)
-    {
-        //TODO Okiekno errora // błąd e
-    }
-    catch (...)
-    {
-        //TODO Okienko errora // inny błąd
+    if(checked) {
+        emitCurrentSettings();
+        UpdateNetworkUI();
     }
 }
 
@@ -241,23 +248,9 @@ void WorkDialog::on_BtnDisconnect_clicked()
 
 void WorkDialog::on_RdioNet_toggled(bool checked)
 {
-    qDebug() << "Rdionet toggled";
-    if(checked){
-        try
-        {
-            if(checked) {
-                emitCurrentSettings();
-                UpdateNetworkUI();
-            }
-        }
-        catch (std::runtime_error e)
-        {
-            //TODO Okiekno errora // błąd e
-        }
-        catch (...)
-        {
-            //TODO Okienko errora // inny błąd
-        }
+    if(checked) {
+        emitCurrentSettings();
+        UpdateNetworkUI();
     }
 }
 
@@ -296,20 +289,20 @@ void WorkDialog::onServerDiscovered(const QString& ip, int port, bool alive)
 
 void WorkDialog::closeEvent(QCloseEvent *event)
 {
-    if (State::getInstance().getMode() == NetworkManager::Mode::PID)
-    {
-        // Bezpieczne gaszenie serwera
-        State::getInstance().setPublicServer(false, 0);
-        State::getInstance().stopListening();
-        State::getInstance().stopServerDiscovery();
-    }
-    else if (State::getInstance().getMode() == NetworkManager::Mode::ARX)
-    {
-        // Klient MUSI przestać słuchać UDP zanim okno zostanie usunięte z pamięci!
-        State::getInstance().stopServerDiscovery();
-        State::getInstance().disconnect(); // Czyste zerwanie TCP, jeśli było połączone
-    }
-
+    // if (State::getInstance().getMode() == NetworkManager::Mode::PID)
+    // {
+    //     // Bezpieczne gaszenie serwera
+    //     //State::getInstance().setPublicServer(false, 0);
+    //     //State::getInstance().stopListening();
+    //     State::getInstance().stopServerDiscovery();
+    // }
+    // else if (State::getInstance().getMode() == NetworkManager::Mode::ARX)
+    // {
+    //     // Klient MUSI przestać słuchać UDP zanim okno zostanie usunięte z pamięci!
+    //     State::getInstance().stopServerDiscovery();
+    //     State::getInstance().disconnect(); // Czyste zerwanie TCP, jeśli było połączone
+    // }
+    State::getInstance().stopServerDiscovery();
     event->accept();
 }
 

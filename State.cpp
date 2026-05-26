@@ -38,6 +38,20 @@ State::State()
                 _networkManager.SendMsg(serializeARXState(getArxConfig()));
             }
         }
+        else {
+            // --- REAKCJA NA UTRATĘ POŁĄCZENIA ---
+            if(getMode() == NetworkManager::Mode::ARX) {
+                qDebug() << "[SYSTEM] Utracono połączenie z serwerem. Powrót asynchroniczny.";
+
+                // ASYNCHRONICZNE ZMIENIANIE TRYBU - KLUCZOWE ABY UNIKNĄĆ CRASHA!
+                // Wywołanie jest odkładane na moment, gdy socket skończy pracę ze swoimi sygnałami.
+                QTimer::singleShot(0, this, [this]() {
+                    _networkManager.SetMode(NetworkManager::Mode::Local);
+                    readyForNextTick = true;
+                    emit networkModeChanged(NetworkManager::Mode::Local, true);
+                });
+            }
+        }
         emit statusChanged(connected);
     });
 
@@ -122,7 +136,7 @@ void State::setOutputCallback(const std::function<void(TickData)> callback)
     this->tick_callback = callback;
 }
 
-void State::resetSimmulation()
+void State::resetSimmulation(bool notifyNetwork)
 {
     resetGenerator();
     uar.resetAll();
@@ -133,7 +147,7 @@ void State::resetSimmulation()
     last_processed_pid_id = 0;
     last_processed_arx_id = 0;
 
-    if (getMode() != NetworkManager::Mode::Local) {
+    if (notifyNetwork && getMode() != NetworkManager::Mode::Local) {
         _networkManager.SendMsg(wrapPacket(TypPakietu::SimReset, QByteArray()));
     }
 }
@@ -376,6 +390,12 @@ void State::tick()
         this->tick_callback(uar.tickMoreInfo(choosen_generator->tick()));
     }
     else if (getMode() == NetworkManager::Mode::PID) {
+        if (!isConnected()) {
+            qDebug() << "[TICK BŁĄD] Próba kroku PID bez aktywnego połączenia! Zatrzymuję timer.";
+            setSimmulationRunning(false);
+            emit requestUiUpdate();
+            return;
+        }
 
         // 1. OBSŁUGA LAGA Z POPRZEDNIEGO KROKU
         if (!readyForNextTick) {
@@ -634,7 +654,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         break;
 
     case TypPakietu::SimReset:
-        resetSimmulation();
+        resetSimmulation(false);
         emit requestChartsReset();
         break;
 
@@ -690,6 +710,17 @@ bool State::isReadyForNextTick() const
 
 void State::setMode(const NetworkManager::Mode& mode)
 {
+    if (_networkManager.GetMode() == mode) return;
+
+    if (getSimmulationRunning()) {
+        qDebug() << "[SYSTEM] Zmiana trybu w trakcie symulacji. Automatyczna pauza...";
+        setSimmulationRunning(false);
+    }
+
+    resetSimmulation();
+    emit requestChartsReset();
+    emit requestUiUpdate();
+
     _networkManager.SetMode(mode);
 }
 

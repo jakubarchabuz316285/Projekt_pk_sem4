@@ -12,7 +12,9 @@ TcpClient::TcpClient()
 TcpClient::~TcpClient()
 {
     Disconnect();
-    delete _socket;
+    if (_socket) {
+        _socket->deleteLater();
+    }
 }
 
 void TcpClient::Connect(const QString& ip, int p)
