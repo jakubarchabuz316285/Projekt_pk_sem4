@@ -5,11 +5,12 @@
 #include "networkmanager.h"
 
 #ifdef DEBUG
-    #include "DialogDebug.hpp"
+#include "DialogDebug.hpp"
 #endif
 
 #include <QMainWindow>
 #include <QtCharts>
+#include <QLabel> // <-- DODANE (Wymagane dla kontrolki w pasku stanu)
 #include "UAR.h"
 #include "ListWithWxtremes.hpp"
 
@@ -80,6 +81,10 @@ private slots:
     void on_BtnTrybPracy_clicked();
     void clearCharts();
 
+    // <-- DODANE SLOTY DO OBSŁUGI STATUSU SIECI -->
+    void updateLagIndicator(bool isLagging);
+    void handleConnectionStatus(bool connected);
+
 private:
     bool m_arxParamsEnabled = true;
     static constexpr const double SLIDER_TO_SPINBOX_RATIO = 100.0;
@@ -106,6 +111,9 @@ private:
     ListWithExtremes* lista_sterowanie_D;
 
     qint64 miliseconds_of_simulation;
+
+    // <-- DODANY WSKAŹNIK NA LAMPKĘ STATUSU -->
+    QLabel* lblLagStatus;
 
 #ifdef DEBUG
     QElapsedTimer debug_timer;

@@ -388,6 +388,7 @@ void State::tick()
 {
     if (getMode() == NetworkManager::Mode::Local) {
         this->tick_callback(uar.tickMoreInfo(choosen_generator->tick()));
+        emit lagStatusChanged(false);
     }
     else if (getMode() == NetworkManager::Mode::PID) {
         if (!isConnected()) {
@@ -397,26 +398,16 @@ void State::tick()
             return;
         }
 
-        // 1. OBSŁUGA LAGA Z POPRZEDNIEGO KROKU
-        if (!readyForNextTick) {
-            qDebug() << "[LAG] Sieć spóźnia się dla ID:" << current_sample_id << "- Wrzucam na wykres gotową symulację lokalną!";
+        emit lagStatusChanged(!readyForNextTick);
 
-            // Sieć zawiodła na czas, więc wypychamy do GUI naszą kompletną, lokalną predykcję
-            if (tick_callback) {
-                tick_callback(current_tick_data);
-            }
-
-            // Odblokowujemy pętlę – akceptujemy, że ten krok został uratowany przez lokalny ARX
-            readyForNextTick = true;
-        }
-
-        // 2. OBLICZENIA DLA NOWEGO KROKU (Zawsze liczymy pełną predykcję na start)
         current_sample_id++;
 
-        // Twój pomysł: Wyliczamy CAŁOŚĆ lokalnie (generujemy pełną strukturę TickData)
         current_tick_data = uar.tickMoreInfo(choosen_generator->tick());
 
-        // Prosimy sieć o próbkę (wysyłamy tylko to, co potrzebne dla ARX)
+        if (tick_callback) {
+            tick_callback(current_tick_data);
+        }
+
         _networkManager.SendMsg(serializePidSample(
             current_sample_id,
             current_tick_data.wartosc_zadana,
@@ -427,7 +418,6 @@ void State::tick()
         readyForNextTick = false;
     }
 }
-
 const std::tuple<const ARX*, const RegulatorPID*, const State::TypGeneratora, const GeneratorSinusoida*, const GeneratorProstokatny*> State::getAppState()
 {
     return std::make_tuple(&uar.getARX(), &uar.getRegulatorPID(), getGenerator(), &gen_sin, &gen_pros);
@@ -524,20 +514,14 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
 
         if (stream.status() != QDataStream::Ok) return;
 
-        // FILTROWANIE SPÓŹNIONYCH PAKIETÓW NA KOMPUTERZE PID:
-        // Jeśli otrzymaliśmy ID mniejsze lub równe temu, co już przetworzyliśmy (lub przewidzieliśmy lokalnie) -> DROP
-        if (response_id <= last_processed_arx_id) {
-           qDebug() << "[PID DROP] Odrzucam spóźniony pakiet ARX. ID:" << response_id << "Ostatnie dobre ID:" << last_processed_arx_id;
-            return;
-        }
+        if (response_id <= last_processed_arx_id) return;
         last_processed_arx_id = response_id;
 
-        current_tick_data.wartosc_regulowana = val;
         uar.setPreviousYi(val);
 
-        if(tick_callback) tick_callback(current_tick_data);
-
-        readyForNextTick = true;
+        if (response_id == current_sample_id) {
+            readyForNextTick = true;
+        }
         break;
     }
 
@@ -554,19 +538,15 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
 
         if (stream.status() != QDataStream::Ok) return;
 
-        // OCHRONA HISTORII ARX NA KOMPUTERZE ARX:
-        // Jeśli z sieci przyszedł pakiet starszy lub równy od już przetworzonego – odrzucamy chronologiczny śmieć.
         if (received_id <= last_processed_pid_id) {
             qDebug() << "[ARX DROP] Ignoruję przeterminowany pakiet PID. ID:" << received_id;
             return;
         }
         last_processed_pid_id = received_id;
 
-        // Obliczenie realnego kroku ARX
         double u_k = tick_data.sterowanie.Proportional + tick_data.sterowanie.Integral + tick_data.sterowanie.Derrivative;
         tick_data.wartosc_regulowana = uar.getARX().tick(u_k);
 
-        // Odsyłamy wynik z zachowaniem sparowanego ID paczki
         _networkManager.SendMsg(serializeArxSample(received_id, tick_data.wartosc_regulowana));
 
         if(tick_callback) tick_callback(tick_data);
@@ -581,7 +561,7 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
         uint16_t samples_per_cycle;
         double bias;
         int genType;
-        uint32_t interval; // POPRAWKA SYNC STRUMIENIA: zmiana typu z unsigned int na uint8_t, aby pasował do struktury!
+        uint32_t interval;
         double dutyCycle;
 
         stream >> k >> T_i >> T_d >> integType >> amplitude
@@ -712,16 +692,23 @@ void State::setMode(const NetworkManager::Mode& mode)
 {
     if (_networkManager.GetMode() == mode) return;
 
-    if (getSimmulationRunning()) {
-        qDebug() << "[SYSTEM] Zmiana trybu w trakcie symulacji. Automatyczna pauza...";
+    bool wasRunning = getSimmulationRunning();
+    if (wasRunning) {
         setSimmulationRunning(false);
     }
 
-    resetSimmulation();
-    emit requestChartsReset();
-    emit requestUiUpdate();
+
+    if (mode != NetworkManager::Mode::Local) {
+        resetSimmulation();
+        emit requestChartsReset();
+    }
 
     _networkManager.SetMode(mode);
+    emit requestUiUpdate();
+
+    if (wasRunning) {
+        setSimmulationRunning(true);
+    }
 }
 
 NetworkManager::Mode State::getMode() const

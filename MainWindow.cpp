@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     chart_skladowe_sterowania = new QChart();
 
 
+
     updateUiFromState();
     {
         auto seria = new QLineSeries();
@@ -183,6 +184,22 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateUiFromState();
     on_doubleSpinBox_generator_okres_editingFinished();
+
+    update_charts_timer = new QTimer(this);
+    update_charts_timer->setInterval(250);
+    update_charts_timer->start();
+    QObject::connect(update_charts_timer, &QTimer::timeout, this, &MainWindow::updateCharts);
+
+    updateUiFromState();
+    on_doubleSpinBox_generator_okres_editingFinished();
+
+    lblLagStatus = new QLabel(" Oczekiwanie na połączenie ", this);
+    lblLagStatus->setAlignment(Qt::AlignCenter);
+    lblLagStatus->setStyleSheet("background-color: #7f8c8d; color: white; font-weight: bold; padding: 4px; border-radius: 4px;");
+    ui->statusbar->addPermanentWidget(lblLagStatus);
+
+    connect(&State::getInstance(), &State::lagStatusChanged, this, &MainWindow::updateLagIndicator);
+    connect(&State::getInstance(), &State::statusChanged, this, &MainWindow::handleConnectionStatus);
 
 }
 void MainWindow::updateCharts()
@@ -706,4 +723,46 @@ void MainWindow::clearCharts() {
     updateCharts();
 
 }
+// --- OBSŁUGA STATUSU POŁĄCZENIA I LAGA ---
 
+void MainWindow::updateLagIndicator(bool isLagging)
+{
+    // Jeżeli jesteśmy w trybie lokalnym, ignorujemy opóźnienia
+    if (State::getInstance().getMode() == NetworkManager::Mode::Local) {
+        lblLagStatus->setStyleSheet("background-color: #3498db; color: white; font-weight: bold; padding: 4px; border-radius: 4px; border: 1px solid #2980b9;");
+        lblLagStatus->setText(" TRYB LOKALNY ");
+        return;
+    }
+
+    if (isLagging) {
+        // Czerwona lampka - gubimy pakiety, sieć nie wyrabia
+        lblLagStatus->setStyleSheet("background-color: #e74c3c; color: white; font-weight: bold; padding: 4px; border-radius: 4px; border: 1px solid #c0392b;");
+        lblLagStatus->setText(" LAG (Opóźnienie sieci) ");
+    } else {
+        // Zielona lampka - wszystko działa poprawnie
+        lblLagStatus->setStyleSheet("background-color: #2ecc71; color: white; font-weight: bold; padding: 4px; border-radius: 4px; border: 1px solid #27ae60;");
+        lblLagStatus->setText(" SYNCHRONIZACJA OK ");
+    }
+}
+
+void MainWindow::handleConnectionStatus(bool connected)
+{
+    // Reagujemy tylko, jeśli byliśmy w trybie sieciowym, a połączenie padło
+    if (!connected && State::getInstance().getMode() != NetworkManager::Mode::Local) {
+
+        // Zmiana statusu na szary, informująca o rozłączeniu
+        lblLagStatus->setStyleSheet("background-color: #7f8c8d; color: white; font-weight: bold; padding: 4px; border-radius: 4px;");
+        lblLagStatus->setText(" ROZŁĄCZONO ");
+
+        // Zatrzymaj automatycznie symulację na GUI
+        if (State::getInstance().getSimmulationRunning()) {
+            State::getInstance().setSimmulationRunning(false);
+            ui->pushButton_symulacja_star_stop->setText(tr("START"));
+        }
+
+        // Komunikat o awarii
+        QMessageBox::critical(this,
+                              tr("Awaria Połączenia Sieciowego"),
+                              tr("Utracono połączenie z drugim programem!\n\nSymulacja została awaryjnie zatrzymana. Sprawdź, czy serwer/klient działa poprawnie i połącz się ponownie."));
+    }
+}

@@ -173,10 +173,10 @@ signals:
     void requestUiUpdate();
     void requestChartsReset();
 
-    // BROADCAST
 
     void serverDiscovered(const QString& ip, int port, bool alive);
     void networkModeChanged(NetworkManager::Mode mode, bool isLocal);
+    void lagStatusChanged(bool isLagging);
 };
 
 class SaveStateInterface
