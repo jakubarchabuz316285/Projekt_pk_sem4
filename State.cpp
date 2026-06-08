@@ -514,7 +514,11 @@ void State::deserializeAndApplyPayload(TypPakietu typ, const QByteArray& byteArr
 
         if (stream.status() != QDataStream::Ok) return;
 
-        if (response_id <= last_processed_arx_id) return;
+
+        if (response_id < current_sample_id) {
+            return;
+        }
+
         last_processed_arx_id = response_id;
 
         uar.setPreviousYi(val);

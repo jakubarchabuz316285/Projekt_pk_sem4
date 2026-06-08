@@ -326,12 +326,24 @@ void MainWindow::on_pushButton_symulacja_star_stop_released()
 // Interwał symulacji
 void MainWindow::on_spinBox_symulacja_interwal_valueChanged(int arg1)
 {
+    ui->horizontalSlider_symulacja_interwal->blockSignals(true);
     ui->horizontalSlider_symulacja_interwal->setValue(arg1);
+    ui->horizontalSlider_symulacja_interwal->blockSignals(false);
+
+    State().setSimmulationIntervalMS(arg1);
+    recalculate_generator_period();
 }
+
 void MainWindow::on_horizontalSlider_symulacja_interwal_valueChanged(int value)
 {
+    ui->spinBox_symulacja_interwal->blockSignals(true);
     ui->spinBox_symulacja_interwal->setValue(value);
+    ui->spinBox_symulacja_interwal->blockSignals(false);
+
+    State().setSimmulationIntervalMS(value);
+    recalculate_generator_period();
 }
+
 
 void MainWindow::recalculate_generator_period()
 {
