@@ -31,6 +31,7 @@ State::State()
 
     QObject::connect(&_networkManager, &NetworkManager::statusChanged, this, [this](bool connected){
         if(connected) {
+            emit lagStatusChanged(false);
             if(getMode() == NetworkManager::Mode::PID) {
                 _networkManager.SendMsg(serializePIDState(getPIDConfig()));
                 readyForNextTick = true;
@@ -38,20 +39,7 @@ State::State()
                 _networkManager.SendMsg(serializeARXState(getArxConfig()));
             }
         }
-        else {
-            // --- REAKCJA NA UTRATĘ POŁĄCZENIA ---
-            if(getMode() == NetworkManager::Mode::ARX) {
-                qDebug() << "[SYSTEM] Utracono połączenie z serwerem. Powrót asynchroniczny.";
 
-                // ASYNCHRONICZNE ZMIENIANIE TRYBU - KLUCZOWE ABY UNIKNĄĆ CRASHA!
-                // Wywołanie jest odkładane na moment, gdy socket skończy pracę ze swoimi sygnałami.
-                QTimer::singleShot(0, this, [this]() {
-                    _networkManager.SetMode(NetworkManager::Mode::Local);
-                    readyForNextTick = true;
-                    emit networkModeChanged(NetworkManager::Mode::Local, true);
-                });
-            }
-        }
         emit statusChanged(connected);
     });
 
@@ -402,6 +390,7 @@ void State::tick()
 
         current_sample_id++;
 
+        failed_sample_counter++;
         current_tick_data = uar.tickMoreInfo(choosen_generator->tick());
 
         if (tick_callback) {
@@ -696,11 +685,11 @@ void State::setMode(const NetworkManager::Mode& mode)
 {
     if (_networkManager.GetMode() == mode) return;
 
+    // Przechwytujemy czy symulacja działała, by ew. jej nie przerywać
     bool wasRunning = getSimmulationRunning();
     if (wasRunning) {
         setSimmulationRunning(false);
     }
-
 
     if (mode != NetworkManager::Mode::Local) {
         resetSimmulation();
@@ -708,6 +697,9 @@ void State::setMode(const NetworkManager::Mode& mode)
     }
 
     _networkManager.SetMode(mode);
+
+    emit networkModeChanged(mode, mode == NetworkManager::Mode::Local);
+
     emit requestUiUpdate();
 
     if (wasRunning) {

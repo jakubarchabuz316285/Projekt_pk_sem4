@@ -167,6 +167,7 @@ private:
     State &operator=(const State &) = delete;
     State();
     ~State();
+    int failed_sample_counter;
 
 signals:
     void statusChanged(bool connected);

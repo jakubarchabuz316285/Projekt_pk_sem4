@@ -759,22 +759,38 @@ void MainWindow::updateLagIndicator(bool isLagging)
 
 void MainWindow::handleConnectionStatus(bool connected)
 {
-    // Reagujemy tylko, jeśli byliśmy w trybie sieciowym, a połączenie padło
-    if (!connected && State::getInstance().getMode() != NetworkManager::Mode::Local) {
+    // Jeśli nawiązano połączenie, nic nie robimy
+    if (connected) return;
 
-        // Zmiana statusu na szary, informująca o rozłączeniu
-        lblLagStatus->setStyleSheet("background-color: #7f8c8d; color: white; font-weight: bold; padding: 4px; border-radius: 4px;");
-        lblLagStatus->setText(" ROZŁĄCZONO ");
+    // Zapisujemy, w jakim trybie byliśmy w momencie awarii
+    NetworkManager::Mode modeAtCrash = State::getInstance().getMode();
 
-        // Zatrzymaj automatycznie symulację na GUI
-        if (State::getInstance().getSimmulationRunning()) {
-            State::getInstance().setSimmulationRunning(false);
-            ui->pushButton_symulacja_star_stop->setText(tr("START"));
+    // Jeśli już jesteśmy w trybie lokalnym, ignorujemy
+    if (modeAtCrash == NetworkManager::Mode::Local) return;
+
+    // Używamy bezpiecznego opóźnienia 100 ms.
+    // Daje to pewność, że gniazdo sieciowe skończyło przetwarzać wszystkie swoje wewnętrzne sygnały.
+    QTimer::singleShot(100, this, [this, modeAtCrash]() {
+
+        // Upewniamy się, że to prawdziwa awaria
+        if (!State::getInstance().isConnected() && State::getInstance().getMode() == modeAtCrash) {
+
+            // 1. Zmiana lampki
+            lblLagStatus->setStyleSheet("background-color: #7f8c8d; color: white; font-weight: bold; padding: 4px; border-radius: 4px;");
+            lblLagStatus->setText(" ROZŁĄCZONO ");
+
+            // 2. Wyświetlenie okienka ostrzegawczego ZGODNIE Z WYTYCZNYMI
+            // Używamy warning zamiast critical, bo aplikacja sobie z tym radzi.
+            QMessageBox::warning(this,
+                                 tr("Awaria Połączenia"),
+                                 tr("Utracono połączenie z drugim programem!\n\nAplikacja automatycznie przechodzi w tryb stacjonarny (Lokalny), aby bezuderzeniowo kontynuować symulację."));
+
+            // 3. PO KLIKNIĘCIU "OK" PRZEZ UŻYTKOWNIKA:
+            // Wymuszamy bezpieczne przełączenie programu w tryb lokalny
+            State::getInstance().setMode(NetworkManager::Mode::Local);
+
+            // 4. Upewniamy się, że symulacja dalej biegnie (odblokowanie z tła)
+            State::getInstance().setSimmulationRunning(true);
         }
-
-        // Komunikat o awarii
-        QMessageBox::critical(this,
-                              tr("Awaria Połączenia Sieciowego"),
-                              tr("Utracono połączenie z drugim programem!\n\nSymulacja została awaryjnie zatrzymana. Sprawdź, czy serwer/klient działa poprawnie i połącz się ponownie."));
-    }
+    });
 }
